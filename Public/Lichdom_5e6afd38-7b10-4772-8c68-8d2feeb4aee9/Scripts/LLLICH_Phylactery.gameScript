@@ -9,16 +9,16 @@ ON
 	OnCharacterStatusApplied(_Lich, LLLICH_PHYLACTERY_ACTIVE)
 ACTIONS
 IF "!c1"
-	HasFlag(_Lich, "LLLICH_HidePhylacteryStatus")
+	HasFlag(_Lich, "LLLICH_Settings_HidePhylacteryStatus")
 THEN
 	CharacterApplyStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, -1, 0, _Lich)
 ENDIF
-
+	
 EVENT LLLICH_Phylactery_InfoStatus_ApplyViaFlag
 VARS
 	CHARACTER:_Lich
 ON
-	OnCharacterFlagCleared("LLLICH_HidePhylacteryStatus", _Lich)
+	OnCharacterFlagCleared("LLLICH_Settings_HidePhylacteryStatus", _Lich)
 ACTIONS
 IF "c1"
 	//HasFlag(_Lich, "LLLICH_PhylacteryActive")
@@ -32,7 +32,7 @@ VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_PHYLACTERY_ACTIVE)
-	OnCharacterFlagSet("LLLICH_HidePhylacteryStatus", _Lich)
+	OnCharacterFlagSet("LLLICH_Settings_HidePhylacteryStatus", _Lich)
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, null, 0)
 	
@@ -53,13 +53,25 @@ THEN
 		IsLessThen(_HP, 1.0)
 		IsEqual(_HP, 1.0)
 	THEN
+		PlayEffectAt(_Lich, "RS3_FX_Skills_Soul_Cast_Soul_Impact_Root_01")
+		CharacterPlayEffect(_Lich, "RS3_FX_Skills_Soul_LastRites_Disappear_Overlay_01")
+		//CharacterEvent(_Lich, "LLLICH_OnLichDying_RemoveHarmfulStatuses")
 		CharacterEvent(_Lich, "LLLICH_OnLichDying")
 		//CharacterEvent(_Lich, "LLLICH_StartLichRecovery")
+		CharacterApplyStatus(_Lich, LLLICH_CLEAR_HARMFUL, 0, 1, _Lich)
 		CharacterApplyStatus(_Lich, UNCONSCIOUS, 3, 1, _Lich)
 		CharacterApplyStatus(_Lich, LLLICH_RECOVERING, 3, 1, _Lich)
 		SetTag(_Lich, "AI_IGNORED_TARGET")
 	ENDIF
-ENDIF
+ENDIF	
+
+EVENT LLLICH_Phylactery_Teleported_Effects
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_Phylactory_LichTeleported")
+ACTIONS
+	CharacterPlayEffect(_Lich, "RS3_FX_Skills_Polymorph_Soul_TurnInto_StatusApplied_Root_01")
 
 EVENT LLLICH_Phylactery_Recovery_End
 VARS

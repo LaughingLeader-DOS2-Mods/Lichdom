@@ -19,23 +19,51 @@ LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up li
 LLLich_Main_SetupLich(_Player);
 
 PROC
-LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich")
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, "LLLich_Lich")
 THEN
 LLLich_Main_SetupLich(_Player);
 
 PROC
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich")
+THEN
+LLLich_Main_SetupLich(_Player);
+
+QRY
+LLLICH_Main_QRY_ShouldSetUpLich((CHARACTERGUID)_Player)
+AND
+CharacterHasSkill(_Player, "Shout_LLLICH_CreatePhylactery", 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Main_QRY_ShouldSetUpLich((CHARACTERGUID)_Player)
+AND
+IsTagged(_Player, "LLLICH_Lich", 0)
+THEN
+DB_NOOP(1);
+
+PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Player)
+AND
+LLLICH_Main_QRY_ShouldSetUpLich(_Player)
 THEN
 CharacterAddTalent(_Player, "Zombie");
 CharacterAddSkill(_Player, "Shout_LLLICH_CreatePhylactery", 1);
 SetTag(_Player, "LLLICH_Lich");
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Player)
+THEN
+SetStoryEvent(_Player, "LLLICH_SetupLich");
 //SetTag(_Player, "UNDEAD");
 //LLLich_Main_SetUndeadTag(_Player);
 
+/*
 IF
 ObjectWasTagged(_Lich, "LLLICH_Lich")
 THEN
 SetStoryEvent(_Lich, "LLLICH_SetupLich");
+*/
 
 IF
 ObjectLostTag(_Lich, "LLLICH_Lich")

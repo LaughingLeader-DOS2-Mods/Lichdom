@@ -94,6 +94,11 @@ RemoveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE");
 
 //REGION DYING_TELEPORT_PHYLACTERY
 IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying_RemoveHarmfulStatuses")
+THEN
+RemoveHarmfulStatuses(_Lich);
+
+IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
 AND
 HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_EQUIPPED", 0)
@@ -101,9 +106,20 @@ AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
 AND
 ItemIsInInventory(_Phylactery, 0)
+AND
+DB_CurrentLevel(_Level)
 THEN
 DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
-TeleportTo(_Lich, _Phylactery, "", 0, 1, 1);
+PlayEffect(_Phylactery, "RS3_FX_Skills_Soul_Cast_Shout_Root_02");
+//PlayBeamEffect(_Phylactery, _Lich, "RS3_FX_Skills_Soul_Cast_Beam_MassPurgingDevice_01", "", "Dummy_BodyFX");
+PROC_LoopBeamEffect("RS3_FX_Skills_Soul_Cast_Beam_Soul_ShacklesPain_Beam_02", _Lich, _Phylactery, "Dummy_BodyFX", "", "LLLICH.FX.PhylacteryBeam", _Level);
+TeleportTo(_Lich, _Phylactery, "LLLICH_Phylactory_LichTeleported", 0, 1, 1);
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
+THEN
+PROC_StopLoopBeamEffect(_Lich, "LLLICH.FX.PhylacteryBeam");
+
 //END_REGION
 
 //REGION DYING_TELEPORT_WAYPOINT

@@ -30,9 +30,6 @@
                                 <node id="Category">
                                     <attribute id="Name" value="Story" type="23" />
                                 </node>
-                                <node id="Category">
-                                    <attribute id="Name" value="Profession" type="23" />
-                                </node>
                             </children>
                         </node>
                     </children>

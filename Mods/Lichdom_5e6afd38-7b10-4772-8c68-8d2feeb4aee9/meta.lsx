@@ -19,7 +19,7 @@
                 <node id="ModuleInfo">
                     <attribute id="Author" value="LaughingLeader" type="30" />
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
-                    <attribute id="Description" value="" type="30" />
+                    <attribute id="Description" value="Become a Lich, granting immunity to death as long as your Phylactery exists." type="30" />
                     <attribute id="Folder" value="Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9" type="30" />
                     <attribute id="GMTemplate" value="" type="22" />
                     <attribute id="LobbyLevelName" value="" type="22" />

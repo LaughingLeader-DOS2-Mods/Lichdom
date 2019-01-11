@@ -2,5 +2,5 @@ new skillset "Avatar_LLLICH_Lich"
 add skill "Shout_LLLICH_Invulnerability
 new skillset "Class_LLLICH_Lich"
 add skill "Target_MosquitoSwarm"
-add skill "Target_EnemyFreezingTouch"
+add skill "Target_LLLICH_ChillTouch"
 add skill "Target_ShacklesOfPain"
