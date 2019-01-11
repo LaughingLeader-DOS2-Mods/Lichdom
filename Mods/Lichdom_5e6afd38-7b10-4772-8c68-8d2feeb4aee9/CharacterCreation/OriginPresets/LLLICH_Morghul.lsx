@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationManager">
+        <node id="root">
+            <children>
+                <node id="OriginDesc">
+                	<attribute id="OriginDisplayName" value="Lich" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                    <attribute id="OriginName" value="LLLICH_Lich" type="22" />
+                	<attribute id="OriginDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                	<attribute id="OriginLongDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life. Liches are scheming, and to some, insane. They hunger forever for greater power, long-forgotten knowledge, and the most terrible of arcane secrets. Because the shadow of death does not hang over them, they often conceive plans taking years, decades, or even centuries to come to fruition." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                    <attribute id="CharacterUUID" value="bf8be633-74e9-40e6-8734-5e0b31ba35c0" type="22" />
+                    <attribute id="UserCanAlterTags" value="1" type="19" />
+                    <attribute id="SkillSet" value="Avatar_LLLICH_Lich" type="22" />
+
+                	<children>
+                		<node id="SupportedGenders">
+                			<children>
+                				<node id="Gender">
+                                    <attribute id="Gender" value="Female" type="23" />
+                                </node>
+                                <node id="Gender">
+                                    <attribute id="Gender" value="Male" type="23" />
+                                </node>
+                			</children>
+                		</node>
+
+                		<node id="SupportedRaces">
+                			<children>
+                				<node id="SupportedRaces">
+                                    <attribute id="Object" value="Human" type="22" />
+                                </node>
+                                <node id="SupportedRaces">
+                                    <attribute id="Object" value="Dwarf" type="22" />
+                                </node>
+                                <node id="SupportedRaces">
+                                    <attribute id="Object" value="Lizard" type="22" />
+                                </node>
+                                <node id="SupportedRaces">
+                                    <attribute id="Object" value="Elf" type="22" />
+                                </node>
+								<node id="SupportedRaces">
+                                    <attribute id="Object" value="Undead_Human" type="22" />
+                                </node>
+								<node id="SupportedRaces">
+                                    <attribute id="Object" value="Undead_Dwarf" type="22" />
+                                </node>
+								<node id="SupportedRaces">
+                                    <attribute id="Object" value="Undead_Lizard" type="22" />
+                                </node>
+								<node id="SupportedRaces">
+                                    <attribute id="Object" value="Undead_Elf" type="22" />
+                                </node>								
+                			</children>
+                		</node>
+                	</children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

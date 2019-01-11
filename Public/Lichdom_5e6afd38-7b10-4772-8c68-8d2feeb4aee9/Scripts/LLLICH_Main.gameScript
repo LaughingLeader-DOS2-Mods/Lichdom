@@ -1,0 +1,7 @@
+#INCLUDE LLLICH_Phylactery
+#INCLUDE LLLICH_Statuses
+INIT
+USING LLLICH_Phylactery
+USING LLLICH_Statuses
+
+EVENTS

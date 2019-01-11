@@ -1,0 +1,79 @@
+INIT
+
+EVENTS
+
+EVENT LLLICH_Phylactery_InfoStatus_Apply
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusApplied(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+ACTIONS
+IF "!c1"
+	HasFlag(_Lich, "LLLICH_HidePhylacteryStatus")
+THEN
+	CharacterApplyStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, -1, 0, _Lich)
+ENDIF
+
+EVENT LLLICH_Phylactery_InfoStatus_ApplyViaFlag
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterFlagCleared("LLLICH_HidePhylacteryStatus", _Lich)
+ACTIONS
+IF "c1"
+	//HasFlag(_Lich, "LLLICH_PhylacteryActive")
+	CharacterHasStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+THEN
+	CharacterApplyStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, -1, 0, _Lich)
+ENDIF
+
+EVENT LLLICH_Phylactery_InfoStatus_Remove
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+	OnCharacterFlagSet("LLLICH_HidePhylacteryStatus", _Lich)
+ACTIONS
+	CharacterRemoveStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, null, 0)
+	
+EVENT LLLICH_Phylactery_Respawn
+VARS
+	CHARACTER:_Lich
+	FLOAT:_HP
+	FLOAT3:_Pos
+ON
+	OnCharacterStatusApplied(_Lich, HIT)
+ACTIONS
+IF "c1&!c2"
+	CharacterHasStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+	CharacterHasStatus(_Lich, LLLICH_RECOVERING)
+THEN
+	IF "c1&(c2|c3)"
+		CharacterGetStat(_HP, _Lich, VitalityPoints)
+		IsLessThen(_HP, 1.0)
+		IsEqual(_HP, 1.0)
+	THEN
+		CharacterEvent(_Lich, "LLLICH_OnLichDying")
+		//CharacterEvent(_Lich, "LLLICH_StartLichRecovery")
+		CharacterApplyStatus(_Lich, UNCONSCIOUS, 3, 1, _Lich)
+		CharacterApplyStatus(_Lich, LLLICH_RECOVERING, 3, 1, _Lich)
+		SetTag(_Lich, "AI_IGNORED_TARGET")
+	ENDIF
+ENDIF
+
+EVENT LLLICH_Phylactery_Recovery_End
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_RECOVERING)
+ACTIONS
+	ClearTag(_Lich, "AI_IGNORED_TARGET")
+	//CharacterSetAnimationOverride(_Lich, "")
+
+EVENT LLLICH_Phylactery_Destroyed
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_OnPhylacteryDestroyed")
+ACTIONS
+	

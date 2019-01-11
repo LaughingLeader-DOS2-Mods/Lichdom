@@ -1,0 +1,46 @@
+INIT
+
+EVENTS
+
+EVENT LLLICH_Lichform_Apply
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_SetupLich")
+ACTIONS
+	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
+	AddStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
+	
+EVENT LLLICH_Lichform_Remove
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
+ACTIONS
+	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)	
+	
+EVENT LLLICH_Lichform_Polymorph
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
+ACTIONS
+IF "!c1"
+	HasGlobalFlag("LLLICH_Settings_PolymorphDisabled")
+THEN
+	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)
+ENDIF
+	
+EVENT LLLICH_Lichform_Polymorph_Flag
+ON
+	OnGlobalFlagCleared("LLLICH_Settings_PolymorphDisabled")
+ACTIONS
+	IterateParty("LLLICH_Iterator_ShapeshiftLich", null, null, null, "LLLICH_Lich")
+
+EVENT LLLICH_Lichform_Polymorph_Iterator
+VARS
+	CHARACTER:_Lich
+ON
+	OnIterateCharacter(_Lich, "LLLICH_Iterator_ShapeshiftLich")
+ACTIONS
+	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)

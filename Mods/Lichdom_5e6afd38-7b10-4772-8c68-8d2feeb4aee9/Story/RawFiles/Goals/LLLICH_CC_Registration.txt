@@ -1,0 +1,10 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//DB_Origins(S_LLLICH_Origin_Lich_bf8be633-74e9-40e6-8734-5e0b31ba35c0);
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "Z_Shared_Campaign_At_End"

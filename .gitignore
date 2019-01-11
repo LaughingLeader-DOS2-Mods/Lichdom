@@ -1,0 +1,118 @@
+# SourceControlGenerator #
+##########################
+SourceControlGenerator.json
+
+# Levels
+######################
+Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Levels/*
+Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Globals/*
+Editor/Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Levels/*
+
+# Story files        #
+######################
+*.div
+*.raw
+
+# Asset Folders      #
+######################
+Public/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Assets/*
+#Public/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/GUI/*
+
+# Editor files       #
+######################
+RootTemplateSelectorConfig_*
+ResourceSelectorConfig_*
+StatsEditorConfig.xml
+EffectEditorConfig.xml
+DockPanel.config
+EditorBrowserMetadata_*
+EditorBrowserMetadata.xml
+Autosave/*
+Recovered/*
+
+# Assets             #
+######################
+*.gr2
+*.dae
+*.swf
+*.bullet
+*.dds
+*.tga
+*.png
+*.jpg
+*.jpeg
+*.ttf
+*.lsb
+*.lsf
+*.lsfx
+*.lsefx
+#*.lsx
+*.lsmg
+*.fbx
+*.lsm
+
+# Logs               #
+######################
+*.log
+*.ailog
+log.txt
+errors.txt
+dialoglog.txt
+personallog.txt
+ReConHistory.txt
+
+# Binary Files       #
+######################
+*.dat
+*.data
+*.bik
+*.bnk
+*.bshd
+*.cur
+*.fnt
+*.iggy
+*.iggytex
+*.osi
+*.patch
+*.tmpl
+*.psd
+*.xcf
+*.blend*
+*.spp
+*.assbin
+
+# Dump files         #
+######################
+*.stackdump
+*.dmp
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.lnk

@@ -1,0 +1,57 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_LLLICH_UndeadConversionTags("Dwarf", "UNDEAD_DWARF", "DWARF");
+DB_LLLICH_UndeadConversionTags("Human", "UNDEAD_HUMAN", "HUMAN");
+DB_LLLICH_UndeadConversionTags("Elf", "UNDEAD_ELF", "ELF");
+DB_LLLICH_UndeadConversionTags("Lizard", "UNDEAD_LIZARD", "LIZARD");
+
+KBSECTION
+
+IF
+TextEventSet("lichdom_setup")
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterIsControlled(_Player, 1)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up lich.");
+LLLich_Main_SetupLich(_Player);
+
+PROC
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich")
+THEN
+LLLich_Main_SetupLich(_Player);
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Player)
+THEN
+CharacterAddTalent(_Player, "Zombie");
+CharacterAddSkill(_Player, "Shout_LLLICH_CreatePhylactery", 1);
+SetTag(_Player, "LLLICH_Lich");
+//SetTag(_Player, "UNDEAD");
+//LLLich_Main_SetUndeadTag(_Player);
+
+IF
+ObjectWasTagged(_Lich, "LLLICH_Lich")
+THEN
+SetStoryEvent(_Lich, "LLLICH_SetupLich");
+
+IF
+ObjectLostTag(_Lich, "LLLICH_Lich")
+THEN
+SetStoryEvent(_Lich, "LLLICH_ClearLich");
+
+PROC
+LLLich_Main_SetUndeadTag((CHARACTERGUID)_Player)
+AND
+CharacterGetRace(_Player, 0, _Race)
+AND
+DB_LLLICH_UndeadConversionTags(_Race, _UndeadTag, _RegularTag)
+THEN
+SetTag(_Player, _UndeadTag);
+ClearTag(_Player, _RegularTag);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

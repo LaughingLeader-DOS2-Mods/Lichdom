@@ -1,0 +1,262 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+//REGION CREATION
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_CREATE_PHYLACTORY", _)
+AND
+QRY_SpeakerIsAvailable(_Lich)
+AND
+ObjectGetFlag(_Lich, "LLLICH_PhylacteryActive", _PhylactoryActive)
+THEN
+LLLICH_Phylactery_StartPhylactoryCreationDialog(_Lich, _PhylactoryActive);
+
+PROC
+LLLICH_Phylactery_StartPhylactoryCreationDialog((CHARACTERGUID)_Lich, 0)
+THEN
+Proc_StartDialog(0, "LLLICH_CreatePhylactery", _Lich, _Lich);
+
+PROC
+LLLICH_Phylactery_StartPhylactoryCreationDialog((CHARACTERGUID)_Lich, 1)
+THEN
+Proc_StartDialog(1, "LLLICH_AD_PhylacteryAlreadyActive", _Lich);
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Amulet", (CHARACTERGUID)_Lich, _)
+AND
+GetPosition(_Lich, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d", _x, _y, _z, _Phylactery)
+THEN
+LLLICH_Phylactery_OnPhylacteryCreated(_Lich, _Phylactery);
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Ring", (CHARACTERGUID)_Lich, _)
+AND
+GetPosition(_Lich, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48", _x, _y, _z, _Phylactery)
+THEN
+LLLICH_Phylactery_OnPhylacteryCreated(_Lich, _Phylactery);
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Smallbox", (CHARACTERGUID)_Lich, _)
+AND
+GetPosition(_Lich, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332", _x, _y, _z, _Phylactery)
+THEN
+LLLICH_Phylactery_OnPhylacteryCreated(_Lich, _Phylactery);
+
+PROC
+LLLICH_Phylactery_OnPhylacteryCreated((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
+THEN
+ItemToInventory(_Phylactery, _Lich);
+ItemSetOwner(_Phylactery, _Lich);
+SetVarObject(_Lich, "LLLICH_Phylactery", _Phylactery);
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery);
+ApplyStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", -1.0, 1, _Lich);
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_PHYLACTERY_ACTIVE", _)
+THEN
+CharacterSetImmortal(_Lich, 0);
+
+IF
+CharacterStatusApplied(_Lich, "LLLICH_PHYLACTERY_ACTIVE", _)
+THEN
+CharacterSetImmortal(_Lich, 1);
+
+//END_REGION
+
+//REGION EDITOR_WORKAROUNDS
+IF
+CharacterStatusRemoved(_Lich, "RESURRECT", _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+ItemGetDurability(_Phylactery, _Durability)
+AND
+NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _Durability)
+THEN
+ApplyStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", -1.0, 1, _Lich);
+
+IF
+CharacterStatusApplied(_Lich, "LLLICH_PHYLACTERY_ACTIVE", _)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _)
+THEN
+RemoveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE");
+//END_REGION
+
+//REGION DYING_TELEPORT_PHYLACTERY
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_EQUIPPED", 0)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+ItemIsInInventory(_Phylactery, 0)
+THEN
+DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
+TeleportTo(_Lich, _Phylactery, "", 0, 1, 1);
+//END_REGION
+
+//REGION DYING_TELEPORT_WAYPOINT
+QRY
+LLLICH_Phylactery_QRY_WaypointDistanceIsLess((CHARACTERGUID)_Player, (REAL)_Dist)
+AND
+NOT DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Phylactery_QRY_WaypointDistanceIsLess((CHARACTERGUID)_Player, (REAL)_Dist)
+AND
+DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _LastDist, _LastWaypointItem)
+AND
+_Dist < _LastDist
+THEN
+NOT DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _LastDist, _LastWaypointItem);
+
+QRY
+LLLICH_Phylactery_QRY_IsInHarmfulSurface((CHARACTERGUID)_Player)
+AND
+GetSurfaceGroundAt(_Player, "SurfaceLava")
+THEN
+DB_NOOP(1);
+
+//Avoid continually regenerating in lava
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+NOT DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich)
+AND
+LLLICH_Phylactery_QRY_IsInHarmfulSurface(_Lich)
+AND
+CharacterCanUseWaypoints(_Lich, 1)
+AND
+DB_WaypointUnlocked(_WaypointID, _Player)
+AND
+DB_WaypointInfo(_WaypointItem, _Trigger, _WaypointID)
+AND
+GetDistanceTo(_Player, _WaypointItem, _Dist)
+AND
+LLLICH_Phylactery_QRY_WaypointDistanceIsLess(_Player, _Dist)
+THEN
+DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _Dist, _WaypointItem);
+
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _Dist, _WaypointItem)
+THEN
+NOT DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Player, _Dist, _WaypointItem);
+TeleportTo(_Player, _WaypointItem, "", 0, 1, 1);
+DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
+
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich)
+THEN
+NOT DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
+//END_REGION
+
+//REGION DYING_DURABILITY_DAMAGE
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+ItemGetDurability(_Phylactery, _CurrentDurability)
+AND
+IntegerSubtract(_CurrentDurability, 20, _NextDurability)
+AND
+IntegerMax(0, _NextDurability, _Durability)
+AND
+NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _Durability)
+THEN
+ItemSetDurability(_Phylactery, _Durability);
+LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:LLLICH_OnLichDying] Phylactery took damage. Durability: [",_Durability,"]");
+ShowNotification(_Lich, "LLLICH_Notifications_PhylacteryDamage");
+
+QRY
+LLLICH_Phylactery_QRY_PhylacteryIsBroken((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, (INTEGER)_Durability)
+AND
+_Durability <= 0
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:QRY:PhylacteryIsBroken] The Phylactery was destroyed!");
+ItemDestroy(_Phylactery);
+
+IF
+ItemDestroyed(_Phylactery)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+THEN
+NOT DB_LLLICH_Phylactery_Active(_Lich, _Phylactery);
+ShowNotification(_Lich, "LLLICH_Notifications_PhylacteryDestroyed");
+ClearVarObject(_Lich, "LLLICH_Phylactery");
+RemoveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE");
+SetStoryEvent(_Lich, "LLLICH_OnPhylacteryDestroyed");
+//END_REGION
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
+AND
+NOT DB_GlobalFlag("LLLICH_Settings_DisableJumpToTurn")
+AND
+CharacterIsInCombat(_Lich, 1)
+THEN
+JumpToTurn(_Lich);
+
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_StartLichRecovery")
+THEN
+PlayAnimation(_Lich, "knockdown_fall", "LLLICH_StartKnockdownLoop");
+
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_StartKnockdownLoop")
+THEN
+CharacterSetAnimationOverride(_Lich, "knockdown_loop");
+ProcObjectTimer(_Lich, "LLLICH_Timers_ApplyRecoveryStatus", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_ApplyRecoveryStatus")
+THEN
+ApplyStatus(_Lich, "LLLICH_RECOVERING", 12.0, 1, _Lich);
+
+PROC
+ProcBlockUseOfItem(_Character, _Smallbox)
+AND
+GetTemplate(_Smallbox, "LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332")
+THEN
+DB_CustomUseItemResponse(_Character, _Smallbox, 0);
+LLLICH_Phylactery_OnSmallboxUsed(_Character, _Smallbox);
+
+PROC
+LLLICH_Phylactery_OnSmallboxUsed((CHARACTERGUID)_Character, (ITEMGUID)_Smallbox)
+AND
+GetVarObject(_Character, "LLLICH_Phylactery", (ITEMGUID)_Phylactery)
+AND
+_Smallbox == _Phylactery
+AND
+ItemGetDurability(_Phylactery, _Durability)
+THEN
+CharacterDisplayTextWithParam(_Character, "LLLICH_DisplayText_SmallBoxInspected_Owner", _Durability);
+
+PROC
+LLLICH_Phylactery_OnSmallboxUsed((CHARACTERGUID)_Character, (ITEMGUID)_Smallbox)
+AND
+NOT GetVarObject(_Character, "LLLICH_Phylactery", _Smallbox)
+THEN
+DisplayText(_Character, "LLLICH_DisplayText_SmallBoxInspected_Stranger");
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

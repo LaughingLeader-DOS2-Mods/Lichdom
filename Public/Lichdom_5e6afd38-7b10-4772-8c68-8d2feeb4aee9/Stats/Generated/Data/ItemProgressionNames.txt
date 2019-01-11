@@ -1,0 +1,8 @@
+new namegroup "LLLICH_Phylactery_Amulet"
+add name "Strange Amulet",""
+
+new namegroup "LLLICH_Phylactery_Ring"
+add name "Strange Ring",""
+
+new namegroup "LLLICH_Phylactery_Smallbox"
+add name "Strange Box",""

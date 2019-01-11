@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+QRY
+LLLICH_Init_QRY_IsLichPreset((CHARACTERGUID)_Player)
+AND
+GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", "LLLich_Lich")
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Init_QRY_IsLichPreset((CHARACTERGUID)_Player)
+AND
+NOT GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _)
+AND
+CharacterGetReservedUserID(_Player, _UserID)
+AND
+DB_LeaderLib_CC_Temp_SelectedPreset(_UserID, "LLLich_Lich")
+THEN
+DB_NOOP(1);
+
+/*
+IF
+GameStarted(_Level, 0)
+AND
+IsGameLevel(_Level, 1)
+AND
+DB_IsPlayer(_Player)
+AND
+LLLICH_Init_QRY_IsLichPreset(_Player)
+THEN
+LLLich_Main_SetupLich(_Player);
+GoalCompleted;
+*/
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

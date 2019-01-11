@@ -1,0 +1,17 @@
+new itemgroup "LLLICH_Phylactery_Amulet"
+
+add levelgroup 0,0,"All"
+add rootgroup "5d0c0bef-9071-4328-b72c-b58086b0f68d",""
+add namegroup "LLLICH_Phylactery_Amulet","",""
+
+new itemgroup "LLLICH_Phylactery_Ring"
+
+add levelgroup 0,0,"All"
+add rootgroup "cd0b735f-6c57-43b5-8d12-131b725dda48",""
+add namegroup "LLLICH_Phylactery_Ring","",""
+
+new itemgroup "LLLICH_Phylactery_Smallbox"
+
+add levelgroup 0,0,"All"
+add rootgroup "73c01ec2-7894-4d19-b12f-991650263332",""
+add namegroup "LLLICH_Phylactery_Smallbox","",""
