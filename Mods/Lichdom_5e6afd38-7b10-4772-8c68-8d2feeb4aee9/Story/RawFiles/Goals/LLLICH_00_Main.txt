@@ -6,6 +6,49 @@ DB_LLLICH_UndeadConversionTags("Human", "UNDEAD_HUMAN", "HUMAN");
 DB_LLLICH_UndeadConversionTags("Elf", "UNDEAD_ELF", "ELF");
 DB_LLLICH_UndeadConversionTags("Lizard", "UNDEAD_LIZARD", "LIZARD");
 
+/* Original Undead
+Dwarves_Hero_Female_Undead_373a1966-a54d-4a3e-be70-e779a654c914
+Dwarves_Hero_Male_Undead_726442a5-6856-4b0d-91ed-5d2f003b8a0c
+Elves_Hero_Female_Undead_7f366172-9fd1-45df-8719-a6d14cb534b3
+Elves_Hero_Male_Undead_9eeaaafd-c47d-4650-9200-b00430d61e83
+Humans_Hero_Female_Undead_3bd0693d-0b0a-4f6d-93e2-aea9be654bee
+Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b
+Lizards_Hero_Female_Undead_725f9a47-a3d4-41d2-92cf-017d18c2b212
+Lizards_Hero_Male_Undead_57b70554-36bf-4b86-b9aa-8f7cc3944153
+
+DB_LLLICH_RaceConversion("Dwarf", 1, "Dwarves_Hero_Female_Undead_373a1966-a54d-4a3e-be70-e779a654c914");
+DB_LLLICH_RaceConversion("Dwarf", 0, "Dwarves_Hero_Male_Undead_726442a5-6856-4b0d-91ed-5d2f003b8a0c");
+DB_LLLICH_RaceConversion("Elf", 1, "Elves_Hero_Female_Undead_7f366172-9fd1-45df-8719-a6d14cb534b3");
+DB_LLLICH_RaceConversion("Elf", 0, "Elves_Hero_Male_Undead_9eeaaafd-c47d-4650-9200-b00430d61e83");
+DB_LLLICH_RaceConversion("Human", 1, "Humans_Hero_Female_Undead_3bd0693d-0b0a-4f6d-93e2-aea9be654bee");
+DB_LLLICH_RaceConversion("Human", 0, "Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b");
+DB_LLLICH_RaceConversion("Lizard", 1, "Lizards_Hero_Female_Undead_725f9a47-a3d4-41d2-92cf-017d18c2b212");
+DB_LLLICH_RaceConversion("Lizard", 0, "Lizards_Hero_Male_Undead_57b70554-36bf-4b86-b9aa-8f7cc3944153");
+
+Lich Versions
+Dwarves_Hero_Female_Undead_Lich_414c29bd-6a1a-42ee-a885-f7d449d911f8
+Dwarves_Hero_Male_Undead_Lich_a9f4b776-dab2-4204-a28c-37fb592dac35
+Elves_Hero_Female_Undead_Lich_9dfe13c2-a2f6-4cbb-b341-70f58baded63
+Elves_Hero_Male_Undead_Lich_4305d9f2-1190-4de9-81a5-2c3b10104bd1
+Humans_Hero_Female_Undead_Lich_8ff91227-7d47-4f0a-bf68-0a800a6fa250
+Humans_Hero_Male_Undead_Lich_8ce7cc69-220c-4c49-9723-f28c50750ddf
+Lizards_Hero_Female_Undead_Lich_76052c24-dd04-4e2d-b8df-3120664c9760
+Lizards_Hero_Male_Undead_Lich_6c80cd2c-9bf3-4a82-9a75-20e7f31abcf5
+*/
+
+DB_LLLICH_RaceConversion("Dwarf", 1, "Dwarves_Hero_Female_Undead_Lich_414c29bd-6a1a-42ee-a885-f7d449d911f8", "Undead_Dwarf");
+DB_LLLICH_RaceConversion("Dwarf", 0, "Dwarves_Hero_Male_Undead_Lich_a9f4b776-dab2-4204-a28c-37fb592dac35", "Undead_Dwarf");
+DB_LLLICH_RaceConversion("Elf", 1, "Elves_Hero_Female_Undead_Lich_9dfe13c2-a2f6-4cbb-b341-70f58baded63", "Undead_Elf");
+DB_LLLICH_RaceConversion("Elf", 0, "Elves_Hero_Male_Undead_Lich_4305d9f2-1190-4de9-81a5-2c3b10104bd1", "Undead_Elf");
+DB_LLLICH_RaceConversion("Human", 1, "Humans_Hero_Female_Undead_Lich_8ff91227-7d47-4f0a-bf68-0a800a6fa250", "Undead_Human");
+DB_LLLICH_RaceConversion("Human", 0, "Humans_Hero_Male_Undead_Lich_8ce7cc69-220c-4c49-9723-f28c50750ddf", "Undead_Human");
+DB_LLLICH_RaceConversion("Lizard", 1, "Lizards_Hero_Female_Undead_Lich_76052c24-dd04-4e2d-b8df-3120664c9760", "Undead_Lizard");
+DB_LLLICH_RaceConversion("Lizard", 0, "Lizards_Hero_Male_Undead_Lich_6c80cd2c-9bf3-4a82-9a75-20e7f31abcf5", "Undead_Lizard");
+
+DB_LLLICH_RacialSkills("Dwarf",     "REALLY_DWARF",     "Target_LLLICH_ParalyzingTouch",    "Target_PetrifyingTouch");
+DB_LLLICH_RacialSkills("Human",     "REALLY_HUMAN",     "Shout_LLLICH_DreadShout",          "Shout_InspireStart");
+DB_LLLICH_RacialSkills("Elf",       "REALLY_ELF",       "Target_LLLICH_FleshSacrifice",     "Shout_FleshSacrifice");
+DB_LLLICH_RacialSkills("Lizard",    "REALLY_LIZARD",    "Cone_LLLICH_Chillbreath",          "Cone_Flamebreath");
 KBSECTION
 
 IF
@@ -19,12 +62,13 @@ LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up li
 LLLich_Main_SetupLich(_Player);
 
 PROC
-LeaderLib_PresetApplied((CHARACTERGUID)_Player, "LLLich_Lich")
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich", 0)
 THEN
 LLLich_Main_SetupLich(_Player);
 
+//LeaderLib PresetMenu
 PROC
-LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich")
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, "LLLich_Lich", 0)
 THEN
 LLLich_Main_SetupLich(_Player);
 
@@ -42,33 +86,62 @@ IsTagged(_Player, "LLLICH_Lich", 0)
 THEN
 DB_NOOP(1);
 
+IF
+ObjectFlagSet("LLLICH_Commands_SetupLich", (CHARACTERGUID)_Player, _)
+THEN
+ObjectClearFlag(_Player, "LLLICH_Commands_SetupLich");
+LLLich_Main_SetupLich(_Player);
+
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Player)
 AND
-LLLICH_Main_QRY_ShouldSetUpLich(_Player)
+CharacterGetRace(_Player, 0, _Race)
+AND
+StringContains(_Race, "Undead", 1)
+THEN
+ObjectSetFlag(_Player, "LLLICH_PlayerRaceOriginallyUndead");
+
+QRY
+LLLICH_Main_QRY_ShouldAddRaceSkill((CHARACTERGUID)_Player, (STRING)_RaceTag, (STRING)_RaceSkill)
+AND
+IsTagged(_Player, _RaceTag, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Main_QRY_ShouldAddRaceSkill((CHARACTERGUID)_Player, (STRING)_RaceTag, (STRING)_RaceSkill)
+AND
+CharacterHasSkill(_Player, _RaceSkill, 1)
+THEN
+DB_NOOP(1);
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Player)
+AND
+DB_LLLICH_RacialSkills(_Race, _RaceTag, _LichSkill, _RaceSkill)
+AND
+LLLICH_Main_QRY_ShouldAddRaceSkill(_Player, _RaceTag, _RaceSkill)
+THEN
+CharacterRemoveSkill(_Player, _RaceSkill);
+CharacterAddSkill(_Player, _LichSkill, 1);
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Player)
 THEN
 CharacterAddTalent(_Player, "Zombie");
-CharacterAddSkill(_Player, "Shout_LLLICH_CreatePhylactery", 1);
 SetTag(_Player, "LLLICH_Lich");
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Player)
+AND
+CharacterHasSkill(_Player, "Shout_LLLICH_CreatePhylactery", 0)
+THEN
+CharacterAddSkill(_Player, "Shout_LLLICH_CreatePhylactery", 1);
 
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Player)
 THEN
 SetStoryEvent(_Player, "LLLICH_SetupLich");
-//SetTag(_Player, "UNDEAD");
-//LLLich_Main_SetUndeadTag(_Player);
-
-/*
-IF
-ObjectWasTagged(_Lich, "LLLICH_Lich")
-THEN
-SetStoryEvent(_Lich, "LLLICH_SetupLich");
-*/
-
-IF
-ObjectLostTag(_Lich, "LLLICH_Lich")
-THEN
-SetStoryEvent(_Lich, "LLLICH_ClearLich");
 
 PROC
 LLLich_Main_SetUndeadTag((CHARACTERGUID)_Player)
@@ -79,6 +152,179 @@ DB_LLLICH_UndeadConversionTags(_Race, _UndeadTag, _RegularTag)
 THEN
 SetTag(_Player, _UndeadTag);
 ClearTag(_Player, _RegularTag);
+
+//REGION RESET
+IF
+ObjectFlagSet("LLLICH_Commands_ResetLich", (CHARACTERGUID)_Player, _)
+THEN
+ObjectClearFlag(_Player, "LLLICH_Commands_ResetLich");
+LLLich_Main_ResetLich(_Player);
+
+PROC
+LLLich_Main_ResetLich((CHARACTERGUID)_Player)
+AND
+DB_LLLICH_RacialSkills(_Race, _RaceTag, _LichSkill, _RaceSkill)
+AND
+CharacterHasSkill(_Player, _LichSkill, 1)
+THEN
+CharacterRemoveSkill(_Player, _LichSkill);
+LLLich_Main_ResetLich_AddOriginalRaceSkill(_Player, _RaceSkill);
+
+PROC
+LLLich_Main_ResetLich_AddOriginalRaceSkill((CHARACTERGUID)_Player, (STRING)_RaceSkill)
+AND
+ObjectGetFlag(_Player, "LLLICH_PlayerRaceOriginallyUndead", 0)
+THEN
+CharacterAddSkill(_Player, _RaceSkill, 1);
+
+PROC
+LLLich_Main_ResetLich((CHARACTERGUID)_Player)
+AND
+ObjectGetFlag(_Player, "LLLICH_PlayerRaceOriginallyUndead", 1)
+THEN
+CharacterRemoveTalent(_Player, "Zombie");
+
+PROC
+LLLich_Main_ResetLich((CHARACTERGUID)_Player)
+THEN
+CharacterRemoveSkill(_Player, "Shout_LLLICH_CreatePhylactery");
+ClearTag(_Player, "LLLICH_Lich");
+SetStoryEvent(_Player, "LLLICH_ClearLich");
+//END_REGION
+
+//REGION RACE_CHANGE
+IF
+TextEventSet("lichdom_racechange")
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterIsControlled(_Player, 1)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_racechange)] Changing race to an undead lich version.");
+LLLich_Main_ChangeRaceToUndead(_Player);
+
+IF
+ObjectFlagSet("LLLICH_Commands_ChangeRaceToLich", (CHARACTERGUID)_Player, _)
+THEN
+ObjectClearFlag(_Player, "LLLICH_Commands_ChangeRaceToLich");
+LLLich_Main_ChangeRaceToUndead(_Player);
+
+PROC
+LLLich_Main_ChangeRaceToUndead((CHARACTERGUID)_Player)
+AND
+GetTemplate(_Player, _OriginalTemplate)
+AND
+CharacterGetRace(_Player, 0, _Race)
+AND
+IsTagged(_Player, "FEMALE", _IsFemale)
+AND
+DB_LLLICH_RaceConversion(_Race, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
+THEN
+DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, _UndeadRacePreset, 1);
+ObjectSetFlag(_Player, "LLLICH_PlayerRaceChanged");
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, 1, _UndeadTemplate, _UndeadRacePreset)
+THEN
+SetTag(_Player, "FEMALE");
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, 0, _UndeadTemplate, _UndeadRacePreset)
+THEN
+ClearTag(_Player, "FEMALE");
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
+THEN
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_TransformToTemplate", 150);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
+THEN
+CharacterTransform(_Player, _UndeadTemplate, 1, 1, 1, 0, 0, 1, 0);
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_ApplyClassPreset", 150);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _Preset)
+THEN
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Preset, 0);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
+THEN
+NOT DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
+
+IF
+TextEventSet("lichdom_racereset")
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterIsControlled(_Player, 1)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_racereset)] Resetting race to original template.");
+LLLich_Main_ResetRace(_Player);
+
+IF
+ObjectFlagSet("LLLICH_Commands_ResetRace", (CHARACTERGUID)_Player, _)
+THEN
+ObjectClearFlag(_Player, "LLLICH_Commands_ResetRace");
+LLLich_Main_ResetRace(_Player);
+
+PROC
+LLLich_Main_ResetRace((CHARACTERGUID)_Player)
+AND
+DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale)
+THEN
+NOT DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
+DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race);
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Race, 1);
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Race, 1)
+AND
+DB_LLLICH_Main_Temp_RaceResetData(_Player, 1, _OriginalTemplate, _Race)
+THEN
+SetTag(_Player, "FEMALE");
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Race, 1)
+AND
+DB_LLLICH_Main_Temp_RaceResetData(_Player, 0, _OriginalTemplate, _Race)
+THEN
+ClearTag(_Player, "FEMALE");
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
+AND
+DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race)
+THEN
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_ResetRaceTransform", 150);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ResetRaceTransform")
+AND
+DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race)
+THEN
+NOT DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race);
+CharacterTransform(_Player, _OriginalTemplate, 1, 1, 1, 0, 0, 1, 0);
+ObjectClearFlag(_Player, "LLLICH_PlayerRaceChanged");
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_ApplyClassPreset", 150);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

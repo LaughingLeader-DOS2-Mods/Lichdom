@@ -55,7 +55,7 @@ ON
 	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
 ACTIONS
 IF "!c1"
-	HasGlobalFlag("LLLICH_Settings_PolymorphDisabled")
+	HasFlag(_Lich, "LLLICH_Settings_PolymorphDisabled")
 THEN
 	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)
 ENDIF
@@ -65,12 +65,9 @@ VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterFlagSet("LLLICH_Settings_PolymorphDisabled", _Lich)
+	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
 ACTIONS
-IF "c1"
-	IsTagged(_Lich, "LLLICH_Lich")
-THEN
 	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_CleanseShapeshifting, -1, _Lich)
-ENDIF
 
 EVENT LLLICH_Lichform_Polymorph_Enabled
 VARS
