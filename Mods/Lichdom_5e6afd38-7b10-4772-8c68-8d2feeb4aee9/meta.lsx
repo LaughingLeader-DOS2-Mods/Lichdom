@@ -12,7 +12,7 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="LeaderLib - Definitive Edition" type="22" />
                             <attribute id="UUID" value="7e737d2f-31d2-4751-963f-be6ccc59cd0c" type="22" />
-                            <attribute id="Version" value="285868032" type="4" />
+                            <attribute id="Version" value="285933568" type="4" />
                         </node>
                         <node id="ModuleShortDesc">
                             <attribute id="Folder" value="AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c" type="30" />
@@ -26,7 +26,7 @@
                 <node id="ModuleInfo">
                     <attribute id="Author" value="LaughingLeader" type="30" />
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
-                    <attribute id="Description" value="Become a Lich, granting immunity to death as long as your Phylactery exists." type="30" />
+                    <attribute id="Description" value="Become a Lich, gaining new skills, and immunity to death as long as your Phylactery exists." type="30" />
                     <attribute id="Folder" value="Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9" type="30" />
                     <attribute id="GMTemplate" value="" type="22" />
                     <attribute id="LobbyLevelName" value="" type="22" />
