@@ -220,10 +220,30 @@ IsTagged(_Player, "FEMALE", _IsFemale)
 AND
 DB_LLLICH_RaceConversion(_Race, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
 THEN
+ObjectSetFlag(_Player, "LLLICH_PlayerRaceChanged");
 DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
 DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
 LeaderLib_PresetMenu_StartApplyingPreset(_Player, _UndeadRacePreset, 1);
+
+//Undead Races
+PROC
+LLLich_Main_ChangeRaceToUndead((CHARACTERGUID)_Player)
+AND
+NOT DB_LLLICH_Main_Temp_RaceChangeData(_Player, _, _, _)
+AND
+GetTemplate(_Player, _OriginalTemplate)
+AND
+CharacterGetRace(_Player, 0, _UndeadRace)
+AND
+IsTagged(_Player, "FEMALE", _IsFemale)
+AND
+DB_LLLICH_RaceConversion(_Race, _IsFemale, _UndeadTemplate, _UndeadRace)
+THEN
 ObjectSetFlag(_Player, "LLLICH_PlayerRaceChanged");
+DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRace);
+//No need to apply a race preset for undead races. Transform instead!
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_TransformToTemplate", 50);
 
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
@@ -248,6 +268,14 @@ DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadR
 THEN
 ProcObjectTimer(_Player, "LLLICH_Timers_Main_TransformToTemplate", 150);
 
+//Race presets/transformations may reset the max SP
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+CharacterGetMaxSourcePoints(_Player, _MaxSP)
+THEN
+DB_LLLICH_Main_Temp_MaxSourcePoints(_Player, _MaxSP);
+
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
 AND
@@ -264,7 +292,16 @@ THEN
 NOT DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ApplyClassPreset")
+AND
+DB_LLLICH_Main_Temp_MaxSourcePoints(_Player, _MaxSP)
+THEN
+NOT DB_LLLICH_Main_Temp_MaxSourcePoints(_Player, _MaxSP);
+CharacterOverrideMaxSourcePoints(_Player, _MaxSP);
+LeaderLog_LogInt("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] Reset max source points to [",_MaxSP,"].");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ApplyClassPreset")
 AND
 GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _Preset)
 THEN
@@ -299,10 +336,24 @@ PROC
 LLLich_Main_ResetRace((CHARACTERGUID)_Player)
 AND
 DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale)
+AND
+StringContains(_Race, "Undead", 0)
 THEN
 NOT DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
 DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race);
 LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Race, 1);
+
+//Undead Races
+PROC
+LLLich_Main_ResetRace((CHARACTERGUID)_Player)
+AND
+DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale)
+AND
+StringContains(_Race, "Undead", 1)
+THEN
+NOT DB_LLLICH_PlayerData_OriginalRace(_Player, _OriginalTemplate, _Race, _IsFemale);
+DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race);
+ProcObjectTimer(_Player, "LLLICH_Timers_Main_ResetRaceTransform", 50);
 
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Race, 1)
@@ -310,6 +361,7 @@ AND
 DB_LLLICH_Main_Temp_RaceResetData(_Player, 1, _OriginalTemplate, _Race)
 THEN
 SetTag(_Player, "FEMALE");
+ClearTag(_Player, "MALE");
 
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Race, 1)
@@ -317,13 +369,21 @@ AND
 DB_LLLICH_Main_Temp_RaceResetData(_Player, 0, _OriginalTemplate, _Race)
 THEN
 ClearTag(_Player, "FEMALE");
+SetTag(_Player, "MALE");
 
 PROC
-LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Race, 1)
 AND
 DB_LLLICH_Main_Temp_RaceResetData(_Player, _IsFemale, _OriginalTemplate, _Race)
 THEN
 ProcObjectTimer(_Player, "LLLICH_Timers_Main_ResetRaceTransform", 150);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ResetRaceTransform")
+AND
+CharacterGetMaxSourcePoints(_Player, _MaxSP)
+THEN
+DB_LLLICH_Main_Temp_MaxSourcePoints(_Player, _MaxSP);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ResetRaceTransform")
