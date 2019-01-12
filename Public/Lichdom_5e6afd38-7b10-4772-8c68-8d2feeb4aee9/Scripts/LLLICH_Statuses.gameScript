@@ -47,7 +47,8 @@ ON
 	OnCharacterFlagSet("LLLICH_Settings_HideLichStatus", _Lich)
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_LICHFORM_INFO, null, 0)
-	
+
+/*
 EVENT LLLICH_Lichform_Polymorph
 VARS
 	CHARACTER:_Lich
@@ -80,7 +81,7 @@ IF "c1"
 THEN
 	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)
 ENDIF
-
+*/
 /*
 EVENT LLLICH_Lichform_Polymorph_Cancel_Flag
 ON

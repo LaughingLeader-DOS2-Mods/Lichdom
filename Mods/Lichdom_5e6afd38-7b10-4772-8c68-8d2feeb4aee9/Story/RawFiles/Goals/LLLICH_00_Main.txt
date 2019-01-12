@@ -231,12 +231,14 @@ AND
 DB_LLLICH_Main_Temp_RaceChangeData(_Player, 1, _UndeadTemplate, _UndeadRacePreset)
 THEN
 SetTag(_Player, "FEMALE");
+ClearTag(_Player, "MALE");
 
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_UndeadRacePreset, 1)
 AND
 DB_LLLICH_Main_Temp_RaceChangeData(_Player, 0, _UndeadTemplate, _UndeadRacePreset)
 THEN
+SetTag(_Player, "MALE");
 ClearTag(_Player, "FEMALE");
 
 PROC
@@ -257,16 +259,25 @@ ProcObjectTimer(_Player, "LLLICH_Timers_Main_ApplyClassPreset", 150);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
 AND
-GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _Preset)
+DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
 THEN
-LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Preset, 0);
+NOT DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_TransformToTemplate")
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset)
+GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _Preset)
 THEN
-NOT DB_LLLICH_Main_Temp_RaceChangeData(_Player, _IsFemale, _UndeadTemplate, _UndeadRacePreset);
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Preset, 0);
+DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset);
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Preset, 0)
+AND
+DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset)
+THEN
+NOT DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset);
+LLLich_Main_SetupLich(_Player);
 
 IF
 TextEventSet("lichdom_racereset")
