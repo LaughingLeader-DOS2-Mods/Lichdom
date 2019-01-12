@@ -6,3 +6,10 @@ add name "Strange Ring",""
 
 new namegroup "LLLICH_Phylactery_Smallbox"
 add name "Strange Box",""
+
+new namegroup "WPN_UNIQUE_LLLICH_LichStaff"
+add name "Staff of the Soulkeeper",""
+
+new namegroup "LLLICH_LichStaff"
+add name "Lich's Staff",""
+add namecool "Lich's Wicked Staff",""

@@ -23,43 +23,43 @@
                     <children>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Human" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Humans" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Humans" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Dwarf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Dwarves" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Dwarves" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Elf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Elves" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Elves" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Lizard" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Lizards" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Lizards" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Undead_Human" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Humans" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start_Undead" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Humans" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Undead_Dwarf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Dwarves" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start_Undead" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Dwarves" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Undead_Elf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Elves" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start_Undead" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Elves" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                         <node id="EquipmentProperty">
                             <attribute id="RaceName" value="Undead_Lizard" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_Witch_Lizards" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_Witch_Start_Undead" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLLICH_Lich_Lizards" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLLICH_Lich_Start_Undead" type="22" />
                         </node>
                     </children>
                 </node>

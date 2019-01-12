@@ -1,0 +1,77 @@
+new equipment "Class_LLLICH_Lich_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLLICH_LichStaff"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+add equipmentgroup
+add equipment entry "GRN_Grenade_PoisonFlask_A"
+
+new equipment "Class_LLLICH_Lich_Lizards"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLLICH_LichStaff_Staff_Lizards"
+
+new equipment "Class_LLLICH_Lich_Elves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLLICH_LichStaff_Staff_Elves"
+
+new equipment "Class_LLLICH_Lich_Dwarves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLLICH_LichStaff_Staff_Dwarves"
+
+new equipment "Class_LLLICH_Lich_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLLICH_Lich_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLLICH_LichStaff_Staff_Humans"
