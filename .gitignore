@@ -12,8 +12,8 @@ Editor/Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Levels/*
 ######################
 *.div
 *.raw
-story.debugInfo
 *.debugInfo
+*.debuginfo
 Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Story/Dialogs/Autosave/*
 Mods/Lichdom_5e6afd38-7b10-4772-8c68-8d2feeb4aee9/Story/Dialogs/Recovered/*
 
