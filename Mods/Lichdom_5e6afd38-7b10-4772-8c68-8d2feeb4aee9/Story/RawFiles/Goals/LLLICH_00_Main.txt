@@ -62,13 +62,13 @@ LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up li
 LLLich_Main_SetupLich(_Player);
 
 PROC
-LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLich_Lich", 0)
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLLICH_Lich", 0)
 THEN
 LLLich_Main_SetupLich(_Player);
 
 //LeaderLib PresetMenu
 PROC
-LeaderLib_PresetApplied((CHARACTERGUID)_Player, "LLLich_Lich", 0)
+LeaderLib_PresetApplied((CHARACTERGUID)_Player, "LLLICH_Lich", 0)
 THEN
 LLLich_Main_SetupLich(_Player);
 

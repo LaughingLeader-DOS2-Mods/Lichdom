@@ -1,1 +1,1 @@
-new itemcolor "LLLICH_Lich","2c2d34","b8a88f","f2dcc3"
+new itemcolor "LLLICH_Lich","2c2d34","212227","212227"

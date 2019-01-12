@@ -32,7 +32,7 @@ add equipment entry "ARM_LLLICH_Lich_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLLICH_Lich_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLLICH_LichStaff_Staff_Lizards"
+add equipment entry "WPN_LLLICH_LichStaff_Preview"
 
 new equipment "Class_LLLICH_Lich_Elves"
 add equipmentgroup
@@ -46,7 +46,7 @@ add equipment entry "ARM_LLLICH_Lich_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLLICH_Lich_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLLICH_LichStaff_Staff_Elves"
+add equipment entry "WPN_LLLICH_LichStaff_Preview"
 
 new equipment "Class_LLLICH_Lich_Dwarves"
 add equipmentgroup
@@ -60,7 +60,7 @@ add equipment entry "ARM_LLLICH_Lich_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLLICH_Lich_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLLICH_LichStaff_Staff_Dwarves"
+add equipment entry "WPN_LLLICH_LichStaff_Preview"
 
 new equipment "Class_LLLICH_Lich_Humans"
 add equipmentgroup
@@ -74,4 +74,4 @@ add equipment entry "ARM_LLLICH_Lich_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLLICH_Lich_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLLICH_LichStaff_Staff_Humans"
+add equipment entry "WPN_LLLICH_LichStaff_Preview"

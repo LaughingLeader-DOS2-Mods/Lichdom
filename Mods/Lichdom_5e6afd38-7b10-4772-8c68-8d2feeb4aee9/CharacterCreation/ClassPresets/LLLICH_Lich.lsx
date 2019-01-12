@@ -4,7 +4,7 @@
     <version major="1" minor="3" revision="0" build="0" />
     <region id="CharacterCreationClass">
         <node id="root">
-            <attribute id="ClassDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life.&lt;br&gt;Choosing this preset will unlock the full capabilities of a Lich." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+            <attribute id="ClassDescription" value="A lich is an undead spellcaster who uses a phylactery to gain immortality by binding their soul.&lt;br&gt;Choosing this preset will unlock the full capabilities of a Lich, and will replace any racial skills with a Lich equivalent." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
 			<attribute id="ClassLongDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life. Liches are scheming, and to some, insane. They hunger forever for greater power, long-forgotten knowledge, and the most terrible of arcane secrets. Because the shadow of death does not hang over them, they often conceive plans taking years, decades, or even centuries to come to fruition." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
             <attribute id="ClassName" value="Lich" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
             <attribute id="ClassType" value="LLLICH_Lich" type="22" />
