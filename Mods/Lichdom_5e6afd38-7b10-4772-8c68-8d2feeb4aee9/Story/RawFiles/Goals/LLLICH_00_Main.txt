@@ -305,8 +305,21 @@ ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ApplyClassPr
 AND
 GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _Preset)
 THEN
-LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Preset, 0);
+LeaderLog_Log("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] Re-applying CC preset [",_Preset,"].");
 DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset);
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, _Preset, 0);
+
+//Editor, Existing saves
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLLICH_Timers_Main_ApplyClassPreset")
+AND
+NOT DB_LLLICH_Main_Temp_TransformToLich(_Player, _)
+AND
+NOT GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] No CC preset found. Applying preset [LLLICH_Lich].");
+DB_LLLICH_Main_Temp_TransformToLich(_Player, "LLLICH_Lich");
+LeaderLib_PresetMenu_StartApplyingPreset(_Player, "LLLICH_Lich", 0);
 
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Player, (STRING)_Preset, 0)
@@ -314,8 +327,10 @@ AND
 DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset)
 THEN
 NOT DB_LLLICH_Main_Temp_TransformToLich(_Player, _Preset);
-LLLich_Main_SetupLich(_Player);
+//LLLich_Main_SetupLich(_Player);
+//END_REGION
 
+//REGION RESET_RACE
 IF
 TextEventSet("lichdom_racereset")
 AND

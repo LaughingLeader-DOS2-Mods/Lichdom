@@ -7,7 +7,7 @@
             <attribute id="ClassDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life.&lt;br&gt;Choosing this preset will unlock the full capabilities of a Lich." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
 			<attribute id="ClassLongDescription" value="A lich is an undead spellcaster who has used its magical powers to unnaturally extend its life. Liches are scheming, and to some, insane. They hunger forever for greater power, long-forgotten knowledge, and the most terrible of arcane secrets. Because the shadow of death does not hang over them, they often conceive plans taking years, decades, or even centuries to come to fruition." handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
             <attribute id="ClassName" value="Lich" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
-            <attribute id="ClassType" value="LLLich_Lich" type="22" />
+            <attribute id="ClassType" value="LLLICH_Lich" type="22" />
             <attribute id="SkillSet" value="Class_LLLICH_Lich" type="22" />
             <attribute id="Voice" value="1" type="5" />
 			<attribute id="Icon" value="10" type="5" />
