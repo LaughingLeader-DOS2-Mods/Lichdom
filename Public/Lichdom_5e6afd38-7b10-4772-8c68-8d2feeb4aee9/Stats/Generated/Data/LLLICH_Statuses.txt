@@ -7,6 +7,7 @@ data "FormatColor" "Source"
 data "StatsId" "Stats_LLLICH_LichForm"
 data "StackId" "Stack_LLLICH_LichForm"
 data "LeaveAction" "Projectile_LLLICH_LichForm_CleanseShapeshifting"
+data "Skills" "Target_LLLICH_ChillTouch"
 
 new entry "Stats_LLLICH_LichForm"
 type "Potion"
@@ -71,6 +72,15 @@ data "DescriptionRef" "Character is immortal through the power of a Phylactery.<
 data "Icon" "Item_LOOT_Skull_A_Magic"
 data "FormatColor" "Source"
 data "StackId" "Stack_LLLICH_PhylacteryActiveInfo"
+
+new entry "LLLICH_PHYLACTERY_NEARLICH"
+type "StatusData"
+data "StatusType" "CONSUME"
+data "ForGameMaster" "No"
+data "InitiateCombat" "No"
+data "DisplayName" "Near Phylactery"
+data "Icon" "unknown"
+data "StackId" "Stack_LLLICH_PhylacteryNearLich"
 
 new entry "LLLICH_CREATE_PHYLACTORY"
 type "StatusData"

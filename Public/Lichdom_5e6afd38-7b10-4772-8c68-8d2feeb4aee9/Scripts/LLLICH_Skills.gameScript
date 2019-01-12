@@ -1,0 +1,20 @@
+INIT
+
+EVENTS
+
+EVENT LLLICH_DrainSoul_SourceExplosion
+VARS
+	CHARACTER:_Lich
+	CHARACTER:_Target
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterCharacterEvent(_Lich, _Target, "LLLICH_Skills_CastDrainSoulExplosion")
+ACTIONS
+	Set(_Level, -1)
+IF "c1"
+	CharacterGetStat(_LevelF, _Lich, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+	ExplodeAt(_Target, Projectile_LLLICH_SourceExplosion, _Level, _Lich)

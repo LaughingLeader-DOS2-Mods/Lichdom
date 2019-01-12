@@ -1,0 +1,86 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+CharacterUsedSkillOnTarget(_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul", _, _)
+THEN
+DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
+ProcObjectTimer(_Target, "LLLICH_Timers_CancelDyingEvent", 2000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Target, "LLLICH_Timers_CancelDyingEvent")
+AND
+DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
+THEN
+NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
+
+IF
+CharacterStatusAttempt(_Target, "DYING", _)
+AND
+DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
+THEN
+NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
+ProcObjectTimerCancel(_Target, "LLLICH_Timers_CancelDyingEvent");
+LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
+
+PROC
+LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+ObjectExists(_Phylactery, 1)
+AND
+ItemIsDestroyed(_Phylactery, 0)
+AND
+ItemGetDurability(_Phylactery, _CurrentDurability)
+AND
+_CurrentDurability < 100
+AND
+IntegerSum(_CurrentDurability, 20, _NextDurability)
+AND
+IntegerMin(100, _NextDurability, _Durability)
+AND
+IntegertoString(_Durability, _DurabilityStr)
+THEN
+ItemSetDurability(_Phylactery, _Durability);
+LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", _DurabilityStr, "/100 Durability)</font>");
+
+PROC
+LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
+AND
+NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul")
+AND
+HasActiveStatus(_Lich, "SOURCE_MUTED", 0)
+AND
+CharacterGetSourcePoints(_Lich, _SP)
+AND
+CharacterGetMaxSourcePoints(_Lich, _SPMax)
+AND
+_SP < _SPMax
+THEN
+DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul");
+ApplyStatus(_Lich, "SOURCE_REPLENISH", 0.0, 1, _Lich);
+
+//Source Explosion
+PROC
+LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
+AND
+NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul")
+THEN
+DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul");
+CharacterCharacterSetEvent(_Lich, _Target, "LLLICH_Skills_CastDrainSoulExplosion");
+
+PROC
+LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, (STRING)_ID)
+AND
+DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, _ID)
+THEN
+NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, _ID);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

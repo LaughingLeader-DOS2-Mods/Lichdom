@@ -1,0 +1,83 @@
+INIT
+	ITEM:__Me
+	CHARACTER:%LLLICH_Phylactory_Owner = null
+	EXTERN FLOAT:%LLLICH_Phylactory_AuraRadius = 12.0
+	EXTERN FLOAT:%LLLICH_Phylactory_SleepDuration = 4.0
+	INT:%LLLICH_Phylactory_NearDetectionEnabled = 0
+EVENTS
+
+EVENT LLLICH_Phylactory_Dropped
+ON
+	OnItemDropped(__Me, _)
+ACTIONS
+IF "!c1&c2&!c3"
+	IsEqual(%LLLICH_Phylactory_Owner, null)
+	CharacterHasStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_ACTIVE_INFO)
+	HasFlag(%LLLICH_Phylactory_Owner, "LLLICH_Settings_DisablePhylacteryBeam")
+THEN
+	CallFunction("LLLICH_Phylactory_EnableNearReaction")
+ENDIF
+
+EVENT LLLICH_Phylactory_NearStatus_EnableNearReaction
+ON
+	OnCharacterStatusApplied(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_ACTIVE_INFO)
+	OnCharacterFlagCleared("LLLICH_Settings_DisablePhylacteryBeam", %LLLICH_Phylactory_Owner)
+	OnFunction("LLLICH_Phylactory_EnableNearReaction")
+ACTIONS
+IF "!c1&!c2"
+	IsEqual(%LLLICH_Phylactory_NearDetectionEnabled, 1)
+	HasFlag(%LLLICH_Phylactory_Owner, "LLLICH_Settings_DisablePhylacteryBeam")
+THEN
+	Set(%LLLICH_Phylactory_NearDetectionEnabled, 1)
+	SetPriority("LLLICH_Phylactory_NearStatus", 99999)
+ENDIF
+
+EVENT LLLICH_Phylactory_NearStatus_DisableNearReaction
+ON
+	OnCharacterFlagSet("LLLICH_Settings_DisablePhylacteryBeam", %LLLICH_Phylactory_Owner)
+	OnCharacterFlagSet("LLLICH_Settings_HidePhylacteryStatus", %LLLICH_Phylactory_Owner)
+	OnFunction("LLLICH_Phylactory_DisableNearReaction")
+	OnPickupItem(_, __Me)
+ACTIONS
+IF "c1"
+	IsEqual(%LLLICH_Phylactory_NearDetectionEnabled, 1)
+THEN
+	Set(%LLLICH_Phylactory_NearDetectionEnabled, 0)
+	SetPriority("LLLICH_Phylactory_NearStatus", 0)
+	CharacterRemoveStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH)
+ENDIF
+	
+BEHAVIOUR
+
+REACTION LLLICH_Phylactory_NearStatus,0
+USAGE ALL
+VARS
+	FLOAT:_Dist
+	FLOAT:_SleepDuration
+CHECK "c1&!c2"
+	IsEqual(%LLLICH_Phylactory_NearDetectionEnabled, 1)
+	IsEqual(%LLLICH_Phylactory_Owner, null)
+ACTIONS
+	Set(_SleepDuration, %LLLICH_Phylactory_SleepDuration)
+IF "c1"
+	GetDistance(_Dist, __Me, %LLLICH_Phylactory_Owner)
+THEN
+	IF "c1|c2"
+		IsLessThen(_Dist, %LLLICH_Phylactory_AuraRadius)
+		IsEqual(_Dist, %LLLICH_Phylactory_AuraRadius)
+	THEN
+		IF "!c1"
+			CharacterHasStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH)
+		THEN
+			CharacterApplyStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH, -1, 1, __Me)
+		ELSE
+			
+		ENDIF
+	ELIF "c1"
+		CharacterHasStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH)
+	THEN
+		CharacterRemoveStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH)
+		Set(_SleepDuration, 2.0)
+	ENDIF
+ENDIF
+	Sleep(_SleepDuration)

@@ -4,6 +4,49 @@ INITSECTION
 
 KBSECTION
 
+//REGION QUERIES
+QRY
+LLLICH_Phylactery_QRY_PhylacteryIsDamaged((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+ItemGetDurability(_Phylactery, _Durability)
+AND
+_Durability < 100
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Phylactery_QRY_PhylacteryIsDamaged((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
+AND
+ObjectExists(_Phylactery, 1)
+AND
+ItemGetDurability(_Phylactery, _Durability)
+AND
+_Durability < 100
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Phylactery_QRY_PhylacteryIsBroken((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, (INTEGER)_Durability)
+AND
+_Durability <= 0
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:QRY:PhylacteryIsBroken] The Phylactery was destroyed!");
+ItemDestroy(_Phylactery);
+
+QRY
+LLLICH_Phylactery_QRY_PhylacteryIsInWorld((ITEMGUID)_Phylactery)
+AND
+ObjectExists(_Phylactery, 1)
+AND
+ItemIsInInventory(_Phylactery, 0)
+AND
+ItemIsDestroyed(_Phylactery, 0)
+THEN
+DB_NOOP(1);
+//END_REGION
+
 //REGION CREATION
 IF
 CharacterStatusRemoved(_Lich, "LLLICH_CREATE_PHYLACTORY", _)
@@ -57,6 +100,7 @@ THEN
 ItemToInventory(_Phylactery, _Lich);
 ItemSetOwner(_Phylactery, _Lich);
 SetVarObject(_Lich, "LLLICH_Phylactery", _Phylactery);
+SetVarObject(_Phylactery, "LLLICH_Phylactory_Owner", _Lich);
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery);
 ApplyStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", -1.0, 1, _Lich);
 
@@ -112,13 +156,15 @@ THEN
 DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 PlayEffect(_Phylactery, "RS3_FX_Skills_Soul_Cast_Shout_Root_02");
 //PlayBeamEffect(_Phylactery, _Lich, "RS3_FX_Skills_Soul_Cast_Beam_MassPurgingDevice_01", "", "Dummy_BodyFX");
-PROC_LoopBeamEffect("RS3_FX_Skills_Soul_Cast_Beam_Soul_ShacklesPain_Beam_02", _Lich, _Phylactery, "Dummy_BodyFX", "", "LLLICH.FX.PhylacteryBeam", _Level);
+//PROC_LoopBeamEffect("RS3_FX_Skills_Soul_Cast_Beam_Soul_ShacklesPain_Beam_02", _Lich, _Phylactery, "Dummy_BodyFX", "", "LLLICH.FX.PhylacteryBeam", _Level);
 TeleportTo(_Lich, _Phylactery, "LLLICH_Phylactory_LichTeleported", 0, 1, 1);
 
+/*
 IF
 CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
 THEN
 PROC_StopLoopBeamEffect(_Lich, "LLLICH.FX.PhylacteryBeam");
+*/
 
 //END_REGION
 
@@ -201,14 +247,6 @@ ItemSetDurability(_Phylactery, _Durability);
 LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:LLLICH_OnLichDying] Phylactery took damage. Durability: [",_Durability,"]");
 ShowNotification(_Lich, "LLLICH_Notifications_PhylacteryDamage");
 
-QRY
-LLLICH_Phylactery_QRY_PhylacteryIsBroken((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, (INTEGER)_Durability)
-AND
-_Durability <= 0
-THEN
-LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:QRY:PhylacteryIsBroken] The Phylactery was destroyed!");
-ItemDestroy(_Phylactery);
-
 IF
 ItemDestroyed(_Phylactery)
 AND
@@ -221,6 +259,7 @@ RemoveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE");
 SetStoryEvent(_Lich, "LLLICH_OnPhylacteryDestroyed");
 //END_REGION
 
+//REGION RECOVERING
 IF
 CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
 AND
@@ -245,7 +284,9 @@ PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_ApplyRecoveryStatus")
 THEN
 ApplyStatus(_Lich, "LLLICH_RECOVERING", 12.0, 1, _Lich);
+//END_REGION
 
+//REGION SMALLBOX_USED_BLOCK
 PROC
 ProcBlockUseOfItem(_Character, _Smallbox)
 AND
@@ -271,7 +312,40 @@ AND
 NOT GetVarObject(_Character, "LLLICH_Phylactery", _Smallbox)
 THEN
 DisplayText(_Character, "LLLICH_DisplayText_SmallBoxInspected_Stranger");
+//END_REGION
 
+//REGION CHAIN_LOOP_FX
+
+//Delay the beam effect in case the player is teetering near the edge of the aura
+IF
+CharacterStatusApplied(_Lich, "LLLICH_PHYLACTERY_NEARLICH", (ITEMGUID)_Phylactery)
+THEN
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_StartPhylacteryBeamEffect");
+ProcObjectTimer(_Lich, "LLLICH_Timers_StartPhylacteryBeamEffect", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_StartPhylacteryBeamEffect")
+AND
+HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_NEARLICH", 1)
+AND
+HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE_INFO", 1)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+AND
+LLLICH_Phylactery_QRY_PhylacteryIsInWorld(_Phylactery)
+AND
+DB_CurrentLevel(_Level)
+THEN
+PROC_LoopBeamEffect("LLLICH_FX_Status_NearPhylactory_Beam_01", _Lich, _Phylactery, "Dummy_BodyFX", "", "LLLICH.FX.PhylacteryBeam", _Level);
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_PHYLACTERY_NEARLICH", _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+THEN
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_StartPhylacteryBeamEffect");
+PROC_StopLoopBeamEffect(_Lich, "LLLICH.FX.PhylacteryBeam");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
