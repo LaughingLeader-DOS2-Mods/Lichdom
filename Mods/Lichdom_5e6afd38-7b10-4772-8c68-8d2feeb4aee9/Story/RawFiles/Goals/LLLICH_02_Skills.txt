@@ -8,17 +8,27 @@ IF
 CharacterUsedSkillOnTarget(_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul", _, _)
 THEN
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
-ProcObjectTimer(_Target, "LLLICH_Timers_CancelDyingEvent", 2000);
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_CancelDyingEvent");
+ProcObjectTimer(_Lich, "LLLICH_Timers_CancelDyingEvent", 5000);
+
+IF
+SkillCast(_Lich, "Target_LLLICH_DrainSoul", _, _)
+AND
+DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
+THEN
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_CancelDyingEvent");
+ProcObjectTimer(_Lich, "LLLICH_Timers_CancelDyingEvent", 3000);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Target, "LLLICH_Timers_CancelDyingEvent")
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_CancelDyingEvent")
 AND
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
 NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 
 IF
-CharacterStatusAttempt(_Target, "DYING", _)
+//CharacterStatusAttempt(_Target, "DYING", _)
+CharacterPrecogDying(_Target)
 AND
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
@@ -26,27 +36,26 @@ NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSou
 ProcObjectTimerCancel(_Target, "LLLICH_Timers_CancelDyingEvent");
 LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 
+IF
+TextEventSet("lichdom_notif")
+AND
+CharacterGetHostCharacter(_Lich)
+THEN
+LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", "100", "/100 Charges)</font>");
+
+//Bonus, in addition to the other two results
 PROC
 LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
 AND
-ObjectExists(_Phylactery, 1)
-AND
-ItemIsDestroyed(_Phylactery, 0)
-AND
-ItemGetDurability(_Phylactery, _CurrentDurability)
-AND
-_CurrentDurability < 100
-AND
-IntegerSum(_CurrentDurability, 20, _NextDurability)
-AND
-IntegerMin(100, _NextDurability, _Durability)
-AND
-IntegertoString(_Durability, _DurabilityStr)
+LLLICH_Phylactery_QRY_PhylacteryIsDamaged(_Lich, _Phylactery)
 THEN
-ItemSetDurability(_Phylactery, _Durability);
-LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", _DurabilityStr, "/100 Durability)</font>");
+//ItemSetDurability(_Phylactery, _Durability);
+ItemAddCharges(_Phylactery, 20);
+LeaderLog_Log("DEBUG", "[Lichdom:Skills:OnTargetDeath] Target died from [Target_LLLICH_DrainSoul]. Regenerating Phylactery.");
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Healed");
+//LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", _DurabilityStr, "/100 Charges)</font>");
 
 PROC
 LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
@@ -61,6 +70,7 @@ CharacterGetMaxSourcePoints(_Lich, _SPMax)
 AND
 _SP < _SPMax
 THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Skills:OnTargetDeath] Target died from [Target_LLLICH_DrainSoul]. Applying [SOURCE_REPLENISH].");
 DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul");
 ApplyStatus(_Lich, "SOURCE_REPLENISH", 0.0, 1, _Lich);
 
@@ -70,6 +80,7 @@ LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Targe
 AND
 NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Skills:OnTargetDeath] Target died from [Target_LLLICH_DrainSoul]. Causing source explosion.");
 DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul");
 CharacterCharacterSetEvent(_Lich, _Target, "LLLICH_Skills_CastDrainSoulExplosion");
 

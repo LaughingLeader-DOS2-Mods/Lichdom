@@ -86,24 +86,26 @@ THEN
 	THEN
 		PlayEffectAt(_Lich, "RS3_FX_Skills_Soul_Cast_Soul_Impact_Root_01")
 		CharacterPlayEffect(_Lich, "RS3_FX_Skills_Soul_LastRites_Disappear_Overlay_01")
-		//CharacterEvent(_Lich, "LLLICH_OnLichDying_RemoveHarmfulStatuses")
-		CharacterEvent(_Lich, "LLLICH_OnLichDying")
-		//CharacterEvent(_Lich, "LLLICH_StartLichRecovery")
 		CharacterApplyStatus(_Lich, LLLICH_CLEAR_HARMFUL, 0, 1, _Lich)
-		CharacterApplyStatus(_Lich, UNCONSCIOUS, 3, 1, _Lich)
-		CharacterApplyStatus(_Lich, LLLICH_RECOVERING, 3, 1, _Lich)
 		SetTag(_Lich, "AI_IGNORED_TARGET")
+		CharacterEvent(_Lich, "LLLICH_OnLichDying")
 	ENDIF
 ENDIF	
 
-EVENT LLLICH_Phylactery_Teleported_Effects
+EVENT LLLICH_Phylactery_Teleported
 VARS
 	CHARACTER:_Lich
 ON
-	OnCharacterEvent(_Lich, "LLLICH_Phylactory_LichTeleported")
+	OnCharacterEvent(_Lich, "LLLICH_Phylactory_Regenerating_LichTeleported")
 ACTIONS
 	CharacterPlayEffect(_Lich, "RS3_FX_Skills_Polymorph_Soul_TurnInto_StatusApplied_Root_01")
-
+	//CharacterApplyStatus(_Lich, UNCONSCIOUS, 3, 1, _Lich)
+	/*
+	LLLICH_RECOVERING applies UNCONSCIOUS if tagged with AI_IGNORED_TARGET
+	This is to get around TeleportToPosition clearing UNCONSCIOUS
+	*/
+	CharacterApplyStatus(_Lich, LLLICH_RECOVERING, 3, 1, _Lich)
+	
 EVENT LLLICH_Phylactery_Recovery_End
 VARS
 	CHARACTER:_Lich

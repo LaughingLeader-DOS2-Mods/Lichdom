@@ -1,6 +1,13 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+LLLICH_Main_InitSettings();
+KBSECTION
+
+//REGION SETTINGS
+PROC
+LLLICH_Main_InitSettings()
+THEN
 DB_LLLICH_UndeadConversionTags("Dwarf", "UNDEAD_DWARF", "DWARF");
 DB_LLLICH_UndeadConversionTags("Human", "UNDEAD_HUMAN", "HUMAN");
 DB_LLLICH_UndeadConversionTags("Elf", "UNDEAD_ELF", "ELF");
@@ -57,7 +64,22 @@ DB_LLLICH_LichStatuses("LLLICH_PHYLACTERY_ACTIVE_INFO");
 DB_LLLICH_LichStatuses("LLLICH_PHYLACTERY_NEARLICH");
 DB_LLLICH_LichStatuses("LLLICH_CREATE_PHYLACTORY");
 DB_LLLICH_LichStatuses("LLLICH_FLESH_SACRIFICE");
-KBSECTION
+
+//Block when applying a different preset
+DB_LLLICH_LichSkills("Target_LLLICH_ChillTouch");
+DB_LLLICH_LichSkills("Target_LLLICH_DrainSoul");
+DB_LLLICH_LichSkills("Shout_LLLICH_Recall");
+
+//END_REGION
+
+//REGION PRESETS
+PROC
+LeaderLib_PresetMenu_BlockSkillCopying((CHARACTERGUID)_Player, (STRING)_Preset, (STRING)_Skill, (INTEGER)_ChangingRace)
+AND
+DB_LLLICH_LichSkills(_Skill)
+THEN
+DB_LeaderLib_PresetMenu_Temp_BlockSkill(_Player, _Skill);
+//END_REGION
 
 //REGION SETUP
 IF
