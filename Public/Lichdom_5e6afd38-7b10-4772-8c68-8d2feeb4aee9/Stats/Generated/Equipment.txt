@@ -10,7 +10,7 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_UNIQUE_LLLICH_LichStaff"
+add equipment entry "WPN_LLLICH_LichStaff_PresetStarter"
 add equipmentgroup
 add equipment entry "CON_Potion_Poison_A"
 add equipmentgroup

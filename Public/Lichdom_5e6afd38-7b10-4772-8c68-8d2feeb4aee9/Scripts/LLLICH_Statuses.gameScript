@@ -1,4 +1,6 @@
 INIT
+	INT:%LLLICH_SavingThrow_Fear = 500
+	INT:%LLLICH_SavingThrow_Stunned = 700
 
 EVENTS
 
@@ -7,6 +9,7 @@ VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterEvent(_Lich, "LLLICH_SetupLich")
+	OnCharacterEvent(_Lich, "LLLICH_ApplyStatusInfluence")
 ACTIONS
 	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
 	AddStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
@@ -16,10 +19,11 @@ VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
+	OnCharacterEvent(_Lich, "LLLICH_ClearStatusInfluence")
 ACTIONS
 	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
 
-EVENT LLLICH_Lichform_InfoStatus_Apply
+EVENT LLLICH_Lichform_InfoStatus_Apply2
 VARS
 	CHARACTER:_Lich
 ON
@@ -27,6 +31,19 @@ ON
 ACTIONS
 	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_INFO, -1, 0, _Lich)
 
+EVENT LLLICH_Lichform_InfoStatus_RemoveWorkaround
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM_INFO)
+ACTIONS
+IF "c1&!c2"
+	HasStatusInfluence(_Lich, LLLICH_LICHFORM)
+	HasFlag(_Lich, "LLLICH_Settings_HideLichStatus")
+THEN
+	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_INFO, -1, 0, _Lich)
+ENDIF
+	
 EVENT LLLICH_Lichform_InfoStatus_ApplyViaFlag
 VARS
 	CHARACTER:_Lich
@@ -47,6 +64,48 @@ ON
 	OnCharacterFlagSet("LLLICH_Settings_HideLichStatus", _Lich)
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_LICHFORM_INFO, null, 0)
+
+EVENT LLLICH_Lichform_SavingThrow_Fear
+VARS
+	CHARACTER:_Lich
+	INT:_Roll
+ON
+	OnCharacterStatusApplied(_Lich, FEAR)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Lich, LLLICH_LICHFORM)
+THEN
+	GetRandomBetween(_Roll, 0, 999)
+	IF "c1"
+		IsGreaterThen(_Roll, %LLLICH_SavingThrow_Fear)
+	THEN
+		CharacterRemoveStatus(_Lich, FEAR, LLLICH_LICHFORM_INFO, 1)
+		StatusText(_Lich, "LLLICH_StatusText_SavingThrow_Fear")
+		//CombatLogText(_Lich, "LLLICH_StatusText_SavingThrow_Fear", 1, 1)
+		//DisplayText(_Lich, "", 0)
+	ENDIF
+ENDIF
+
+EVENT LLLICH_Lichform_SavingThrow_Stunned
+VARS
+	CHARACTER:_Lich
+	INT:_Roll
+ON
+	OnCharacterStatusApplied(_Lich, STUNNED)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Lich, LLLICH_LICHFORM)
+THEN
+	GetRandomBetween(_Roll, 0, 999)
+	IF "c1"
+		IsGreaterThen(_Roll, %LLLICH_SavingThrow_Stunned)
+	THEN
+		CharacterRemoveStatus(_Lich, STUNNED, LLLICH_LICHFORM_INFO, 1)
+		StatusText(_Lich, "LLLICH_StatusText_SavingThrow_Stunned")
+		//CombatLogText(_Lich, "LLLICH_StatusText_SavingThrow_Stunned", 1, 1)
+		//DisplayText(_Lich, "", 0)
+	ENDIF
+ENDIF
 
 /*
 EVENT LLLICH_Lichform_Polymorph

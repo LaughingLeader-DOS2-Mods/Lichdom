@@ -2,6 +2,12 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 
+//Missing anim flags
+DB_GLO_CharacterAnimation("PlayAnim_skill_prepare_flight_01_start","skill_prepare_flight_01_start", 0);
+DB_GLO_CharacterAnimation("PlayAnim_skill_prepare_flight_01_loop","skill_prepare_flight_01_loop", 1);
+DB_GLO_CharacterAnimation("PlayAnim_skill_jump_flight_start","skill_jump_flight_start", 0);
+
+//LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "LichPassives", "LLLICH_LICHFORM", (STRING)_Flag)
 KBSECTION
 
 EXITSECTION

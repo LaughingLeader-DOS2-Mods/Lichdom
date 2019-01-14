@@ -2,6 +2,37 @@ INIT
 
 EVENTS
 
+EVENT LLLICH_Phylactery_Apply
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence")
+ACTIONS
+	RemoveStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 1000.0, "", 0)
+	AddStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 999.0, "", 0)
+	
+EVENT LLLICH_Phylactery_Remove
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
+	OnCharacterEvent(_Lich, "LLLICH_ClearPhylacteryStatusInfluence")
+ACTIONS
+	RemoveStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 1000.0, "", 0)
+
+EVENT LLLICH_Phylactery_InfoStatus_RemoveWorkaround
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO)
+ACTIONS
+IF "c1&!c2"
+	HasStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+	HasFlag(_Lich, "LLLICH_Settings_HidePhylacteryStatus")
+THEN
+	CharacterApplyStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, -1, 0, _Lich)
+ENDIF
+
 EVENT LLLICH_Phylactery_InfoStatus_Apply
 VARS
 	CHARACTER:_Lich

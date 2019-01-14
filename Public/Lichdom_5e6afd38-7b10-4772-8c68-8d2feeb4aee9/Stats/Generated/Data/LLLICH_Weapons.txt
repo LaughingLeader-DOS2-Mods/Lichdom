@@ -84,6 +84,11 @@ data "Damage Type" "Water"
 data "DamageFromBase" "50"
 data "ExtraProperties" "LLWEAPONEX_STAFF_HIT,100,0"
 
+new entry "WPN_LLLICH_LichStaff_PresetStarter"
+type "Weapon"
+using "WPN_LLLICH_LichStaff"
+data "ItemGroup" "WPN_LLLICH_LichStaff_PresetStarter"
+
 new entry "WPN_UNIQUE_LLLICH_LichStaff"
 type "Weapon"
 using "WPN_LLLICH_LichStaff"

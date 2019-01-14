@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.0.1");
+LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.1.2");
 LeaderUpdater_Register_ActiveGoal("Lichdom", "LaughingLeader", "LLLICH_ZZZ_Updater");
 LeaderUpdater_Register_Dependency("Lichdom", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 LeaderLib_Register_ModMenu("LaughingLeader.Lichdom", "[Lichdom] Settings", "LLLICH_SettingsMenu", "Lichdom", "LaughingLeader");
@@ -11,9 +11,9 @@ KBSECTION
 IF
 GameStarted(_,_)
 AND
-LeaderUpdater_QRY_ModUpdateNeeded("Lichdom", "LaughingLeader", "0.9.0.1")
+LeaderUpdater_QRY_ModUpdateNeeded("Lichdom", "LaughingLeader", "0.9.1.2")
 THEN
-LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.0.1");
+LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.1.2");
 
 /*
 PROC

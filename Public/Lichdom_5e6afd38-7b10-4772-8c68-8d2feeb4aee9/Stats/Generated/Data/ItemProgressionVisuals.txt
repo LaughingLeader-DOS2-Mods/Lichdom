@@ -22,6 +22,12 @@ add levelgroup 0,0,"All"
 add rootgroup "7981440d-567e-4738-8779-c36a276b632f",""
 add namegroup "WPN_UNIQUE_LLLICH_LichStaff","",""
 
+new itemgroup "WPN_LLLICH_LichStaff_PresetStarter"
+
+add levelgroup 0,0,"All"
+add rootgroup "461453e9-34bd-4afc-993d-46a09be6eb22",""
+add namegroup "LLLICH_LichStaff","",""
+
 new itemgroup "LLLICH_Staffs"
 
 add levelgroup 1,3,"Common"
