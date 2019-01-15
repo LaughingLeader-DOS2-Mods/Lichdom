@@ -683,7 +683,7 @@ CharacterIsDead(_Lich, 0)
 AND
 NOT LLLICH_Phylactery_QRY_PhylacteryIsStolen(_Lich, _Phylactery)
 THEN
-ProcObjectTimer(_Lich, "LLLICH_Timers_TeleportToPhylactery", 1425);
+ProcObjectTimer(_Lich, "LLLICH_Timers_TeleportToPhylactery", 500);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_TeleportToPhylactery")
@@ -691,7 +691,6 @@ AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
 THEN
 DB_LLLICH_Phylactery_Temp_TeleportingViaSkill(_Lich);
-PlayAnimation(_Lich, "");
 LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "LLLICH_Phylactery_PlayerReturned");
 
 IF
@@ -700,7 +699,13 @@ AND
 DB_LLLICH_Phylactery_Temp_TeleportingViaSkill(_Lich)
 THEN
 NOT DB_LLLICH_Phylactery_Temp_TeleportingViaSkill(_Lich);
-PlayAnimation(_Lich, "Teleport_In_01");
+CharacterSetAnimationOverride(_Lich, "Teleport_In_01");
+ProcObjectTimer(_Lich, "LLLICH_Timers_ClearAnimationOverride", 2100);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_ClearAnimationOverride")
+THEN
+CharacterSetAnimationOverride(_Lich, "");
 //END_REGION
 
 //REGION DURABILITY_NOTIFICATIONS
