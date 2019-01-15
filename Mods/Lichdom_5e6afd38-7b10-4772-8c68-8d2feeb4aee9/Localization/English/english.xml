@@ -1,7 +1,7 @@
 <contentList>
-	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OriginalText="Blows up your target"></content>
-	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43" OriginalText="Set [1].[2][3]">[1][2][3]</content>
+	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OT="Blows up your target"></content>
+	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43" OT="Set [1].[2][3]">[1][2][3]</content>
 	<content contentuid="hd637bf1eg9694g410dgacb1g18a391faa056">Restore [1].[2][3]</content>
-	<content contentuid="h45484416gd69bg4d03g80fdga518ae3b0bd5" OriginalText="Inflict [1] on contact&lt;br&gt;">Inflict [1] on Contact&lt;br&gt;</content>
-	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OriginalText="Number of uses">Power</content>
+	<content contentuid="h45484416gd69bg4d03g80fdga518ae3b0bd5" OT="Inflict [1] on contact&lt;br&gt;">Inflict [1] on Contact&lt;br&gt;</content>
+	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Power</content>
 </contentList>
