@@ -10,12 +10,29 @@ PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 2, 0)
-AND
-DB_IsPlayer(_Lich)
-AND
-CharacterFindTaggedItem(_Lich, "LLLICH_Phylactery", _FoundPhylactery)
 THEN
-LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery(_Lich, _FoundPhylactery);
+LLLICH_Phylactery_Debug_StatsReload_Start();
+
+PROC
+LLLICH_Phylactery_Debug_StatsReload_Start()
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery)
+AND
+ItemIsInInventory(_OldPhylactery, 0)
+AND
+GetTemplate(_OldPhylactery, _Template)
+THEN
+Transform(_OldPhylactery, _Template, 0, 0, 1);
+
+//Phylacteries equipped or in an inventory may lose their stored GUIDSTRING when the stats change
+PROC
+LLLICH_Phylactery_Debug_StatsReload_Start()
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterFindTaggedItem(_Player, "LLLICH_Phylactery", _FoundPhylactery)
+THEN
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery(_Player, _FoundPhylactery);
 
 PROC
 LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_FoundPhylactery)
@@ -37,6 +54,8 @@ AND
 NOT ItemGetOwner(_FoundPhylactery, _Lich)
 AND
 ItemGetOwner(_FoundPhylactery, _OtherLich)
+AND
+IsTagged(_OtherLich, "LLLICH_Lich", 1)
 AND
 NOT DB_LLLICH_Phylactery_Active(_OtherLich, _FoundPhylactery)
 AND
@@ -673,10 +692,10 @@ DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
 THEN
 DB_LLLICH_Phylactery_Temp_TeleportingViaSkill(_Lich);
 PlayAnimation(_Lich, "");
-LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "");
+LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "LLLICH_Phylactery_PlayerReturned");
 
 IF
-StoryEvent((CHARACTERGUID)_Lich, _TeleportEvent)
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_Phylactery_PlayerReturned")
 AND
 DB_LLLICH_Phylactery_Temp_TeleportingViaSkill(_Lich)
 THEN

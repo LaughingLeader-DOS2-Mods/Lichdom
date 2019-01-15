@@ -61,8 +61,8 @@ PROC
 LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
 AND
 NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, "Target_LLLICH_DrainSoul")
-AND
-HasActiveStatus(_Lich, "SOURCE_MUTED", 0)
+//AND
+//HasActiveStatus(_Lich, "SOURCE_MUTED", 0)
 AND
 CharacterGetSourcePoints(_Lich, _SP)
 AND

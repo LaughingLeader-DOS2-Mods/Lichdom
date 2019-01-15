@@ -59,7 +59,7 @@ data "DescriptionRef" "<font color='#73F6FF' size='18'>Phylactery Power</font><b
 data "FXScale" "100"
 data "PrepareAnimationInit" "skill_prepare_divine_01_start"
 data "PrepareAnimationLoop" "skill_prepare_divine_01_loop"
-data "PrepareEffect" ""
+data "PrepareEffect" "LLLICH_FX_Skills_Recall_Prepare_Hand_01:Dummy_R_Hand;RS3_FX_Skills_Soul_Prepare_Soul_ShacklesPain_Root_01_LowVolume,Detach:Dummy_Root"
 data "CastAnimation" "Teleport_Out_01"
 data "CastTextEvent" "cast"
 data "CastEffect" ""
