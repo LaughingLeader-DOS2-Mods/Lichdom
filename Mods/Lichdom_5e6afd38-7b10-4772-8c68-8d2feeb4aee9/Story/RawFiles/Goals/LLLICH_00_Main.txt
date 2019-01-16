@@ -398,6 +398,7 @@ LeaderLog_Log("DEBUG", "[Lichdom:Main:ResetLich] Clearing [LLLICH_Lich] tag and 
 ClearTag(_Lich, "LLLICH_Lich");
 SetStoryEvent(_Lich, "LLLICH_ClearLich");
 LLLICH_Phylactery_ClearFlags(_Lich);
+LLLICH_Main_RemoveLichSkills(_Lich);
 
 PROC
 LLLich_Debug_ResetLich((CHARACTERGUID)_Lich)
