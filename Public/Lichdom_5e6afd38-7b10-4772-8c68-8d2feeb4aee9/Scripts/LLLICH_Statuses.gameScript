@@ -4,6 +4,21 @@ INIT
 
 EVENTS
 
+//This effect is disabled/overriden in the status
+EVENT LLLICH_Lifesteal_FX
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusAttempt(_Character, LIFESTEAL)
+ACTIONS
+IF "!c1"
+	IsTagged(_Character, "LLLICH_Lich")
+THEN
+	CharacterPlayEffect(_Character, "RS3_FX_GP_Status_NecroHeal_Impact_01")
+ELSE
+	CharacterPlayEffect(_Character, "RS3_FX_GP_Impacts_Ghost_01", "Dummy_BodyFX")
+ENDIF
+
 EVENT LLLICH_Lichform_Apply
 VARS
 	CHARACTER:_Lich
@@ -107,6 +122,102 @@ THEN
 	ENDIF
 ENDIF
 
+/* Stats version:
+IF(InSurface:SurfaceWaterFrozen|InSurface:SurfaceWaterFrozenBlessed|InSurface:SurfaceWaterFrozenCursed|InSurface:SurfaceWaterFrozenPurified|InSurface:SurfaceBloodFrozen|InSurface:SurfaceBloodFrozenBlessed|InSurface:SurfaceBloodFrozenCursed|InSurface:SurfaceBloodFrozenPurified|InSurface:SurfaceFrostCloud):LLLICH_CHILLFORM_SPEEDBOOST,100,-2
+*/
+EVENT LLLICH_ChillForm_SpeedBoost_Apply
+VARS
+	CHARACTER:_Lich
+	FLOAT:_Radius
+ON
+	OnCharacterStatusApplied(_Lich, INSURFACE)
+	OnCharacterStatusApplied(_Lich, LLLICH_CHILLFORM)
+ACTIONS
+IF "c1&!c2"
+	CharacterHasStatus(_Lich, LLLICH_CHILLFORM)
+	CharacterHasStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST)
+THEN
+	Set(_Radius, 2.0)
+	IF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10"
+		IsInSurface(_Lich, SurfaceWaterFrozen, _Radius)
+		IsInSurface(_Lich, SurfaceWaterFrozenBlessed, _Radius)
+		IsInSurface(_Lich, SurfaceWaterFrozenCursed, _Radius)
+		IsInSurface(_Lich, SurfaceWaterFrozenCursed, _Radius)
+		IsInSurface(_Lich, SurfaceWaterFrozenPurified, _Radius)
+		IsInSurface(_Lich, SurfaceBloodFrozen, _Radius)
+		IsInSurface(_Lich, SurfaceBloodFrozenBlessed, _Radius)
+		IsInSurface(_Lich, SurfaceBloodFrozenCursed, _Radius)
+		IsInSurface(_Lich, SurfaceBloodFrozenCursed, _Radius)
+		IsInSurface(_Lich, SurfaceBloodFrozenPurified, _Radius)
+	THEN
+		CharacterApplyStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, 1, 1, _Lich)
+	ENDIF
+ENDIF
+
+EVENT LLLICH_ChillForm_SpeedBoost_RemoveStart
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, INSURFACE)
+ACTIONS
+IF "c1&c2"
+	CharacterHasStatus(_Lich, LLLICH_CHILLFORM)
+	CharacterHasStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST)
+THEN
+	SetVar(_Lich, "LeaderLib_Timer_CompleteEvent", STRING:"LLLICH_Events_ChillForm_CheckForIceSurface")
+	SetVar(_Lich, "LeaderLib_Timer_Delay", INT:899)
+	CharacterEvent(_Lich, "LeaderLib_Commands_StartObjectTimer")
+ENDIF
+
+EVENT LLLICH_ChillForm_SpeedBoost_Remove
+VARS
+	CHARACTER:_Lich
+	FLOAT:_Radius
+ON
+	OnCharacterEvent(_Lich, "LLLICH_Events_ChillForm_CheckForIceSurface")
+ACTIONS
+	IF "!c1"
+		CharacterHasStatus(_Lich, INSURFACE)
+	THEN
+		CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
+	ELSE
+		Set(_Radius, 1.0)
+		IF "!c1&!c2&!c3&!c4&!c5&!c6&!c7&!c8&!c9&!c10"
+			IsInSurface(_Lich, SurfaceWaterFrozen, _Radius)
+			IsInSurface(_Lich, SurfaceWaterFrozenBlessed, _Radius)
+			IsInSurface(_Lich, SurfaceWaterFrozenCursed, _Radius)
+			IsInSurface(_Lich, SurfaceWaterFrozenCursed, _Radius)
+			IsInSurface(_Lich, SurfaceWaterFrozenPurified, _Radius)
+			IsInSurface(_Lich, SurfaceBloodFrozen, _Radius)
+			IsInSurface(_Lich, SurfaceBloodFrozenBlessed, _Radius)
+			IsInSurface(_Lich, SurfaceBloodFrozenCursed, _Radius)
+			IsInSurface(_Lich, SurfaceBloodFrozenCursed, _Radius)
+			IsInSurface(_Lich, SurfaceBloodFrozenPurified, _Radius)
+		THEN
+			CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
+		ENDIF
+	ENDIF
+EVENT LLLICH_ChillForm_EndTurn_FX
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_CHILLFORM_ENDTURN_AURA)
+ACTIONS
+IF "c1"
+	IsInCombat(_Lich)
+THEN
+	PlayEffectAt(_Lich, "RS3_FX_Skills_Water_Ice_Shout_Ground_02")
+ENDIF
+	
+EVENT LLLICH_ChillForm_Removed
+VARS
+	CHARACTER:_Lich
+	FLOAT:_Radius
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_CHILLFORM)
+ACTIONS
+	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_ENDTURN_AURA, null, 0)
+	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
 /*
 EVENT LLLICH_Lichform_Polymorph
 VARS

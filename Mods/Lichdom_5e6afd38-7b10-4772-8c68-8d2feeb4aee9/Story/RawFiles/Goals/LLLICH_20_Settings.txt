@@ -10,6 +10,66 @@ DB_GLO_CharacterAnimation("PlayAnim_skill_jump_flight_start","skill_jump_flight_
 //LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "LichPassives", "LLLICH_LICHFORM", (STRING)_Flag)
 KBSECTION
 
+QRY
+LLLICH_Settings_ShouldRefundSoulExtractor((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Item)
+AND
+ObjectExists(_Item, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Settings_ShouldRefundSoulExtractor((CHARACTERGUID)_Lich)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _)
+AND
+HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Settings_ShouldRefundSoulExtractor((CHARACTERGUID)_Lich)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+AND
+NOT ObjectGetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor", 1)
+THEN
+DB_NOOP(1);
+
+IF
+DialogStarted("LLLICH_SettingsMenu", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, (CHARACTERGUID)_Lich)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+AND
+LLLICH_Settings_ShouldRefundSoulExtractor(_Lich)
+THEN
+ObjectSetFlag(_Lich, "LLLICH_Settings_SoulExtractorRefundAvailable");
+
+IF
+DialogEnded("LLLICH_SettingsMenu", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, (CHARACTERGUID)_Lich)
+AND
+ObjectGetFlag(_Lich, "LLLICH_Settings_SoulExtractorRefundAvailable", 1)
+THEN
+ObjectClearFlag(_Lich, "LLLICH_Settings_SoulExtractorRefundAvailable");
+
+IF
+ObjectFlagSet("LLLICH_Commands_RefundSoulExtractor", (CHARACTERGUID)_Lich, _)
+THEN
+ObjectClearFlag(_Lich, "LLLICH_Commands_RefundSoulExtractor");
+ObjectClearFlag(_Lich, "LLLICH_Settings_SoulExtractorRefundAvailable");
+LLLich_Debug_ResetLich(_Lich);
+
+IF
+ObjectFlagSet("LLLICH_Commands_RefundSoulExtractor", (CHARACTERGUID)_Lich, _)
+AND
+ItemTemplateIsInCharacterInventory(_Lich, "PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", 0)
+THEN
+ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
 EXITSECTION
 
 ENDEXITSECTION

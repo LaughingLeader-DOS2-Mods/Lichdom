@@ -38,6 +38,7 @@ ON
 	OnCharacterFlagSet("LLLICH_Settings_HidePhylacteryStatus", %LLLICH_Phylactory_Owner)
 	OnFunction("LLLICH_Phylactory_DisableNearReaction")
 	OnPickupItem(_, __Me)
+	OnDeactivate() // Out of range
 ACTIONS
 IF "c1"
 	IsEqual(%LLLICH_Phylactory_NearDetectionEnabled, 1)

@@ -4,6 +4,7 @@ INITSECTION
 
 KBSECTION
 
+//REGION DRAIN_SOUL
 IF
 CharacterUsedSkillOnTarget(_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul", _, _)
 THEN
@@ -35,13 +36,7 @@ THEN
 NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 ProcObjectTimerCancel(_Target, "LLLICH_Timers_CancelDyingEvent");
 LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
-
-IF
-TextEventSet("lichdom_notif")
-AND
-CharacterGetHostCharacter(_Lich)
-THEN
-LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", "100", "/100 Charges)</font>");
+//END_REGION
 
 //Bonus, in addition to the other two results
 PROC

@@ -66,19 +66,97 @@ DB_LLLICH_LichStatuses("LLLICH_CREATE_PHYLACTORY");
 DB_LLLICH_LichStatuses("LLLICH_FLESH_SACRIFICE");
 
 //Block when applying a different preset
-DB_LLLICH_LichSkills("Target_LLLICH_ChillTouch");
-DB_LLLICH_LichSkills("Target_LLLICH_DrainSoul");
-DB_LLLICH_LichSkills("Shout_LLLICH_Recall");
+DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_ChillTouch", 0);
+DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_ChillForm", 0);
+DB_LLLICH_LichSkills("Phylactery","Target_LLLICH_DrainSoul", 0);
+DB_LLLICH_LichSkills("Phylactery","Shout_LLLICH_Recall", 0);
 
+//END_REGION
+
+//REGION LICH_SKILLS
+IF
+ObjectWasTagged((CHARACTERGUID)_Lich, "LLLICH_Lich")
+AND
+DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
+AND
+CharacterHasSkill(_Lich, _Skill, 0)
+THEN
+CharacterAddSkill(_Lich, _Skill, 1);
+
+IF
+ObjectLostTag((CHARACTERGUID)_Lich, "LLLICH_Lich")
+AND
+DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
+THEN
+CharacterRemoveSkill(_Lich, _Skill);
+
+IF
+ObjectFlagSet("LLLICH_PhylacteryActive", (CHARACTERGUID)_Lich, _)
+AND
+DB_LLLICH_LichSkills("Phylactery", _Skill, _MinSouls)
+AND
+CharacterHasSkill(_Lich, _Skill, 0)
+THEN
+CharacterAddSkill(_Lich, _Skill, 1);
+
+IF
+ObjectFlagCleared("LLLICH_PhylacteryActive", (CHARACTERGUID)_Lich, _)
+AND
+DB_LLLICH_LichSkills("Phylactery", _Skill, _MinSouls)
+THEN
+CharacterRemoveSkill(_Lich, _Skill);
+
+PROC
+LLLICH_Main_AddLichSkills((CHARACTERGUID)_Lich)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+AND
+DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
+THEN
+CharacterAddSkill(_Lich, _Skill, 1);
+
+PROC
+LLLICH_Main_AddLichSkills((CHARACTERGUID)_Lich)
+AND
+ObjectGetFlag(_Lich, "LLLICH_PhylacteryActive", 1)
+AND
+DB_LLLICH_LichSkills("Phylactery", _Skill, _MinSouls)
+THEN
+CharacterAddSkill(_Lich, _Skill, 1);
+
+PROC
+LLLICH_Main_RemoveLichSkills((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_LichSkills(_Group, _Skill, _MinSouls)
+THEN
+CharacterRemoveSkill(_Lich, _Skill);
+
+PROC
+LLLICH_Main_RemoveLichSkills((CHARACTERGUID)_Lich, (STRING)_Group)
+AND
+DB_LLLICH_LichSkills(_Group, _Skill, _MinSouls)
+THEN
+CharacterRemoveSkill(_Lich, _Skill);
 //END_REGION
 
 //REGION UPDATES
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 2, 0)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 0)
 THEN
+SysClear("DB_LLLICH_LichSkills", 1);
 LLLICH_Main_InitSettings();
+LLLICH_Main_Internal_UpdateLichSkills();
+
+PROC
+LLLICH_Main_Internal_UpdateLichSkills()
+AND
+DB_IsPlayer(_Lich)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+THEN
+LLLICH_Main_AddLichSkills(_Lich);
 
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
@@ -124,7 +202,7 @@ ObjectClearFlag(_Lich, "LLLICH_Phylactery_Smallbox");
 PROC
 LeaderLib_PresetMenu_BlockSkillCopying((CHARACTERGUID)_Player, (STRING)_Preset, (STRING)_Skill, (INTEGER)_ChangingRace)
 AND
-DB_LLLICH_LichSkills(_Skill)
+DB_LLLICH_LichSkills(_Group, _Skill, _MinSouls)
 THEN
 DB_LeaderLib_PresetMenu_Temp_BlockSkill(_Player, _Skill);
 //END_REGION

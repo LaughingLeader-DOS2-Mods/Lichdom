@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+CharacterUsedItem(_Player, ITEMGUID_PUZ_Lever_LLLICH_Debug_RespawnEnemies_f8bfd305-bf51-42c6-943a-c9fb8bececc5)
+THEN
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_001_128381d9-9fd6-46ba-b0ce-8f0f218b4f27);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_002_c1bd2307-36db-4d7e-bbee-f621ee9ae437);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_000_5c78c111-3807-408b-ae3d-1bb5d0186e91);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_003_6cfba22c-5733-440e-b222-e94f8420ad54);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LeaderLib_20__Debug"
