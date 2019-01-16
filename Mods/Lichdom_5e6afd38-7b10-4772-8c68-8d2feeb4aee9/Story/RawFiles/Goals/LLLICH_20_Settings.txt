@@ -70,6 +70,19 @@ AND
 ItemTemplateIsInCharacterInventory(_Lich, "PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", 0)
 THEN
 ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
+
+IF
+ObjectFlagSet("LLLICH_Commands_RefreshStatuses", (CHARACTERGUID)_Lich, _)
+THEN
+ObjectClearFlag(_Lich, "LLLICH_Commands_RefreshStatuses");
+SetStoryEvent(_Lich, "LLLICH_ApplyStatusInfluence");
+
+IF
+ObjectFlagSet("LLLICH_Commands_RefreshStatuses", (CHARACTERGUID)_Lich, _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+THEN
+SetStoryEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence");
 EXITSECTION
 
 ENDEXITSECTION

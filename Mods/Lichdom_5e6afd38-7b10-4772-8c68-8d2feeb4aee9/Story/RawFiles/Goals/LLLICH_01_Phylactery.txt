@@ -1,7 +1,8 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+DB_LLLICH_Phylactery_DamageOnDeath(0, -20);
+DB_LLLICH_Phylactery_DamageOnDeath(1, -40);
 KBSECTION
 
 //REGION UPDATES
@@ -12,6 +13,8 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 0)
 THEN
 LLLICH_Phylactery_Debug_StatsReload_Start();
+DB_LLLICH_Phylactery_DamageOnDeath(0, -20);
+DB_LLLICH_Phylactery_DamageOnDeath(1, -40);
 
 //Durability changed to Charges
 PROC
@@ -634,6 +637,14 @@ NOT DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 //END_REGION
 
 //REGION DYING_DURABILITY_DAMAGE
+
+IF
+TextEventSet("lichdom_hardcore")
+AND
+IsHardcoreMode(_Hardcore)
+THEN
+LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:lichdom_hardcore] Hardcore mode is: [",_Hardcore,"]");
+
 IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
 AND
@@ -642,14 +653,18 @@ AND
 //ItemGetDurability(_Phylactery, _CurrentDurability)
 ItemGetCharges(_Phylactery, _CurrentDurability)
 AND
-IntegerSubtract(_CurrentDurability, 20, _NextDurability)
+IsHardcoreMode(_Hardcore)
+AND
+DB_LLLICH_Phylactery_DamageOnDeath(_Hardcore, _Damage)
+AND
+IntegerSum(_CurrentDurability, _Damage, _NextDurability)
 AND
 IntegerMax(0, _NextDurability, _Durability)
 AND
 NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _Durability)
 THEN
 //ItemSetDurability(_Phylactery, _Durability);
-ItemAddCharges(_Phylactery, -20);
+ItemAddCharges(_Phylactery, _Damage);
 LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:LLLICH_OnLichDying] Phylactery took damage. Charges: [",_Durability,"]");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Damage");
 //END_REGION
