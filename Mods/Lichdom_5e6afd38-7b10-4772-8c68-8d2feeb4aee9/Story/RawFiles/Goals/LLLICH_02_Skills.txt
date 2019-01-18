@@ -42,14 +42,13 @@ LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 PROC
 LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
 AND
-LLLICH_Phylactery_QRY_PhylacteryIsDamaged(_Lich, _Phylactery)
+LLLICH_Phylactery_QRY_CanFeedSouls(_Lich, _Phylactery)
 THEN
 //ItemSetDurability(_Phylactery, _Durability);
-ItemAddCharges(_Phylactery, 20);
+LLLICH_Phylactery_FeedSouls(_Lich, _Phylactery);
 LeaderLog_Log("DEBUG", "[Lichdom:Skills:OnTargetDeath] Target died from [Target_LLLICH_DrainSoul]. Regenerating Phylactery.");
-ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Healed");
 //LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#46B195'>You empowered your Phylactery. (", _DurabilityStr, "/100 Charges)</font>");
 
 PROC

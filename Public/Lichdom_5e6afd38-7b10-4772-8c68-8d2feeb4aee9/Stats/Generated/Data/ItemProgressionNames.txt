@@ -1,11 +1,38 @@
 new namegroup "LLLICH_Phylactery_Amulet"
 add name "Strange Amulet",""
 
+new namegroup "LLLICH_Phylactery_Amulet_2"
+add name "Strange Pulsating Amulet",""
+
+new namegroup "LLLICH_Phylactery_Amulet_3"
+add name "Empowered Phlyactery",""
+
 new namegroup "LLLICH_Phylactery_Ring"
 add name "Strange Ring",""
 
+new namegroup "LLLICH_Phylactery_Ring_2"
+add name "Strange Pulsating Ring",""
+
+new namegroup "LLLICH_Phylactery_Ring_3"
+add name "Empowered Phlyactery",""
+
 new namegroup "LLLICH_Phylactery_Smallbox"
 add name "Strange Box",""
+
+new namegroup "LLLICH_Phylactery_Smallbox_2"
+add name "Strange Pulsating Box",""
+
+new namegroup "LLLICH_Phylactery_Smallbox_3"
+add name "Empowered Phlyactery",""
+
+new namegroup "LLLICH_Phylactery_Amulet_Broken"
+add name "Strange Amulet (Broken)",""
+
+new namegroup "LLLICH_Phylactery_Ring_Broken"
+add name "Strange Ring (Broken)",""
+
+new namegroup "LLLICH_Phylactery_Smallbox_Broken"
+add name "Strange Box (Broken)",""
 
 new namegroup "WPN_UNIQUE_LLLICH_LichStaff"
 add name "Staff of the Soulkeeper",""

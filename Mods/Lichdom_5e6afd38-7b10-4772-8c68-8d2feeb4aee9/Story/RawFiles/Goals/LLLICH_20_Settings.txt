@@ -13,7 +13,7 @@ KBSECTION
 QRY
 LLLICH_Settings_ShouldRefundSoulExtractor((CHARACTERGUID)_Lich)
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _Item)
+DB_LLLICH_Phylactery_Active(_Lich, _Item, _Active)
 AND
 ObjectExists(_Item, 0)
 THEN
@@ -22,7 +22,7 @@ DB_NOOP(1);
 QRY
 LLLICH_Settings_ShouldRefundSoulExtractor((CHARACTERGUID)_Lich)
 AND
-NOT DB_LLLICH_Phylactery_Active(_Lich, _)
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
 AND
 HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", 1)
 THEN
@@ -80,7 +80,7 @@ SetStoryEvent(_Lich, "LLLICH_ApplyStatusInfluence");
 IF
 ObjectFlagSet("LLLICH_Commands_RefreshStatuses", (CHARACTERGUID)_Lich, _)
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery)
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 THEN
 SetStoryEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence");
 EXITSECTION

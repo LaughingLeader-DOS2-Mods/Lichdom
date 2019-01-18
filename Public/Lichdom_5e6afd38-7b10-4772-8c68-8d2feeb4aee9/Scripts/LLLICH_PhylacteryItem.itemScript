@@ -36,6 +36,7 @@ EVENT LLLICH_Phylactory_NearStatus_DisableNearReaction
 ON
 	OnCharacterFlagSet("LLLICH_Settings_DisablePhylacteryBeam", %LLLICH_Phylactory_Owner)
 	OnCharacterFlagSet("LLLICH_Settings_HidePhylacteryStatus", %LLLICH_Phylactory_Owner)
+	OnCharacterEvent(%LLLICH_Phylactory_Owner, "LLLICH_OnPhylacteryDestroyed")
 	OnFunction("LLLICH_Phylactory_DisableNearReaction")
 	OnPickupItem(_, __Me)
 	OnDeactivate() // Out of range
@@ -47,6 +48,12 @@ THEN
 	SetPriority("LLLICH_Phylactory_NearStatus", 0)
 	CharacterRemoveStatus(%LLLICH_Phylactory_Owner, LLLICH_PHYLACTERY_NEARLICH)
 ENDIF
+
+EVENT LLLICH_Phylactory_SoulAdded
+ON
+	OnItemEvent(__Me, "LLLICH_Phylactery_ReceivedSouls")
+ACTIONS
+	ItemPlayEffect(__Me, "RS3_FX_Skills_Soul_Impact_ReplenishSource_01")
 	
 BEHAVIOUR
 

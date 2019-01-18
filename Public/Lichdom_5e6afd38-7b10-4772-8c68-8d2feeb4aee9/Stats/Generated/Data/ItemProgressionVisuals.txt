@@ -4,17 +4,71 @@ add levelgroup 0,0,"All"
 add rootgroup "5d0c0bef-9071-4328-b72c-b58086b0f68d",""
 add namegroup "LLLICH_Phylactery_Amulet","",""
 
+new itemgroup "LLLICH_Phylactery_Amulet_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "38facf35-de7b-4eb0-baef-48f92c61166a",""
+add namegroup "LLLICH_Phylactery_Amulet_2","",""
+
+new itemgroup "LLLICH_Phylactery_Amulet_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "397a89d5-8fc9-4af2-a25a-dc9e998c223c",""
+add namegroup "LLLICH_Phylactery_Amulet_3","",""
+
+new itemgroup "LLLICH_Phylactery_Amulet_Broken"
+
+add levelgroup 0,0,"All"
+add rootgroup "43577ebe-fec3-4f09-ae13-373aa10e123b",""
+add namegroup "LLLICH_Phylactery_Amulet_Broken","",""
+
 new itemgroup "LLLICH_Phylactery_Ring"
 
 add levelgroup 0,0,"All"
 add rootgroup "cd0b735f-6c57-43b5-8d12-131b725dda48",""
 add namegroup "LLLICH_Phylactery_Ring","",""
 
+new itemgroup "LLLICH_Phylactery_Ring_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa",""
+add namegroup "LLLICH_Phylactery_Ring_2","",""
+
+new itemgroup "LLLICH_Phylactery_Ring_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "845cdd4d-0ad9-49ac-84d5-b4dba325e13c",""
+add namegroup "LLLICH_Phylactery_Ring_3","",""
+
+new itemgroup "LLLICH_Phylactery_Ring_Broken"
+
+add levelgroup 0,0,"All"
+add rootgroup "244e99ff-5fc9-4fcf-aa61-ff37959b90fd",""
+add namegroup "LLLICH_Phylactery_Ring_Broken","",""
+
 new itemgroup "LLLICH_Phylactery_Smallbox"
 
 add levelgroup 0,0,"All"
 add rootgroup "73c01ec2-7894-4d19-b12f-991650263332",""
 add namegroup "LLLICH_Phylactery_Smallbox","",""
+
+new itemgroup "LLLICH_Phylactery_Smallbox_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "8d3d1223-48c5-481b-ac55-e407f71fb749",""
+add namegroup "LLLICH_Phylactery_Smallbox_2","",""
+
+new itemgroup "LLLICH_Phylactery_Smallbox_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "2846990e-f2e4-48d8-8570-4854632cb557",""
+add namegroup "LLLICH_Phylactery_Smallbox_3","",""
+
+new itemgroup "LLLICH_Phylactery_Smallbox_Broken"
+
+add levelgroup 0,0,"All"
+add rootgroup "ea462acf-cfc8-4707-85e9-f647215b4893",""
+add namegroup "LLLICH_Phylactery_Smallbox_Broken","",""
 
 new itemgroup "WPN_UNIQUE_LLLICH_LichStaff"
 

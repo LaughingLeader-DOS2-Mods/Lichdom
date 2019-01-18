@@ -50,6 +50,71 @@
                         </node>
                     </children>
                 </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLLICH_Phylactery_Broken" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLLICH_BlockEquip" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLLICH_Phylactery_Amulet_A" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLLICH_Phylactery_Ring_A" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLLICH_Phylactery_Smallbox_A" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
             </children>
         </node>
     </region>

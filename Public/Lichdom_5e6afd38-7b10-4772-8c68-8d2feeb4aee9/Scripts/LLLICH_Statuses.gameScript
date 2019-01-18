@@ -38,6 +38,47 @@ ON
 ACTIONS
 	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
 
+//REGION LICHFORM_EXTRAS
+EVENT LLLICH_LichForm_OnApplied
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
+	OnIterateCharacter(_Lich, "LLLICH_Iterator_ApplyPenalty")
+ACTIONS
+IF "!c1"
+	HasGlobalFlag("LLLICH_Settings_DisableStatusPenalty")
+THEN
+	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_PENALTY_A, -1, 0, _Lich)
+ENDIF
+
+EVENT LLLICH_LichForm_OnRemoved
+VARS
+	CHARACTER:_Lich
+ON
+	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM)
+	OnIterateCharacter(_Lich, "LLLICH_Iterator_RemovePenalty")
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Lich, LLLICH_LICHFORM_PENALTY_A)
+THEN
+	CharacterRemoveStatus(_Lich, LLLICH_LICHFORM_PENALTY_A)
+ENDIF
+
+EVENT LLLICH_LichForm_Penalties_Apply_IterateStart
+ON
+	OnGlobalFlagCleared("LLLICH_Settings_DisableStatusPenalty")
+ACTIONS
+	IterateParty("LLLICH_Iterator_ApplyPenalty", null, null, null, "LLLICH_Lich")
+
+EVENT LLLICH_LichForm_Penalties_Remove_IterateStart
+ON
+	OnGlobalFlagSet("LLLICH_Settings_DisableStatusPenalty")
+ACTIONS
+	IterateParty("LLLICH_Iterator_RemovePenalty", null, null, null, "LLLICH_Lich")
+
+//END_REGION
+
 EVENT LLLICH_Lichform_InfoStatus_Apply2
 VARS
 	CHARACTER:_Lich
@@ -121,6 +162,8 @@ THEN
 		//DisplayText(_Lich, "", 0)
 	ENDIF
 ENDIF
+
+//REGION CHILLFORM
 
 /* Stats version:
 IF(InSurface:SurfaceWaterFrozen|InSurface:SurfaceWaterFrozenBlessed|InSurface:SurfaceWaterFrozenCursed|InSurface:SurfaceWaterFrozenPurified|InSurface:SurfaceBloodFrozen|InSurface:SurfaceBloodFrozenBlessed|InSurface:SurfaceBloodFrozenCursed|InSurface:SurfaceBloodFrozenPurified|InSurface:SurfaceFrostCloud):LLLICH_CHILLFORM_SPEEDBOOST,100,-2
@@ -217,53 +260,6 @@ ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_CHILLFORM)
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_ENDTURN_AURA, null, 0)
-	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
-/*
-EVENT LLLICH_Lichform_Polymorph
-VARS
-	CHARACTER:_Lich
-ON
-	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
-ACTIONS
-IF "!c1"
-	HasFlag(_Lich, "LLLICH_Settings_PolymorphDisabled")
-THEN
-	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)
-ENDIF
+	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)	
 
-EVENT LLLICH_Lichform_Polymorph_Disabled
-VARS
-	CHARACTER:_Lich
-ON
-	OnCharacterFlagSet("LLLICH_Settings_PolymorphDisabled", _Lich)
-	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
-ACTIONS
-	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_CleanseShapeshifting, -1, _Lich)
-
-EVENT LLLICH_Lichform_Polymorph_Enabled
-VARS
-	CHARACTER:_Lich
-ON
-	OnCharacterFlagCleared("LLLICH_Settings_PolymorphDisabled", _Lich)
-ACTIONS
-IF "c1"
-	IsTagged(_Lich, "LLLICH_Lich")
-THEN
-	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_ApplyShapeshifting, -1, _Lich)
-ENDIF
-*/
-/*
-EVENT LLLICH_Lichform_Polymorph_Cancel_Flag
-ON
-	OnGlobalFlagSet("LLLICH_Settings_PolymorphDisabled")
-ACTIONS
-	IterateParty("LLLICH_Iterator_UnShapeshiftLich", null, null, null, "LLLICH_Lich")
-
-EVENT LLLICH_Lichform_Polymorph_Cancel_Iterator
-VARS
-	CHARACTER:_Lich
-ON
-	OnIterateCharacter(_Lich, "LLLICH_Iterator_UnShapeshiftLich")
-ACTIONS
-	ExplodeAt(_Lich, Projectile_LLLICH_LichForm_CleanseShapeshifting, -1, _Lich)
-*/
+//END_REGION
