@@ -31,7 +31,7 @@ DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Smallbox_A", "LOOT_LLLIC
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 0)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
 THEN
 LLLICH_Phylactery_InitSettings();
 LLLICH_Phylactery_Debug_ErrorCheck();

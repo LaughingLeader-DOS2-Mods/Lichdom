@@ -115,7 +115,7 @@ DB_LLLICH_LichSkills("Phylactery","Shout_LLLICH_Recall", 0);
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 0)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
 THEN
 NOT DB_LLLICH_LichSkills("Phylactery","Target_LLLICH_DrainSoul", 0);
 DB_LLLICH_LichSkills("LichForm","Target_LLLICH_DrainSoul", 0);
