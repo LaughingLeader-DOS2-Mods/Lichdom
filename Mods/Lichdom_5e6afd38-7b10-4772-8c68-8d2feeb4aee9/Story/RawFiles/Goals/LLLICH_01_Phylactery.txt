@@ -217,6 +217,7 @@ SetVarObject(_Lich, "LLLICH_Phylactery", _NewPhylactery);
 SetVarObject(_NewPhylactery, "LLLICH_Phylactory_Owner", _Lich);
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Debug_Replaced");
 LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery successfully replaced. Updated variables.");
+ItemAddCharges(_NewPhylactery, 2);
 
 PROC
 LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, (INTEGER)_Exists, (INTEGER)_InInventory, (INTEGER)_Active)
