@@ -7,6 +7,7 @@ KBSECTION
 PROC
 LLLICH_Phylactery_InitSettings()
 THEN
+SysClear("DB_LLLICH_Phylactery_DamageOnDeath", 2);
 DB_LLLICH_Phylactery_DamageOnDeath(0, -1);
 DB_LLLICH_Phylactery_DamageOnDeath(1, -2);
 /*
@@ -34,6 +35,38 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
 THEN
 LLLICH_Phylactery_InitSettings();
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylacteries_Start();
+TimerCancel("LLLICH_Timers_Debug_RunPhylacterySanityCheck");
+TimerLaunch("LLLICH_Timers_Debug_RunPhylacterySanityCheck", 500);
+
+//No phylactery entry in the DB, but is a lich with the status
+IF
+TimerFinished("LLLICH_Timers_Debug_RunPhylacterySanityCheck")
+AND
+DB_IsPlayer(_Lich)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+AND
+HasActiveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", 1)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload_ReplacePhylacteries_SanityCheck] No phylactery found or stored, despite having the active status. Refunding soul extractor and starting inventory iterator.");
+InventoryLaunchTagIterator(_Lich, "LLLICH_Phylactery", "", "LLLICH_Debug_FoundTaggedPhylactery_Remove", "");
+LLLich_Phylactery_ClearPhylacteryVariables(_Lich);
+ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
+
+IF
+StoryEvent((ITEMGUID)_Phylactery, "LLLICH_Debug_FoundTaggedPhylactery_Remove")
+AND
+NOT DB_LLLICH_Phylactery_Active(_, _Phylactery, _)
+THEN
+ItemRemove(_Phylactery);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug] Deleted tagged Phylactery item not bound to a Lich.");
+
+IF
+TimerFinished("LLLICH_Timers_Debug_RunPhylacterySanityCheck")
+THEN
 LLLICH_Phylactery_Debug_ErrorCheck();
 
 PROC
@@ -46,16 +79,7 @@ AND
 HasActiveStatus(_Player, "LLLICH_PHYLACTERY_ACTIVE", 0)
 THEN
 CharacterSetImmortal(_Player, 0);
-
-//Phylactery stat change - Power -> Charges/MaxCharges
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 0)
-THEN
-LLLICH_Phylactery_Debug_StatsReload_Start();
-DB_LLLICH_Phylactery_DamageOnDeath(0, -1);
-DB_LLLICH_Phylactery_DamageOnDeath(1, -2);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:ErrorCheck] Phylactery status missing. Removing immortality.");
 
 //Power changed to Charges
 PROC
@@ -68,81 +92,82 @@ AND
 GetTemplate(_OldPhylactery, _Template)
 THEN
 Transform(_OldPhylactery, _Template, 0, 0, 1);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:TransformPhylactery] Transformed Phylactery to [",_Template,"].");
 
 //Phylacteries equipped or in an inventory may lose their stored GUIDSTRING when the stats change
 PROC
-LLLICH_Phylactery_Debug_StatsReload_Start()
-AND
-DB_IsPlayer(_Player)
-THEN
-LLLICH_Phylactery_Debug_StatsReload_FindPhylactery(_Player);
-
-PROC
-LLLICH_Phylactery_Debug_StatsReload_Start()
-THEN
-LLLICH_Phylactery_Debug_StatsReload_OldPhylacterySanityCheck();
-
-PROC
-LLLICH_Phylactery_Debug_StatsReload_FindPhylactery((CHARACTERGUID)_Player)
-AND
-CharacterFindTaggedItem(_Player, "LLLICH_Phylactery", _FoundPhylactery)
-THEN
-LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery(_Player, _FoundPhylactery);
-
-PROC
-LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_FoundPhylactery)
-AND
-ItemGetOwner(_FoundPhylactery, _Lich)
-AND
-NOT DB_LLLICH_Phylactery_Active(_Lich, _FoundPhylactery, _)
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylacteries_Start()
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active)
 AND
-ObjectExists(_OldPhylactery, 0)
+ObjectExists(_OldPhylactery, _Exists)
+AND
+ItemIsInInventory(_OldPhylactery, _InInventory)
+THEN
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery(_Lich, _OldPhylactery, _Exists, _InInventory, _Active);
+
+//In an inventory
+PROC
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, 1, 1, (INTEGER)_Active)
+AND
+NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
+AND
+GetInventoryOwner(_OldPhylactery, _Inventory)
+AND
+GetTemplate(_OldPhylactery, _Template)
+AND
+GetPosition(_Lich, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_Template, _x, _y, _z, _NewPhylactery)
 THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active);
-DB_LLLICH_Phylactery_Active(_Lich, _FoundPhylactery, _Active);
+ItemRemove(_OldPhylactery);
+DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active);
+ItemToInventory(_NewPhylactery, _Inventory);
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery is in an inventory. Creating new template, removing old, and sending it to the Lich.");
 
+//Not in an inventory
 PROC
-LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_FoundPhylactery)
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, 1, 0, (INTEGER)_Active)
 AND
-NOT ItemGetOwner(_FoundPhylactery, _Lich)
+NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
 AND
-ItemGetOwner(_FoundPhylactery, _OtherLich)
+GetPosition(_OldPhylactery, _x, _y, _z)
 AND
-IsTagged(_OtherLich, "LLLICH_Lich", 1)
+GetTemplate(_OldPhylactery, _Template)
 AND
-NOT DB_LLLICH_Phylactery_Active(_OtherLich, _FoundPhylactery, _)
-AND
-DB_LLLICH_Phylactery_Active(_OtherLich, _OldPhylactery, _Active)
-AND
-ObjectExists(_OldPhylactery, 0)
+CreateItemTemplateAtPosition(_Template, _x, _y, _z, _NewPhylactery)
 THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active);
-DB_LLLICH_Phylactery_Active(_Lich, _FoundPhylactery, _Active);
+ItemRemove(_OldPhylactery);
+DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active);
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery is in the world. Creating new template, removing old, and placing it as the same spot.");
 
+//Doesn't exist
 PROC
-LLLICH_Phylactery_Debug_StatsReload_OldPhylacterySanityCheck()
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, 0, (INTEGER)_InInventory, (INTEGER)_Active)
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active)
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
 AND
-ObjectExists(_OldPhylactery, 0)
+NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
+AND
+LLLICH_Phylactery_Debug_StatsReload_QRY_CreateNew(_Lich)
+AND
+DB_LLLICH_Debug_NewPhylactery(_Lich, _NewPhylactery)
 THEN
-LLLICH_Phylactery_Debug_ReplacePhylactery(_Lich);
-
-PROC
-LLLICH_Phylactery_Debug_ReplacePhylactery((CHARACTERGUID)_Lich)
-AND
-DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active)
-THEN
+NOT DB_LLLICH_Debug_NewPhylactery(_Lich, _NewPhylactery);
 NOT DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active);
-ObjectCLearFlag(_Lich, "LLLICH_PhylacteryActive");
-ClearVarObject(_Lich, "LLLICH_Phylactery");
+DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active);
+ItemToInventory(_NewPhylactery, _Lich, 1, 1, 1);
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery does not exist. Creating new template and sending it to the Lich.");
 
-PROC
-LLLICH_Phylactery_Debug_ReplacePhylactery((CHARACTERGUID)_Lich)
+QRY
+LLLICH_Phylactery_Debug_StatsReload_QRY_CreateNew((CHARACTERGUID)_Lich)
 AND
-NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
+NOT DB_LLLICH_Debug_NewPhylactery(_Lich, _)
 AND
 ObjectGetFlag(_Lich, "LLLICH_Phylactery_Amulet", 1)
 AND
@@ -150,12 +175,12 @@ GetPosition(_Lich, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d", _x, _y, _z, _Phylactery)
 THEN
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
+DB_LLLICH_Debug_NewPhylactery(_Lich, _Phylactery);
 
-PROC
-LLLICH_Phylactery_Debug_ReplacePhylactery((CHARACTERGUID)_Lich)
+QRY
+LLLICH_Phylactery_Debug_StatsReload_QRY_CreateNew((CHARACTERGUID)_Lich)
 AND
-NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
+NOT DB_LLLICH_Debug_NewPhylactery(_Lich, _)
 AND
 ObjectGetFlag(_Lich, "LLLICH_Phylactery_Ring", 1)
 AND
@@ -163,32 +188,45 @@ GetPosition(_Lich, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48", _x, _y, _z, _Phylactery)
 THEN
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
+DB_LLLICH_Debug_NewPhylactery(_Lich, _Phylactery);
 
 //Default
-PROC
-LLLICH_Phylactery_Debug_ReplacePhylactery((CHARACTERGUID)_Lich)
+QRY
+LLLICH_Phylactery_Debug_StatsReload_QRY_CreateNew((CHARACTERGUID)_Lich)
 AND
-//ObjectGetFlag(_Lich, "LLLICH_Phylactery_Smallbox", 1)
-NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
+NOT DB_LLLICH_Debug_NewPhylactery(_Lich, _)
 AND
 GetPosition(_Lich, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332", _x, _y, _z, _Phylactery)
 THEN
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
+DB_LLLICH_Debug_NewPhylactery(_Lich, _Phylactery);
+
+//Success
+PROC
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, (INTEGER)_Exists, (INTEGER)_InInventory, (INTEGER)_Active)
+AND
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active)
+THEN
+NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
+ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive");
+ItemSetOwner(_NewPhylactery, _Lich);
+SetVarObject(_Lich, "LLLICH_Phylactery", _NewPhylactery);
+SetVarObject(_NewPhylactery, "LLLICH_Phylactory_Owner", _Lich);
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Debug_Replaced");
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery successfully replaced. Updated variables.");
 
 PROC
-LLLICH_Phylactery_Debug_ReplacePhylactery((CHARACTERGUID)_Lich)
+LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, (INTEGER)_Exists, (INTEGER)_InInventory, (INTEGER)_Active)
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+DB_LLLICH_Debug_ReplacedPhylactery(_Lich)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
 THEN
-ItemToInventory(_Phylactery, _Lich, 1, 0, 1);
-ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive");
-ItemSetOwner(_Phylactery, _Lich);
-SetVarObject(_Lich, "LLLICH_Phylactery", _Phylactery);
-SetVarObject(_Phylactery, "LLLICH_Phylactory_Owner", _Lich);
-ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Created");
+NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] [ERROR] No active entry for new Phylactery. What happened?");
 //END_REGION
 
 //REGION QUERIES
@@ -530,6 +568,13 @@ ApplyStatus(_Lich, "LLLICH_CLEAR_HARMFUL", 0.0);
 
 IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+THEN
+//Teleport first before reducing souls.
+LLLICH_Phylactery_OnLichDying_Teleport(_Lich);
+LLLICH_Phylactery_OnLichDying_ReduceCharges(_Lich);
+
+PROC
+LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
@@ -538,8 +583,8 @@ THEN
 LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "LLLICH_Phylactory_Regenerating_LichTeleported");
 
 //Phylactery is broken! Uh oh!
-IF
-StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+PROC
+LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 0)
 THEN
@@ -691,8 +736,8 @@ IsHardcoreMode(_Hardcore)
 THEN
 LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:lichdom_hardcore] Hardcore mode is: [",_Hardcore,"]");
 
-IF
-StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+PROC
+LLLICH_Phylactery_OnLichDying_ReduceCharges((CHARACTERGUID)_Lich)
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
@@ -704,12 +749,14 @@ DB_LLLICH_Phylactery_DamageOnDeath(_Hardcore, _Damage)
 AND
 IntegerSum(_CurrentPower, _Damage, _NextPower)
 AND
-IntegerMax(0, _NextPower, _Power)
+LeaderLog_QRY_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Dealing [",_Damage,"] damage to the Phylactery. Hardcore Mode: [",_Hardcore,"]")
 AND
-NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _Power)
+IntegerMax(0, _NextPower, _CappedPower)
+AND
+NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _CappedPower)
 THEN
 ItemAddCharges(_Phylactery, _Damage);
-LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:LLLICH_OnLichDying] Phylactery took damage. Charges: [",_Power,"]");
+LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Phylactery took damage. Power: [",_CappedPower,"]");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Damage");
 //END_REGION
 
@@ -720,6 +767,7 @@ AND
 ObjectExists(_Phylactery, 1)
 THEN
 ItemAddCharges(_Phylactery, 1);
+LLLICH_Phylactery_OnSoulsAdded(_Lich, _Phylactery);
 //LeaderLog_LogTarget("STATUS", _Lich, "<font color='#80FFC3'>Restored 1 Power</font>");
 
 PROC
@@ -806,6 +854,13 @@ ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Restored");
 //END_REGION
 
 //REGION PHYLACTERY_DESTROYED
+IF
+CharacterDestroyedItem(_Attacker, _Phylactery)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+THEN
+LLLICH_Phylactery_Break(_Phylactery);
+
 PROC
 LLLICH_Phylactery_Destroy((ITEMGUID)_Phylactery)
 AND
@@ -825,13 +880,19 @@ NOT DB_LLLICH_Phylactery_PreviousTemplate(_Phylactery, _PreviousTemplate);
 PROC
 LLLich_Phylactery_OnPhylacteryDestroyed((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
 THEN
-LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:OnPhylacteryDestroyed] Phylactery was destroyed. Clearing vars, flags, and statuses.");
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:OnPhylacteryDestroyed] Phylactery was destroyed.");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Destroyed");
+LLLich_Phylactery_ClearPhylacteryVariables(_Lich);
+SetStoryEvent(_Lich, "LLLICH_OnPhylacteryDestroyed");
+
+PROC
+LLLich_Phylactery_ClearPhylacteryVariables((CHARACTERGUID)_Lich)
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:ClearPhylacteryVariables] Clearing vars, flags, and statuses.");
 LLLICH_Phylactery_ClearFlags(_Lich);
 ClearVarObject(_Lich, "LLLICH_Phylactery");
 SetStoryEvent(_Lich, "LLLICH_ClearPhylacteryStatusInfluence");
 RemoveStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE");
-SetStoryEvent(_Lich, "LLLICH_OnPhylacteryDestroyed");
 
 PROC
 LLLICH_Phylactery_Break((ITEMGUID)_Phylactery)
@@ -1006,7 +1067,7 @@ LLLICH_Phylactery_DisplayPower(_Lich);
 PROC
 LLLICH_Phylactery_DisplayPower((CHARACTERGUID)_Lich)
 AND
-DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
 ObjectExists(_Phylactery, 1)
 AND
@@ -1021,6 +1082,35 @@ AND
 IntegertoString(_Max, _MaxStr)
 THEN
 LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#73F6FF'>Your Phylactery has ",_PowerStr,"/",_MaxStr," Power</font>");
+
+PROC
+LLLICH_Phylactery_DisplayPower((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 0)
+AND
+ObjectExists(_Phylactery, 1)
+AND
+ItemIsDestroyed(_Phylactery, 0)
+AND
+ItemGetCharges(_Phylactery, _Power)
+AND
+ItemGetMaxCharges(_Phylactery, _Max)
+AND
+IntegerSubtract(_Max, _Power, _Remaining)
+THEN
+LLLICH_Phylactery_Internal_DisplayRequiredSouls(_Lich, _Remaining);
+
+PROC
+LLLICH_Phylactery_Internal_DisplayRequiredSouls((CHARACTERGUID)_Lich, (INTEGER)_Souls)
+AND
+IntegertoString(_Souls, _SoulsStr)
+THEN
+LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#73F6FF'>Your Phylactery Requires ",_SoulsStr," Souls to be Reactivated</font>");
+
+PROC
+LLLICH_Phylactery_Internal_DisplayRequiredSouls((CHARACTERGUID)_Lich, 1)
+THEN
+LeaderLog_LogTarget("NOTIFICATION", _Lich, "<font color='#73F6FF'>Your Phylactery Requires 1 Soul to be Reactivated</font>");
 //END_REGION
 
 //REGION CHAIN_LOOP_FX
