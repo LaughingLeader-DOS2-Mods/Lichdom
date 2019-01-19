@@ -76,6 +76,7 @@ ObjectFlagSet("LLLICH_Commands_RefreshStatuses", (CHARACTERGUID)_Lich, _)
 THEN
 ObjectClearFlag(_Lich, "LLLICH_Commands_RefreshStatuses");
 SetStoryEvent(_Lich, "LLLICH_ApplyStatusInfluence");
+LLLICH_Main_AddLichSkills(_Lich);
 
 IF
 ObjectFlagSet("LLLICH_Commands_RefreshStatuses", (CHARACTERGUID)_Lich, _)

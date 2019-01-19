@@ -402,7 +402,7 @@ data "StatsDescriptionParams" "Potion:Stats_LLLICH_ChillForm:WaterResistance;Pot
 data "FXScale" "100"
 data "PrepareAnimationInit" "skill_prepare_touch_01_start"
 data "PrepareAnimationLoop" "skill_prepare_touch_01_loop"
-data "PrepareEffect" "RS3_FX_Skills_Water_IceSigil_Base_Prepare_001,Detach:Dummy_Root;RS3_FX_Skills_Water_IceSpellHand_Prepare_001:Dummy_R_HandFX,Dummy_L_HandFX;RS3_FX_Skills_Soul_Prepare_Shout_Root_01:Dummy_Root"
+data "PrepareEffect" "LLLICH_FX_Skills_ChillForm_Prepare_Root_01,Detach:Dummy_Root;RS3_FX_Skills_Water_IceSpellHand_Prepare_001:Dummy_R_HandFX,Dummy_L_HandFX;RS3_FX_Skills_Soul_Prepare_Shout_Root_01:Dummy_Root"
 data "CastAnimation" "skill_cast_self_touch_01_cast"
 data "CastTextEvent" "cast"
 data "CastEffect" "RS3_FX_Skills_Water_Ice_Cast_Ground_01:Dummy_Root:cast"

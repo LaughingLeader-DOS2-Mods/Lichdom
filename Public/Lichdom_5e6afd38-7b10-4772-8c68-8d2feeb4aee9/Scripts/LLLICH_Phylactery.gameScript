@@ -9,6 +9,7 @@ ON
 	OnCharacterEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence")
 ACTIONS
 	RemoveStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 1000.0, "", 0)
+	//CharacterRemoveStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE)
 	AddStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 999.0, "", 0)
 	
 EVENT LLLICH_Phylactery_Remove
@@ -19,7 +20,8 @@ ON
 	OnCharacterEvent(_Lich, "LLLICH_ClearPhylacteryStatusInfluence")
 ACTIONS
 	RemoveStatusInfluence(_Lich, LLLICH_PHYLACTERY_ACTIVE, 1000.0, "", 0)
-
+	//CharacterRemoveStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+	
 EVENT LLLICH_Phylactery_InfoStatus_RemoveWorkaround
 VARS
 	CHARACTER:_Lich

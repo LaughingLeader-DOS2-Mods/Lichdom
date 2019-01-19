@@ -26,8 +26,9 @@ ON
 	OnCharacterEvent(_Lich, "LLLICH_SetupLich")
 	OnCharacterEvent(_Lich, "LLLICH_ApplyStatusInfluence")
 ACTIONS
-	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
-	AddStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
+	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 1000.0, "", 0)
+	//CharacterRemoveStatus(_Lich, LLLICH_LICHFORM)
+	AddStatusInfluence(_Lich, LLLICH_LICHFORM, 999.0, "", 0)
 	
 EVENT LLLICH_Lichform_Remove
 VARS
@@ -36,8 +37,9 @@ ON
 	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
 	OnCharacterEvent(_Lich, "LLLICH_ClearStatusInfluence")
 ACTIONS
-	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 100.0, "", 0)
-
+	RemoveStatusInfluence(_Lich, LLLICH_LICHFORM, 1000.0, "", 0)
+	//CharacterRemoveStatus(_Lich, LLLICH_LICHFORM)
+	
 //REGION LICHFORM_EXTRAS
 EVENT LLLICH_LichForm_OnApplied
 VARS

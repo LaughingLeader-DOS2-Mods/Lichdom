@@ -29,16 +29,6 @@ DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Ph
 DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893");
 
 //REGION UPDATES
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
-THEN
-LLLICH_Phylactery_InitSettings();
-LLLICH_Phylactery_Debug_StatsReload_ReplacePhylacteries_Start();
-TimerCancel("LLLICH_Timers_Debug_RunPhylacterySanityCheck");
-TimerLaunch("LLLICH_Timers_Debug_RunPhylacterySanityCheck", 500);
-
 //No phylactery entry in the DB, but is a lich with the status
 IF
 TimerFinished("LLLICH_Timers_Debug_RunPhylacterySanityCheck")
@@ -121,8 +111,8 @@ AND
 CreateItemTemplateAtPosition(_Template, _x, _y, _z, _NewPhylactery)
 THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active);
-ItemRemove(_OldPhylactery);
 DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active);
+ItemRemove(_OldPhylactery);
 ItemToInventory(_NewPhylactery, _Inventory);
 DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
 LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery is in an inventory. Creating new template, removing old, and sending it to the Lich.");
@@ -140,8 +130,8 @@ AND
 CreateItemTemplateAtPosition(_Template, _x, _y, _z, _NewPhylactery)
 THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _OldPhylactery, _Active);
-ItemRemove(_OldPhylactery);
 DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active);
+ItemRemove(_OldPhylactery);
 DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
 LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery is in the world. Creating new template, removing old, and placing it as the same spot.");
 
@@ -212,12 +202,22 @@ DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, _Active)
 THEN
 NOT DB_LLLICH_Debug_ReplacedPhylactery(_Lich);
 ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive");
+LLLICH_Main_AddLichSkills(_Lich);
 ItemSetOwner(_NewPhylactery, _Lich);
 SetVarObject(_Lich, "LLLICH_Phylactery", _NewPhylactery);
 SetVarObject(_NewPhylactery, "LLLICH_Phylactory_Owner", _Lich);
-ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Debug_Replaced");
-LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery successfully replaced. Updated variables.");
+LLLICH_Phylactery_Debug_StatsReload_AdjustActive(_Lich, _NewPhylactery, _Active);
 ItemAddCharges(_NewPhylactery, 2);
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Debug_Replaced");
+LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:Debug:StatsReload:ReplacePhylactery] Phylactery successfully replaced. Updated variables. Phylactery Active:[",_Active,"].");
+
+PROC
+LLLICH_Phylactery_Debug_StatsReload_AdjustActive((CHARACTERGUID)_Lich, (ITEMGUID)_NewPhylactery, 0)
+AND
+IsTagged(_NewPhylactery, "LLLICH_Phylactery_Broken", 0)
+THEN
+NOT DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, 0);
+DB_LLLICH_Phylactery_Active(_Lich, _NewPhylactery, 1);
 
 PROC
 LLLICH_Phylactery_Debug_StatsReload_ReplacePhylactery((CHARACTERGUID)_Lich, (ITEMGUID)_OldPhylactery, (INTEGER)_Exists, (INTEGER)_InInventory, (INTEGER)_Active)

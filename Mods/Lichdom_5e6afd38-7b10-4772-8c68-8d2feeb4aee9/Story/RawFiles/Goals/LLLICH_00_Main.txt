@@ -113,31 +113,12 @@ DB_LLLICH_LichSkills("Phylactery","Shout_LLLICH_Recall", 0);
 
 //REGION UPDATES
 PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
-THEN
-NOT DB_LLLICH_LichSkills("Phylactery","Target_LLLICH_DrainSoul", 0);
-DB_LLLICH_LichSkills("LichForm","Target_LLLICH_DrainSoul", 0);
-LLLICH_Main_InitSettings();
-LLLICH_Main_Debug_Update_MigrateDB();
-
-PROC
 LLLICH_Main_Debug_Update_MigrateDB()
 AND
 DB_LLLICH_Phylactery_Active((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
 THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _Phylactery);
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
-
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 0)
-THEN
-SysClear("DB_LLLICH_LichSkills", 1);
-LLLICH_Main_InitSettings();
-LLLICH_Main_Internal_UpdateLichSkills();
 
 PROC
 LLLICH_Main_Internal_UpdateLichSkills()
@@ -147,17 +128,6 @@ AND
 IsTagged(_Lich, "LLLICH_Lich", 1)
 THEN
 LLLICH_Main_AddLichSkills(_Lich);
-
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 1, 2)
-AND
-DB_IsPlayer(_Player)
-AND
-IsTagged(_Player, "LLLICH_Lich", 1)
-THEN
-LLLICH_Main_Internal_LichUpdate(_Player);
 
 PROC
 LLLICH_Main_Internal_LichUpdate((CHARACTERGUID)_Lich)
@@ -285,6 +255,14 @@ LeaderLib_PresetApplied((CHARACTERGUID)_Lich, "LLLICH_Lich", 0)
 THEN
 LLLich_Main_SetupLich(_Lich);
 
+//Lich skills are blocked from copying
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Lich, (STRING)_Preset, 0)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+THEN
+LLLICH_Main_AddLichSkills(_Lich);
+
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
 AND
@@ -325,16 +303,30 @@ PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
 AND
 NOT ObjectGetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor", 1)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Adding an initial [Soul Extractor].");
 ObjectSetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor");
 ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
+
+PROC
+LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
+AND
+NOT ObjectGetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor", 1)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+AND
+ObjectExists(_Phylactery, 1)
+THEN
+ObjectSetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor");
 
 IF
 ObjectFlagSet("LLLICH_Commands_SetupLich", (CHARACTERGUID)_Lich, _)
 THEN
 ObjectClearFlag(_Lich, "LLLICH_Commands_SetupLich");
 LLLich_Main_SetupLich(_Lich);
+LLLICH_Main_AddLichSkills(_Lich);
 
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
@@ -488,7 +480,8 @@ CharacterGetLevel(_Lich, _Level)
 THEN
 DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
 DB_LLLICH_LichData_Origin(_Lich, _OriginTag);
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, -1, _LichTemplate, _LichRace, 1);
+//DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, -1, _LichTemplate, _LichRace, 1, 1);
 //LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _LichRace, 1);
 ObjectSetFlag(_Lich, "LLLICH_PlayerRaceChanged");
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 50);
@@ -510,7 +503,7 @@ CharacterGetLevel(_Lich, _Level)
 THEN
 DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
 DB_LLLICH_LichData_OriginalRace(_Lich, _OriginalTemplate, _Race, _IsFemale);
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, 0);
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, 0, 1);
 ObjectSetFlag(_Lich, "LLLICH_PlayerRaceChanged");
 LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _UndeadRacePreset, 1);
 
@@ -539,7 +532,7 @@ ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 50);
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Lich, (STRING)_UndeadRacePreset, 1)
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, 1, _UndeadTemplate, _UndeadRacePreset, _IsOrigin)
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, 1, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
 SetTag(_Lich, "FEMALE");
 ClearTag(_Lich, "MALE");
@@ -547,7 +540,7 @@ ClearTag(_Lich, "MALE");
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Lich, (STRING)_UndeadRacePreset, 1)
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, 0, _UndeadTemplate, _UndeadRacePreset, _IsOrigin)
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, 0, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
 SetTag(_Lich, "MALE");
 ClearTag(_Lich, "FEMALE");
@@ -555,7 +548,7 @@ ClearTag(_Lich, "FEMALE");
 PROC
 LeaderLib_PresetApplied((CHARACTERGUID)_Lich, (STRING)_UndeadRacePreset, 1)
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin)
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 150);
 
@@ -570,29 +563,30 @@ DB_LLLICH_Main_Temp_MaxSourcePoints(_Lich, _MaxSP);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, 0)
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
-CharacterTransform(_Lich, _UndeadTemplate, 1, 1, 1, 0, 0, 1, 0);
+CharacterTransform(_Lich, _UndeadTemplate, 1, 1, 1, 0, 0, 0, 1);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, 0)
+THEN
+ProcObjectTimerFinished(_Lich, "LLLICH_Timers_Main_ApplyClassPreset");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, 1)
+THEN
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_ApplyClassPreset", 150);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, 1)
-/*AND
-//GetPosition(_Lich, _x, _y, _z)
-//AND
-TemporaryCharacterCreateAtPosition(_x, _y, _z, _UndeadTemplate, 0, _Copy)*/
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
-CharacterTransform(_Lich, _UndeadTemplate, 1, 1, 1, 0, 0, 1, 0);
-ProcObjectTimer(_Lich, "LLLICH_Timers_Main_ApplyClassPreset", 150);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
-AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin)
-THEN
-NOT DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin);
+NOT DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_ApplyClassPreset")
@@ -733,7 +727,7 @@ AND
 DB_LLLICH_Main_Temp_RaceResetData(_Lich, _IsFemale, _OriginalTemplate, _Race)
 THEN
 NOT DB_LLLICH_Main_Temp_RaceResetData(_Lich, _IsFemale, _OriginalTemplate, _Race);
-CharacterTransform(_Lich, _OriginalTemplate, 1, 1, 1, 0, 0, 1, 0);
+CharacterTransform(_Lich, _OriginalTemplate, 1, 1, 1, 0, 0, 0, 1);
 ObjectClearFlag(_Lich, "LLLICH_PlayerRaceChanged");
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_ApplyClassPreset", 150);
 

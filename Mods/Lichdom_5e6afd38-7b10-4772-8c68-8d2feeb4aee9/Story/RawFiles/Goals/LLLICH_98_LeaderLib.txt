@@ -1,0 +1,49 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLLICH_LeaderLib_RegisterSettings();
+//LeaderLib_Trader_Register_TraderInstance((STRING)_TraderID, (CHARACTERGUID)_Character, (STRING)_Level)
+KBSECTION
+
+//REGION NECROMANCY_TRAINERS
+
+PROC
+LLLICH_LeaderLib_RegisterSettings()
+THEN
+/* Fort Joy */
+//Mona, Necromancy Trainer
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_FTJ_GhettoNPC_Human_003_8e83098f-6dd8-445d-a37b-d22be064d334, "FJ_FortJoy_Main");
+
+/*Reaper's Coast*/
+//Trader Bree
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", RC_DW_Trader_PotionsIngredientsWaterSummonNecro_88ea209d-d5e6-465d-bebe-2f10b1fd2861, "RC_Main");
+
+//Eithne
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_RC_DF_UndeadTrader_4e5290d8-440b-4b95-b1fd-fae79c27cf04, "RC_Main");
+
+/*The Nameless Isle*/
+//JawBone
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_CoS_Temples_Elf_Merchant_002_3b0c1af8-cacb-424d-8e2a-3f51aa92bee6, "CoS_Main");
+
+//Black Ring Alchemist
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_CoS_Temples_BlackRingHub_Alchemist_9ba43a01-adb5-418f-8f66-da36657bc402, "CoS_Main");
+
+/*Arx*/
+//Trader Aravae
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_ARX_CathedralDistrict_TraderMagic_02_ac79ade7-eca6-4b3b-8b1b-b02652b04c0e, "Arx_Main");
+
+//Trader Victor Voss
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_ARX_CS_ShadyMerchant_ff4ef85b-d479-415e-8d64-56f144e04649, "Arx_Main");
+
+//Debug
+LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", CHARACTERGUID_Trailer_Humans_Female_Lohse_000_145810cc-7e46-43e7-9fdf-ab9bb8ffcdc0, "TestLevel_LL_LeaderLib");
+
+LeaderLib_Treasure_Register_TreasureToTrader("LL.Lichdom.NecromancySkillbooks", "LL.Lichdom.NecromancyTrainers");
+LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "BOOK_Skill_Necromancy_LLLICH_BloodBurst_6282599e-2449-4e0f-86ef-dcae4c448a38", 1);
+LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "Scroll_Skill_Shout_LLLICH_BloodBurst_d2adedbd-befe-47a4-aeba-b67c05d946cb", 1);
+
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
