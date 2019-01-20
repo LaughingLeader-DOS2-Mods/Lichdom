@@ -611,6 +611,13 @@ ApplyStatus(_Lich, "LLLICH_CLEAR_HARMFUL", 0.0);
 
 IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
+AND
+CharacterIsInCombat(_Lich, 1)
+THEN
+ObjectSetFlag(_Lich, "LLLICH_Recovering_WasInCombat", 0);
+
+IF
+StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
 THEN
 //Explode before teleporting
 LLLICH_Phylactery_OnLichDying_TriggerUnstable(_Lich);
@@ -1062,9 +1069,17 @@ ApplyStatus(_Lich, "LLLICH_RECOVERING", 12.0, 1, _Lich);
 IF
 CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
 AND
-CharacterIsInCombat(_Lich, 1)
+ObjectGetFlag(_Lich, "LLLICH_Recovering_WasInCombat", 1)
 AND
 NOT DB_GlobalFlag("LLLICH_Settings_DisableJumpToTurn_Recovering")
+THEN
+ObjectClearFlag(_Lich, "LLLICH_Recovering_WasInCombat", 0);
+ProcObjectTimer(_Lich, "LLLICH_Timers_JumpToTurn", 500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_JumpToTurn")
+AND
+CharacterIsInCombat(_Lich, 1)
 THEN
 JumpToTurn(_Lich);
 //END_REGION
