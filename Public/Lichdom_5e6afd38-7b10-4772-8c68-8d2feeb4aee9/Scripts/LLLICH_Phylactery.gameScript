@@ -79,17 +79,19 @@ ON
 ACTIONS
 IF "c1&!c2"
 	CharacterHasStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE)
-	CharacterHasStatus(_Lich, LLLICH_RECOVERING)
+	HasFlag(_Lich, "LLLICH_LichIsRecovering")
 THEN
 	IF "c1&(c2|c3)"
 		CharacterGetStat(_HP, _Lich, VitalityPoints)
 		IsLessThen(_HP, 1.0)
 		IsEqual(_HP, 1.0)
 	THEN
+		SetFlag(_Lich, "LLLICH_LichIsRecovering")
+		SetTag(_Lich, "AI_IGNORED_TARGET")
+		CharacterSetFloating(_Lich, 1)
+		CharacterApplyStatus(_Lich, LLLICH_CLEAR_HARMFUL, 0, 1, _Lich)
 		PlayEffectAt(_Lich, "RS3_FX_Skills_Soul_Cast_Soul_Impact_Root_01")
 		CharacterPlayEffect(_Lich, "RS3_FX_Skills_Soul_LastRites_Disappear_Overlay_01")
-		CharacterApplyStatus(_Lich, LLLICH_CLEAR_HARMFUL, 0, 1, _Lich)
-		SetTag(_Lich, "AI_IGNORED_TARGET")
 		CharacterEvent(_Lich, "LLLICH_OnLichDying")
 	ENDIF
 ENDIF	
@@ -115,6 +117,8 @@ ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_RECOVERING)
 ACTIONS
 	ClearTag(_Lich, "AI_IGNORED_TARGET")
+	ClearFlag(_Lich, "LLLICH_LichIsRecovering")
+	CharacterSetFloating(_Lich, 0)
 	//CharacterSetAnimationOverride(_Lich, "")
 
 EVENT LLLICH_Phylactery_Destroyed

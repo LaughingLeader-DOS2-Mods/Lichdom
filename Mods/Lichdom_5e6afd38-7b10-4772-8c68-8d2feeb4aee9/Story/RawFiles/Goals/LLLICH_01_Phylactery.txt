@@ -9,25 +9,46 @@ LLLICH_Phylactery_InitSettings()
 THEN
 SysClear("DB_LLLICH_Phylactery_DamageOnDeath", 2);
 DB_LLLICH_Phylactery_DamageOnDeath(0, -1);
-DB_LLLICH_Phylactery_DamageOnDeath(1, -2);
+DB_LLLICH_Phylactery_DamageOnDeath(1, -2); // Hardcore mode = Tactician
 /*
 LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d
 LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a
 LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c
 LOOT_LLLICH_Phylactery_Amulet_A_Broken_43577ebe-fec3-4f09-ae13-373aa10e123b
+LOOT_LLLICH_Phylactery_Amulet_A_Broken_2_2d720b82-a762-441f-9e51-7b8ada324239
+LOOT_LLLICH_Phylactery_Amulet_A_Broken_3_fa2727e9-10f9-44eb-a173-1cc94189981f
 LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48
 LOOT_LLLICH_Phylactery_Ring_A_2_8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa
 LOOT_LLLICH_Phylactery_Ring_A_3_845cdd4d-0ad9-49ac-84d5-b4dba325e13c
 LOOT_LLLICH_Phylactery_Ring_A_Broken_244e99ff-5fc9-4fcf-aa61-ff37959b90fd
+LOOT_LLLICH_Phylactery_Ring_A_Broken_2_594756d0-b438-4165-aab3-608ac8bf7df7
+LOOT_LLLICH_Phylactery_Ring_A_Broken_3_719aeae2-9eba-4cfe-a51b-6808ac2d4279
 LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332
 LOOT_LLLICH_Phylactery_Smallbox_A_2_8d3d1223-48c5-481b-ac55-e407f71fb749
 LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557
 LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893
+LOOT_LLLICH_Phylactery_Smallbox_A_Broken_2_a069aefa-a981-4f79-8ab7-1489ebfbc288
+LOOT_LLLICH_Phylactery_Smallbox_A_Broken_3_d2068826-c847-440b-ba41-cb822e8fcd00
 */
-DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_Broken_43577ebe-fec3-4f09-ae13-373aa10e123b");
-DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_Broken_244e99ff-5fc9-4fcf-aa61-ff37959b90fd");
-DB_LLLICH_Phylactery_BrokenTemplates("LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893");
-
+//DB_LLLICH_Phylactery_Templates(_Active, _Level, _Tag, _Template)
+DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d");
+DB_LLLICH_Phylactery_Templates(1, 2, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a");
+DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c");
+DB_LLLICH_Phylactery_Templates(0, 1, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_Broken_43577ebe-fec3-4f09-ae13-373aa10e123b");
+DB_LLLICH_Phylactery_Templates(0, 2, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_Broken_2_2d720b82-a762-441f-9e51-7b8ada324239");
+DB_LLLICH_Phylactery_Templates(0, 3, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_Broken_3_fa2727e9-10f9-44eb-a173-1cc94189981f");
+DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48");
+DB_LLLICH_Phylactery_Templates(1, 2, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_2_8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa");
+DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_3_845cdd4d-0ad9-49ac-84d5-b4dba325e13c");
+DB_LLLICH_Phylactery_Templates(0, 1, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_Broken_244e99ff-5fc9-4fcf-aa61-ff37959b90fd");
+DB_LLLICH_Phylactery_Templates(0, 2, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_Broken_2_594756d0-b438-4165-aab3-608ac8bf7df7");
+DB_LLLICH_Phylactery_Templates(0, 3, "LLLICH_Phylactery_Ring_A", "LOOT_LLLICH_Phylactery_Ring_A_Broken_3_719aeae2-9eba-4cfe-a51b-6808ac2d4279");
+DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332");
+DB_LLLICH_Phylactery_Templates(1, 2, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_2_8d3d1223-48c5-481b-ac55-e407f71fb749");
+DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557");
+DB_LLLICH_Phylactery_Templates(0, 1, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893");
+DB_LLLICH_Phylactery_Templates(0, 2, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_2_a069aefa-a981-4f79-8ab7-1489ebfbc288");
+DB_LLLICH_Phylactery_Templates(0, 3, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_3_d2068826-c847-440b-ba41-cb822e8fcd00");
 //REGION UPDATES
 //No phylactery entry in the DB, but is a lich with the status
 IF
@@ -275,6 +296,27 @@ AND
 ItemIsDestroyed(_Phylactery, 0)
 THEN
 DB_NOOP(1);
+
+QRY
+LLLICH_Phylactery_QRY_CheckSoulLevel((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
+THEN
+LLLICH_Phylactery_InitSoulLevel(_Lich);
+
+PROC
+LLLICH_Phylactery_InitSoulLevel((CHARACTERGUID)_Lich)
+AND
+NOT GetVarInteger(_Lich, "LLLICH_SoulLevel", _)
+THEN
+SetVarInteger(_Lich, "LLLICH_SoulLevel", 1);
+
+PROC
+LLLICH_Phylactery_InitSoulLevel((CHARACTERGUID)_Lich)
+AND
+GetVarInteger(_Lich, "LLLICH_SoulLevel", _Level)
+AND
+_Level < 1
+THEN
+SetVarInteger(_Lich, "LLLICH_SoulLevel", 1);
 //END_REGION
 
 //REGION USING_SOUL_EXTRACTOR
@@ -561,7 +603,7 @@ THEN
 SetStoryEvent(_Lich, "LLLICH_ClearPhylacteryStatusInfluence");
 //END_REGION
 
-//REGION TELEPORT_PHYLACTERY
+//REGION DYING_EVENT
 IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying_RemoveHarmfulStatuses")
 THEN
@@ -581,6 +623,7 @@ DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
 ObjectExists(_Phylactery, 1)
 THEN
+CharacterFlushQueue(_Lich);
 LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "LLLICH_Phylactory_Regenerating_LichTeleported");
 
 //Phylactery is broken! Uh oh!
@@ -590,6 +633,9 @@ AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 0)
 THEN
 CharacterStatusText(_Lich, "LLLICH_StatusText_ActuallyDying");
+//END_REGION
+
+//REGION TELEPORT_PHYLACTERY
 
 //Phylactery in the world
 PROC
@@ -607,6 +653,8 @@ DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 PlayEffect(_Phylactery, "RS3_FX_Skills_Soul_Cast_Shout_Root_02");
 //TeleportTo(_Lich, _Phylactery, _TeleportEvent, 0, 1, 1);
 TeleportToPosition(_Lich, _tx, _ty, _tz, _TeleportEvent, 0, 1);
+//CharacterRemoveTension(_Lich);
+LeaveCombat(_Lich);
 
 /*
 Phylactery in an inventory other than the Lich's.
@@ -631,6 +679,7 @@ FindValidPosition(_x, _y, _z, 12.0, _Lich, _tx, _ty, _tz)
 THEN
 DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 TeleportToPosition(_Lich, _tx, _ty, _tz, _TeleportEvent, 0, 1);
+LeaveCombat(_Lich);
 
 /*
 IF
@@ -703,9 +752,11 @@ NOT DB_LLLICH_Phylactery_Temp_LastWaypointDist(_Lich, _Dist, _WaypointItem);
 DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 TeleportTo(_Lich, _WaypointItem, _TeleportEvent, 0, 1, 1);
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_TeleportedToWaypoint");
+LeaveCombat(_Lich);
 
+//Recall Failed - Phylactery in inventory
 PROC
-LLLICH_Phylactery_Teleport((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, (STRING)_TeleportEvent)
+LLLICH_Phylactery_Teleport((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, "LLLICH_Phylactery_PlayerReturned")
 AND
 NOT DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich)
 AND
@@ -854,7 +905,7 @@ SetStoryEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Restored");
 //END_REGION
 
-//REGION PHYLACTERY_DESTROYED
+//REGION PHYLACTERY_BROKEN
 IF
 CharacterDestroyedItem(_Attacker, _Phylactery)
 AND
@@ -914,7 +965,11 @@ LLLich_Phylactery_OnPhylacteryBroken((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery
 AND
 GetTemplate(_Phylactery, _PreviousTemplate)
 AND
-DB_LLLICH_Phylactery_BrokenTemplates(_Tag, _BrokenTemplate)
+LLLICH_Phylactery_QRY_CheckSoulLevel(_Lich, _Phylactery)
+AND
+GetVarInteger(_Lich, "LLLICH_SoulLevel", _SoulLevel)
+AND
+DB_LLLICH_Phylactery_Templates(0, _SoulLevel, _Tag, _TransformTemplate)
 AND
 IsTagged(_Phylactery, _Tag, 1)
 AND
@@ -923,7 +978,7 @@ THEN
 NOT DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
 DB_LLLICH_Phylactery_PreviousTemplate(_Phylactery, _PreviousTemplate);
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 0);
-Transform(_Phylactery, _BrokenTemplate, 1, 1, 1);
+Transform(_Phylactery, _TransformTemplate, 1, 1, 1);
 
 PROC
 LLLich_Phylactery_OnPhylacteryBroken((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)

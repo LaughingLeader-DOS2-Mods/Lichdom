@@ -378,6 +378,7 @@ LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Added [Zombie] talent and [LLLI
 CharacterAddTalent(_Lich, "Zombie");
 SetTag(_Lich, "LLLICH_Lich");
 SetStoryEvent(_Lich, "LLLICH_SetupLich");
+LLLICH_Phylactery_InitSoulLevel(_Lich);
 /*
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
