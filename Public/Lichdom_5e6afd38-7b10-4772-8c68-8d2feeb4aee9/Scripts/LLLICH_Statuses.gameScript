@@ -47,6 +47,7 @@ ON
 	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
 	OnCharacterStatusApplied(_Lich, LLLICH_PHYLACTERY_ACTIVE)
 	OnIterateCharacter(_Lich, "LLLICH_Iterator_ApplyPenalty")
+	OnCharacterEvent(_Lich, "LLLICH_ApplyLichPenalty")
 ACTIONS
 IF "!c1"
 	HasGlobalFlag("LLLICH_Settings_DisableStatusPenalty")
@@ -66,6 +67,7 @@ VARS
 ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM)
 	OnIterateCharacter(_Lich, "LLLICH_Iterator_RemovePenalty")
+	OnCharacterEvent(_Lich, "LLLICH_RemoveLichPenalty")
 ACTIONS
 IF "c1"
 	CharacterHasStatus(_Lich, LLLICH_LICHFORM_PENALTY_A)

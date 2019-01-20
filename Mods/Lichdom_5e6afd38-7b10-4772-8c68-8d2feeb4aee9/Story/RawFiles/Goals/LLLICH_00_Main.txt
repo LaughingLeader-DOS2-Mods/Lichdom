@@ -483,9 +483,18 @@ DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
 DB_LLLICH_LichData_Origin(_Lich, _OriginTag);
 //DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 DB_LLLICH_Main_Temp_RaceChangeData(_Lich, -1, _LichTemplate, _LichRace, 1, 1);
-//LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _LichRace, 1);
+//Don't actually apply a preset yet, but use LeaderLib to preserve everything
 ObjectSetFlag(_Lich, "LLLICH_PlayerRaceChanged");
-ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 50);
+SetStoryEvent(_Lich, "LLLICH_RaceChange_SaveExperience");
+LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _LichTemplate, -1);
+//ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 50);
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Lich, _LichTemplate, -1)
+AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _LichTemplate, _LichRace, 1, _ApplyPreset)
+THEN
+ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 150);
 
 PROC
 LLLich_Main_ChangeRaceToUndead((CHARACTERGUID)_Lich)
@@ -557,6 +566,8 @@ ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 150);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
 AND
+DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, 1)
+AND
 CharacterGetMaxSourcePoints(_Lich, _MaxSP)
 THEN
 DB_LLLICH_Main_Temp_MaxSourcePoints(_Lich, _MaxSP);
@@ -567,13 +578,21 @@ AND
 DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, _ApplyPreset)
 THEN
 CharacterTransform(_Lich, _UndeadTemplate, 1, 1, 1, 0, 0, 0, 1);
+ProcObjectTimer(_Lich, "LLLICH_Timers_Main_AddExperience", 50);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_AddExperience")
 AND
-DB_LLLICH_Main_Temp_RaceChangeData(_Lich, _IsFemale, _UndeadTemplate, _UndeadRacePreset, _IsOrigin, 0)
+GetVarInteger(_Lich, "LeaderLib_PartyCount", 1)
+AND
+GetVarInteger(_Lich, "LLLICH_RaceChange_LastExperience", _Experience)
+AND
+_Experience > 0
 THEN
-ProcObjectTimerFinished(_Lich, "LLLICH_Timers_Main_ApplyClassPreset");
+DB_LLLICH_Main_Temp_AddedExperience(_Lich);
+LeaderLog_LogInt("DEBUG", "[Lichdom:Main:AddExperience] Adding [",_Experience,"] missing experience to character.");
+PartyAddActualExperience(_Lich, _Experience);
+SetVarInteger(_Lich, "LLLICH_RaceChange_LastExperience", 0);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_TransformToTemplate")
@@ -601,19 +620,35 @@ LeaderLog_LogInt("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] Re
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_ApplyClassPreset")
 AND
+NOT DB_LLLICH_Main_Temp_TransformToLich(_Lich, _)
+AND
+GetVarString(_Lich, "LeaderLib_CurrentPreset", _Preset)
+AND
+_Preset != ""
+THEN
+LeaderLog_Log("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] Applying last preset [",_Preset,"].");
+DB_LLLICH_Main_Temp_TransformToLich(_Lich, _Preset);
+LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _Preset, 0);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_ApplyClassPreset")
+AND
+NOT DB_LLLICH_Main_Temp_TransformToLich(_Lich, _)
+AND
 GetVarFixedString(_Lich, "LeaderLib_CharacterCreationPreset", _Preset)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] Re-applying CC preset [",_Preset,"].");
 DB_LLLICH_Main_Temp_TransformToLich(_Lich, _Preset);
 LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _Preset, 0);
 
-//Editor, Existing saves
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_ApplyClassPreset")
 AND
 NOT DB_LLLICH_Main_Temp_TransformToLich(_Lich, _)
 AND
 NOT GetVarFixedString(_Lich, "LeaderLib_CharacterCreationPreset", _)
+AND
+NOT GetVarString(_Lich, "LeaderLib_CurrentPreset", _)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:LLLICH_Timers_Main_ApplyClassPreset] No CC preset found. Applying preset [LLLICH_Lich].");
 DB_LLLICH_Main_Temp_TransformToLich(_Lich, "LLLICH_Lich");
@@ -658,7 +693,15 @@ THEN
 DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
 NOT DB_LLLICH_LichData_Origin(_Lich, _OriginTag);
 DB_LLLICH_Main_Temp_RaceResetData(_Lich, -1, _OriginTemplate, _OriginRace);
-//LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _OriginRace, 1);
+SetStoryEvent(_Lich, "LLLICH_RaceChange_SaveExperience");
+LeaderLib_PresetMenu_StartApplyingPreset(_Lich, _OriginTemplate, -1);
+//ProcObjectTimer(_Lich, "LLLICH_Timers_Main_TransformToTemplate", 50);
+
+PROC
+LeaderLib_PresetApplied((CHARACTERGUID)_Lich, _OriginTemplate, -1)
+AND
+DB_LLLICH_Main_Temp_RaceResetData(_Lich, -1, _OriginTemplate, _OriginRace)
+THEN
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_ResetRaceTransform", 50);
 
 PROC
@@ -730,15 +773,32 @@ THEN
 NOT DB_LLLICH_Main_Temp_RaceResetData(_Lich, _IsFemale, _OriginalTemplate, _Race);
 CharacterTransform(_Lich, _OriginalTemplate, 1, 1, 1, 0, 0, 0, 1);
 ObjectClearFlag(_Lich, "LLLICH_PlayerRaceChanged");
+ProcObjectTimer(_Lich, "LLLICH_Timers_Main_AddExperience", 50);
 ProcObjectTimer(_Lich, "LLLICH_Timers_Main_ApplyClassPreset", 150);
 
-IF
-ObjectTransformed((CHARACTERGUID)_Lich, _)
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_AddExperience")
+AND
+NOT DB_LLLICH_Main_Temp_AddedExperience(_Lich)
 AND
 DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level)
 THEN
 NOT DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
 CharacterLevelUpTo(_Lich, _Level);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_AddExperience")
+AND
+DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level)
+THEN
+NOT DB_LLLICH_Main_Temp_PreviousLevel(_Lich, _Level);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Main_AddExperience")
+AND
+DB_LLLICH_Main_Temp_AddedExperience(_Lich)
+THEN
+NOT DB_LLLICH_Main_Temp_AddedExperience(_Lich);
 //END_REGION
 
 //REGION STATUS_PRESERVATION

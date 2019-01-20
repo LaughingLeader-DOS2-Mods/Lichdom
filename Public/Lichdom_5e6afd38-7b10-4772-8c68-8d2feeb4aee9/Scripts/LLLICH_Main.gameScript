@@ -26,3 +26,19 @@ THEN
 	//Use a derived projectile here so it doesn't hit the Lich
 	ExplodeAt(_Pos, Projectile_LLLICH_Talent_Unstable, _Level, _Lich)
 ENDIF
+
+EVENT LLLICH_Transforming_SaveExperience
+VARS
+	CHARACTER:_Lich
+	FLOAT3:_Pos
+	FLOAT:_ExpF
+	INT:_Exp
+ON
+	OnCharacterEvent(_Lich, "LLLICH_RaceChange_SaveExperience")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_ExpF, _Lich, Experience)
+THEN
+	Cast(_Exp, _ExpF)
+	SetVar(_Lich, "LLLICH_RaceChange_LastExperience", _Exp)
+ENDIF
