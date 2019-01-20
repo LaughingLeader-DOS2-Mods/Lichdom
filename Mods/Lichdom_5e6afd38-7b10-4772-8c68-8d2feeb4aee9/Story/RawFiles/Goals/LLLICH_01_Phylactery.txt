@@ -612,9 +612,21 @@ ApplyStatus(_Lich, "LLLICH_CLEAR_HARMFUL", 0.0);
 IF
 StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
 THEN
+//Explode before teleporting
+LLLICH_Phylactery_OnLichDying_TriggerUnstable(_Lich);
 //Teleport first before reducing souls.
 LLLICH_Phylactery_OnLichDying_Teleport(_Lich);
 LLLICH_Phylactery_ReducePower(_Lich);
+
+//Only explode if the Lich isn't actually going to die
+PROC
+LLLICH_Phylactery_OnLichDying_TriggerUnstable((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+AND
+CharacterHasTalent(_Lich, "Unstable", 1)
+THEN
+SetStoryEvent(_Lich, "LLLICH_CreateUnstableExplosion");
 
 PROC
 LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)

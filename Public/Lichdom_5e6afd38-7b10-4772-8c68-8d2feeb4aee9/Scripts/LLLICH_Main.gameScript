@@ -7,3 +7,22 @@ USING LLLICH_Skills
 USING LLLICH_Statuses
 
 EVENTS
+
+EVENT LLLICH_Dying_UnstableTalent
+VARS
+	CHARACTER:_Lich
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Lich, "LLLICH_CreateUnstableExplosion")
+ACTIONS
+IF "c1&c2"
+	GetPosition(_Lich, _Pos)
+	CharacterGetStat(_LevelF, _Lich, Level)
+THEN
+	Cast(_Level, _LevelF)
+	//ExplodeAt(_Pos, Projectile_Talent_Unstable, _Level, _Lich)
+	//Use a derived projectile here so it doesn't hit the Lich
+	ExplodeAt(_Pos, Projectile_LLLICH_Talent_Unstable, _Level, _Lich)
+ENDIF

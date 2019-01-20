@@ -7,10 +7,10 @@ KBSECTION
 IF
 ItemTemplateAddedToCharacter(LOOT_LLLICH_Staff_Token_1H_Crafted_A_52803a67-7fc3-434e-8d8d-090b72444e4a, _Token, _Lich)
 THEN
-LLLICH_Crafting_CraftStaff(_Lich, _Token);
+LLLICH_Crafting_CraftStaff(_Lich, _Token, "A");
 
 PROC
-LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token, "A")
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
@@ -28,7 +28,7 @@ ShowNotification(_Lich, "LLLICH_Notifications_Crafting_CreatedLichStaff");
 DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token);
 
 PROC
-LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token, "A")
 AND
 NOT DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token)
 AND
@@ -37,7 +37,7 @@ THEN
 ShowNotification(_Lich, "LLLICH_Notifications_Crafting_PhylacteryRequired");
 
 PROC
-LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token, (STRING)_Type)
 AND
 DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token)
 THEN
