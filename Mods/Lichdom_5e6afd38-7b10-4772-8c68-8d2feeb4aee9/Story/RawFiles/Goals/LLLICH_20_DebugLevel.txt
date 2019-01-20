@@ -12,6 +12,21 @@ CharacterResurrect(CHARACTERGUID_DW_Voidling_A_002_c1bd2307-36db-4d7e-bbee-f621e
 CharacterResurrect(CHARACTERGUID_DW_Voidling_A_000_5c78c111-3807-408b-ae3d-1bb5d0186e91);
 CharacterResurrect(CHARACTERGUID_DW_Voidling_A_003_6cfba22c-5733-440e-b222-e94f8420ad54);
 
+//Stats Reload
+//PROC
+//LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+IF
+CharacterStatusApplied(_Lich, "LLLICH_PHYLACTERY_ACTIVE", _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+AND
+ObjectExists(_Phylactery, 0)
+AND
+CharacterFindTaggedItem(_Lich, "LLLICH_Phylactery", _ActualPhylactery)
+THEN
+NOT DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active);
+DB_LLLICH_Phylactery_Active(_Lich, _ActualPhylactery, _Active);
+
 EXITSECTION
 
 ENDEXITSECTION

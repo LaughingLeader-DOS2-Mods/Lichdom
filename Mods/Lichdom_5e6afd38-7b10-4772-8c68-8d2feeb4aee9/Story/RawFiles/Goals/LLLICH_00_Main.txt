@@ -282,7 +282,7 @@ CharacterEquipItem(_Lich, _LichStaff);
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
 AND
-NOT ObjectGetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff", 1)
+NOT UserGetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff", 1)
 AND
 CharacterGetEquippedItem(_Lich, "Weapon", (ITEMGUID)_LichPresetStaff)
 AND
@@ -295,7 +295,7 @@ AND
 CreateItemTemplateAtPosition("WPN_UNIQUE_LLLICH_Lich_Staff_1H_B_7981440d-567e-4738-8779-c36a276b632f", _x, _y, _z, _LichStaff)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Swapping preset starting staff for unique version.");
-ObjectSetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff");
+UserSetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff");
 ItemRemove(_LichPresetStaff);
 CharacterEquipItem(_Lich, _LichStaff);
 

@@ -614,7 +614,7 @@ StoryEvent((CHARACTERGUID)_Lich, "LLLICH_OnLichDying")
 THEN
 //Teleport first before reducing souls.
 LLLICH_Phylactery_OnLichDying_Teleport(_Lich);
-LLLICH_Phylactery_OnLichDying_ReduceCharges(_Lich);
+LLLICH_Phylactery_ReducePower(_Lich);
 
 PROC
 LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)
@@ -779,7 +779,7 @@ THEN
 NOT DB_LLLICH_Phylactery_Temp_TeleportResolved(_Lich);
 //END_REGION
 
-//REGION DYING_DURABILITY_DAMAGE
+//REGION PHYLACTERY_CHARGE_REDUCTION
 
 IF
 TextEventSet("lichdom_hardcore")
@@ -789,7 +789,7 @@ THEN
 LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:lichdom_hardcore] Hardcore mode is: [",_Hardcore,"]");
 
 PROC
-LLLICH_Phylactery_OnLichDying_ReduceCharges((CHARACTERGUID)_Lich)
+LLLICH_Phylactery_ReducePower((CHARACTERGUID)_Lich)
 AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
@@ -801,14 +801,43 @@ DB_LLLICH_Phylactery_DamageOnDeath(_Hardcore, _Damage)
 AND
 IntegerSum(_CurrentPower, _Damage, _NextPower)
 AND
-LeaderLog_QRY_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Dealing [",_Damage,"] damage to the Phylactery. Hardcore Mode: [",_Hardcore,"]")
+LeaderLog_QRY_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Removing [",_Damage,"] charge(s) from the Phylactery. Hardcore Mode: [",_Hardcore,"]")
 AND
 IntegerMax(0, _NextPower, _CappedPower)
 AND
 NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _CappedPower)
 THEN
 ItemAddCharges(_Phylactery, _Damage);
-LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Phylactery took damage. Power: [",_CappedPower,"]");
+LeaderLog_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Phylactery lost power. Power: [",_CappedPower,"]");
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Damage");
+
+PROC
+LLLICH_Phylactery_ReducePower((CHARACTERGUID)_Lich, (INTEGER)_RemoveCharges)
+AND
+_RemoveCharges > 0
+AND
+IntegerProduct(_RemoveCharges, -1, _ReduceCharges)
+THEN
+LLLICH_Phylactery_ReducePower(_Lich, _ReduceCharges);
+
+PROC
+LLLICH_Phylactery_ReducePower((CHARACTERGUID)_Lich, (INTEGER)_RemoveCharges)
+AND
+_RemoveCharges < 0
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+AND
+ItemGetCharges(_Phylactery, _CurrentPower)
+AND
+IntegerSum(_CurrentPower, _RemoveCharges, _NextPower)
+AND
+LeaderLog_QRY_LogInt("DEBUG", "[Lichdom:Phylactery:OnLichDying:ReduceCharges] Removing [",_RemoveCharges,"] charge(s) from the Phylactery.")
+AND
+IntegerMax(0, _NextPower, _CappedPower)
+AND
+NOT LLLICH_Phylactery_QRY_PhylacteryIsBroken(_Lich, _Phylactery, _CappedPower)
+THEN
+ItemAddCharges(_Phylactery, _RemoveCharges);
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Damage");
 //END_REGION
 
@@ -969,7 +998,7 @@ LLLICH_Phylactery_QRY_CheckSoulLevel(_Lich, _Phylactery)
 AND
 GetVarInteger(_Lich, "LLLICH_SoulLevel", _SoulLevel)
 AND
-DB_LLLICH_Phylactery_Templates(0, _SoulLevel, _Tag, _TransformTemplate)
+DB_LLLICH_Phylactery_Templates(0, _SoulLevel, _Tag, _TransformTemplate) // 0 = broken templates
 AND
 IsTagged(_Phylactery, _Tag, 1)
 AND

@@ -1,0 +1,24 @@
+treasure itemtypes "Common","Uncommon","Rare","Epic","Legendary","Divine","Unique"
+
+new treasuretable "S_LLLICH_Redeem_LichStaff_A"
+IgnoreLevelDiff 1
+new subtable "1,1"
+StartLevel "1"
+EndLevel "3"
+object category "LLLICH_LichStaff_A_Crafted",1,1,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "4"
+EndLevel "7"
+object category "LLLICH_LichStaff_A_Crafted",1,1,1,0,0,0,0,0
+new subtable "1,1"
+StartLevel "8"
+EndLevel "11"
+object category "LLLICH_LichStaff_A_Crafted",1,1,1,1,0,0,0,0
+new subtable "1,1"
+StartLevel "12"
+EndLevel "15"
+object category "LLLICH_LichStaff_A_Crafted",1,1,1,1,1,0,0,0
+new subtable "1,1"
+StartLevel "16"
+object category "LLLICH_LichStaff_A_Crafted",1,1,1,1,1,1,0,0
+

@@ -1,0 +1,60 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+ItemTemplateAddedToCharacter(LOOT_LLLICH_Staff_Token_1H_Crafted_A_52803a67-7fc3-434e-8d8d-090b72444e4a, _Token, _Lich)
+THEN
+LLLICH_Crafting_CraftStaff(_Lich, _Token);
+
+PROC
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+AND
+CharacterGetLevel(_Lich, _Level)
+AND
+GetPosition(_Lich, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
+THEN
+ItemDestroy(_Token);
+GenerateTreasure(_Backpack, "S_LLLICH_Redeem_LichStaff_A", _Level, _Lich);
+LeaderLib_StartCharacterItemTimer(_Lich, _Backpack, 250, "LLLICH_Timers_LichStaffGenerated", "LLLICH_LichStaffGenerated_Transfer");
+LLLICH_Phylactery_ReducePower(_Lich, -1);
+ShowNotification(_Lich, "LLLICH_Notifications_Crafting_CreatedLichStaff");
+DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token);
+
+PROC
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+AND
+NOT DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token)
+AND
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, 1)
+THEN
+ShowNotification(_Lich, "LLLICH_Notifications_Crafting_PhylacteryRequired");
+
+PROC
+LLLICH_Crafting_CraftStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Token)
+AND
+DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token)
+THEN
+NOT DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token);
+
+IF
+CharacterItemEvent(_Lich, _Backpack, "LLLICH_LichStaffGenerated_Transfer")
+THEN
+ContainerIdentifyAll(_Backpack);
+MoveAllItemsTo(_Backpack, _Lich, 0, 0, 1);
+ProcObjectTimer(_Backpack, "LLLICH_Timers_LichStaffGenerated_RemoveBackpack", 50);
+
+PROC
+ProcObjectTimerFinished((ITEMGUID)_Backpack, "LLLICH_Timers_LichStaffGenerated_RemoveBackpack")
+THEN
+ItemRemove(_Backpack);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

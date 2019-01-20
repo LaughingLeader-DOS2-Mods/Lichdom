@@ -1,0 +1,5 @@
+new CraftingPreviewData "LLLICH_Phylactery_Powered"
+type "ObjectCategories"
+data "Category" "LLLICH_Phylactery_Powered"
+data "Icon" "LLLICH_Items_ComboPreview_Phylactery_A"
+data "Tooltip" "Phylactery (Powered)"
