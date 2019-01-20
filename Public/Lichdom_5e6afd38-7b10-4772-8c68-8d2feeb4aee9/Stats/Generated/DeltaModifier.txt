@@ -1,0 +1,60 @@
+new deltamod "Boost_Weapon_Ability_TwoHanded_Staff"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Staff"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Ability_TwoHanded",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Knife"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Knife"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Sword"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Club"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Axe"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Wand"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Wand"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1

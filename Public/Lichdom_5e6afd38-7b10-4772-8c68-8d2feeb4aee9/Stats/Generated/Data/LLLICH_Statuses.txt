@@ -189,7 +189,7 @@ data "ExtraProperties" "CLEANSE:BURNING;CLEANSE:NECROFIRE;CLEANSE:FROZEN;CLEANSE
 
 new entry "LLWEAPONEX_STAFF_HIT"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "EFFECT"
 data "ForGameMaster" "No"
 data "InitiateCombat" "No"
 data "DisplayName" " "
