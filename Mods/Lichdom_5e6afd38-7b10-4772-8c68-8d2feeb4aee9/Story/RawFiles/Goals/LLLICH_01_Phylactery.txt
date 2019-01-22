@@ -949,6 +949,7 @@ DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1);
 Transform(_Phylactery, _Template, 1, 1, 1);
 SetVarObject(_Lich, "LLLICH_Phylactery", _Phylactery);
 SetVarObject(_Phylactery, "LLLICH_Phylactory_Owner", _Lich);
+ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive", 0);
 SetStoryEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Restored");
 //END_REGION

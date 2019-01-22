@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.5.4");
+LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.5.5");
 LeaderUpdater_Register_ActiveGoal("Lichdom", "LaughingLeader", "LLLICH_ZZZ_Updater");
 LeaderUpdater_Register_Dependency("Lichdom", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 LeaderLib_Register_ModMenu("LaughingLeader.Lichdom", "[Lichdom] Settings", "LLLICH_SettingsMenu", "Lichdom", "LaughingLeader");
@@ -11,9 +11,9 @@ KBSECTION
 IF
 GameStarted(_,_)
 AND
-LeaderUpdater_QRY_ModUpdateNeeded("Lichdom", "LaughingLeader", "0.9.5.4")
+LeaderUpdater_QRY_ModUpdateNeeded("Lichdom", "LaughingLeader", "0.9.5.5")
 THEN
-LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.5.4");
+LeaderUpdater_Register_Mod("Lichdom", "LaughingLeader", "0.9.5.5");
 
 /*
 PROC
@@ -25,6 +25,15 @@ LeaderUpdater_Register_Dependency("Lichdom", "LaughingLeader", "AnimationsPlus",
 */
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 5)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phlyactery, 1)
+THEN
+ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive", 0);
+
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
