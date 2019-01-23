@@ -1,5 +1,6 @@
 new skillset "Avatar_LLLICH_Lich"
-add skill "Shout_LLLICH_Invulnerability
+add skill "Shout_LLLICH_Invulnerability"
+
 new skillset "Class_LLLICH_Lich"
 add skill "Summon_BonePile"
 add skill "Target_ShacklesOfPain"
