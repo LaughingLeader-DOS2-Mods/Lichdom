@@ -1,0 +1,59 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+LLLICH_ModCompatibility_InitSettings();
+//LLLICH_ModCompatibility_CheckScripts();
+
+KBSECTION
+PROC
+LLLICH_ModCompatibility_InitSettings()
+THEN
+//DB_LLLICH_ModCompatibility_CheckGoals("Rendal_MysticItem_Flags_Transform", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
+//LeaderLib_ToggleScripts_Register_Script("LLLICH_40_RendalTransmog", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
+DB_NOOP(1);
+
+/*
+PROC
+LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 6)
+THEN
+LLLICH_ModCompatibility_InitSettings();
+*/
+
+/*
+IF
+SavegameLoaded(_,_,_,_)
+THEN
+LLLICH_ModCompatibility_CheckScripts();
+
+PROC
+LLLICH_ModCompatibility_CheckScripts()
+AND
+DB_LLLICH_ModCompatibility_CheckGoals(_Goal, _Flag)
+AND
+NOT DB_GlobalFlag(_Flag)
+AND
+SysIsActive(_Goal)
+THEN
+LeaderLog_Log("DEBUG", "[LLLICH:ModCompatibility:CheckScripts] Goal [",_Goal,"] is active. Activating global flag [",_Flag,"].");
+GlobalSetFlag(_Flag);
+
+PROC
+LLLICH_ModCompatibility_CheckScripts()
+AND
+DB_LLLICH_ModCompatibility_CheckGoals(_Goal, _Flag)
+AND
+DB_GlobalFlag(_Flag)
+AND
+NOT SysIsActive(_Goal)
+THEN
+LeaderLog_Log("DEBUG", "[LLLICH:ModCompatibility:CheckScripts] Goal [",_Goal,"] is inactive. Clearing global flag [",_Flag,"].");
+GlobalClearFlag(_Flag);
+*/
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLLICH_99_Init"

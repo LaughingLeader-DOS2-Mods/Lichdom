@@ -10,6 +10,8 @@ KBSECTION
 PROC
 LLLICH_LeaderLib_RegisterSettings()
 THEN
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
+
 /* Fort Joy */
 //Mona, Necromancy Trainer
 LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_FTJ_GhettoNPC_Human_003_8e83098f-6dd8-445d-a37b-d22be064d334, "FJ_FortJoy_Main");

@@ -4,13 +4,6 @@ INITSECTION
 
 KBSECTION
 
-IF
-GameStarted(_Level, 0)
-AND
-IsGameLevel(_Level, 1)
-THEN
-GoalCompleted;
-
 EXITSECTION
 
 ENDEXITSECTION

@@ -845,6 +845,28 @@ THEN
 DB_CustomUseItemResponse(_Lich, _Item, 0);
 LLLICH_Main_OnBlockedEquipping(_Lich, _Item);
 //END_REGION
+
+//REGION MISC_QRY
+
+QRY
+LLLICH_Init_QRY_IsLichPreset((CHARACTERGUID)_Player)
+AND
+GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", "LLLich_Lich")
+THEN
+DB_NOOP(1);
+
+QRY
+LLLICH_Init_QRY_IsLichPreset((CHARACTERGUID)_Player)
+AND
+NOT GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", _)
+AND
+CharacterGetReservedUserID(_Player, _UserID)
+AND
+DB_LeaderLib_CC_Temp_SelectedPreset(_UserID, "LLLich_Lich")
+THEN
+DB_NOOP(1);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
