@@ -11,7 +11,9 @@ LLLICH_ModCompatibility_InitSettings()
 THEN
 //DB_LLLICH_ModCompatibility_CheckGoals("Rendal_MysticItem_Flags_Transform", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
 //LeaderLib_ToggleScripts_Register_Script("LLLICH_40_RendalTransmog", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
-DB_NOOP(1);
+DB_LLMIME_Mimicking_Blacklist_Skills("Target_LLLICH_DrainSoul");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLLICH_CreatePhylactery");
+//DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLLICH_Recall");
 
 /*
 PROC
