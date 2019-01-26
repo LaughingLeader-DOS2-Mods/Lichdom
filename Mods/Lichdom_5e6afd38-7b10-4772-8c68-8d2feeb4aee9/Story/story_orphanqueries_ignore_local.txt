@@ -1,1 +1,2 @@
-DB_REEQUIP 2
+DB_LLMIME_Mimicking_Blacklist_Skills 1
+DB_LLLICH_Phylactery_Active 2

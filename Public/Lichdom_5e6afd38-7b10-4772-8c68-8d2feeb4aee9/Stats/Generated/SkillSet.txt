@@ -2,6 +2,6 @@ new skillset "Avatar_LLLICH_Lich"
 add skill "Shout_LLLICH_Invulnerability"
 
 new skillset "Class_LLLICH_Lich"
-add skill "Summon_BonePile"
-add skill "Target_ShacklesOfPain"
 add skill "Target_MosquitoSwarm"
+add skill "ProjectileStrike_HailStrike"
+add skill "Shout_LLLICH_BloodBurst"
