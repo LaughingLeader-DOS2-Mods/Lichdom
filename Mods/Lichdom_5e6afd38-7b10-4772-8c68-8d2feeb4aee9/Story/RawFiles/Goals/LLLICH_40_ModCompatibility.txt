@@ -11,19 +11,22 @@ LLLICH_ModCompatibility_InitSettings()
 THEN
 //DB_LLLICH_ModCompatibility_CheckGoals("Rendal_MysticItem_Flags_Transform", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
 //LeaderLib_ToggleScripts_Register_Script("LLLICH_40_RendalTransmog", "LLLICH_ModCompatibilty_RendalTransmog_Enabled");
-DB_LLMIME_Mimicking_Blacklist_Skills("Target_LLLICH_DrainSoul");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLLICH_CreatePhylactery");
-//DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLLICH_Recall");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Target_LLLICH_DrainSoul");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_CreatePhylactery");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_Recall");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_ChillForm"); // Too powerful otherwise?
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_DreadShout");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Target_LLLICH_FleshSacrifice");
 
 /*
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 6)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 8)
 THEN
+SysClear("DB_LLMIME_Mimicking_Blacklist_Skills", 1);
 LLLICH_ModCompatibility_InitSettings();
 */
-
 /*
 IF
 SavegameLoaded(_,_,_,_)
