@@ -108,7 +108,7 @@ data "Unique" "1"
 data "Necromancy" "1"
 data "WaterSpecialist" "1"
 data "IntelligenceBoost" "1"
-data "DamageFromBase" "73"
+data "DamageFromBase" "71"
 
 new entry "WPN_LLLICH_LichStaff_Preview"
 type "Weapon"

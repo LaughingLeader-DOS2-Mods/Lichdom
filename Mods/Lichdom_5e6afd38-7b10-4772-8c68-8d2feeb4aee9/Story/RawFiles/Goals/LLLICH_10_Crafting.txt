@@ -22,7 +22,7 @@ CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-41
 THEN
 ItemDestroy(_Token);
 GenerateTreasure(_Backpack, "S_LLLICH_Redeem_LichStaff_A", _Level, _Lich);
-LeaderLib_StartCharacterItemTimer(_Lich, _Backpack, 250, "LLLICH_Timers_LichStaffGenerated", "LLLICH_LichStaffGenerated_Transfer");
+LeaderLib_Timers_StartCharacterItemTimer(_Lich, _Backpack, 250, "LLLICH_Timers_LichStaffGenerated", "LLLICH_LichStaffGenerated_Transfer");
 LLLICH_Phylactery_ReducePower(_Lich, -1);
 ShowNotification(_Lich, "LLLICH_Notifications_Crafting_CreatedLichStaff");
 DB_LLLICH_Crafting_Temp_CraftingResolved(_Lich, _Token);

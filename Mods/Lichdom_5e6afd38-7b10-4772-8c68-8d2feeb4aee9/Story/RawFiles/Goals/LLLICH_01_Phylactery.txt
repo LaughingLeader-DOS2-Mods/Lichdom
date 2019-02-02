@@ -598,7 +598,7 @@ ApplyStatus(_Lich, "LLLICH_PHYLACTERY_ACTIVE", -1.0, 1, _Lich);
 IF
 CharacterStatusApplied(_Lich, "LLLICH_PHYLACTERY_ACTIVE", _)
 AND
-NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
+NOT DB_LLLICH_Phylactery_Active(_Lich, _, 1)
 THEN
 SetStoryEvent(_Lich, "LLLICH_ClearPhylacteryStatusInfluence");
 //END_REGION
@@ -1041,31 +1041,6 @@ SetStoryEvent(_Lich, "LLLICH_OnPhylacteryDestroyed");
 //END_REGION
 
 //REGION RECOVERING
-IF
-CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
-AND
-NOT DB_GlobalFlag("LLLICH_Settings_DisableJumpToTurn")
-AND
-CharacterIsInCombat(_Lich, 1)
-THEN
-JumpToTurn(_Lich);
-
-IF
-StoryEvent((CHARACTERGUID)_Lich, "LLLICH_StartLichRecovery")
-THEN
-PlayAnimation(_Lich, "knockdown_fall", "LLLICH_StartKnockdownLoop");
-
-IF
-StoryEvent((CHARACTERGUID)_Lich, "LLLICH_StartKnockdownLoop")
-THEN
-CharacterSetAnimationOverride(_Lich, "knockdown_loop");
-ProcObjectTimer(_Lich, "LLLICH_Timers_ApplyRecoveryStatus", 250);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_ApplyRecoveryStatus")
-THEN
-ApplyStatus(_Lich, "LLLICH_RECOVERING", 12.0, 1, _Lich);
-
 //Jump to turn after recovering in combat
 IF
 CharacterStatusRemoved(_Lich, "LLLICH_RECOVERING", _)
@@ -1079,6 +1054,8 @@ ProcObjectTimer(_Lich, "LLLICH_Timers_JumpToTurn", 500);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_JumpToTurn")
+AND
+CharacterIsDead(_Lich, 0)
 AND
 CharacterIsInCombat(_Lich, 1)
 THEN

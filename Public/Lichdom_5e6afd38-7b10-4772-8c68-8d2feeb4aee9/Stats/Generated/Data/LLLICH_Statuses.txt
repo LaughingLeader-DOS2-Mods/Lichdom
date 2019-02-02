@@ -178,6 +178,7 @@ data "SkipInitialEffect" "No"
 data "HealEffectId" "RS3_FX_Skills_Soul_LastRites_Disappear_Root_01"
 data "StatusEffect" "LLLICH_FX_Status_Regenerating_01"
 data "StatsId" "Stats_LLLICH_Recovering"
+data "IsResistingDeath" "Yes"
 
 new entry "Stats_LLLICH_Recovering"
 type "Potion"
