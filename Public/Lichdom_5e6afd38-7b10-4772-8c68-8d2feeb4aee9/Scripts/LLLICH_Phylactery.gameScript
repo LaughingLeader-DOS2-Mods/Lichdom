@@ -66,6 +66,7 @@ VARS
 ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_PHYLACTERY_ACTIVE)
 	OnCharacterFlagSet("LLLICH_Settings_HidePhylacteryStatus", _Lich)
+	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_PHYLACTERY_ACTIVE_INFO, null, 0)
 	
@@ -115,6 +116,7 @@ VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_RECOVERING)
+	OnCharacterEvent(_Lich, "LLLICH_ClearLich")
 ACTIONS
 	ClearTag(_Lich, "AI_IGNORED_TARGET")
 	ClearFlag(_Lich, "LLLICH_LichIsRecovering")
