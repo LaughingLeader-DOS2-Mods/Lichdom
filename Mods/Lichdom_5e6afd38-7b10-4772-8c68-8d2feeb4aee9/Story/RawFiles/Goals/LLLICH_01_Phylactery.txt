@@ -638,12 +638,26 @@ SetStoryEvent(_Lich, "LLLICH_CreateUnstableExplosion");
 PROC
 LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)
 AND
+NOT LLLICH_Phylactery_QRY_LichIsInArena(_Lich)
+AND
 DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 AND
 ObjectExists(_Phylactery, 1)
 THEN
 CharacterFlushQueue(_Lich);
 LLLICH_Phylactery_Teleport(_Lich, _Phylactery, "LLLICH_Phylactory_Regenerating_LichTeleported");
+
+//If in the arena, teleporting is disabled
+PROC
+LLLICH_Phylactery_OnLichDying_Teleport((CHARACTERGUID)_Lich)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+AND
+LLLICH_Phylactery_QRY_LichIsInArena(_Lich)
+THEN
+CharacterFlushQueue(_Lich);
+SetStoryEvent(_Lich, "LLLICH_Phylactory_Regenerating_LichTeleported");
+CharacterStatusText(_Lich, "LLLICH_StatusText_PhylacteryTeleportFailedInArena");
 
 //Phylactery is broken! Uh oh!
 PROC
@@ -655,6 +669,13 @@ CharacterStatusText(_Lich, "LLLICH_StatusText_ActuallyDying");
 //END_REGION
 
 //REGION TELEPORT_PHYLACTERY
+
+QRY
+LLLICH_Phylactery_QRY_LichIsInArena((CHARACTERGUID)_Lich)
+AND
+DB_Arena_PlayerParticipants(_,_,_Lich,_)
+THEN
+DB_NOOP(1);
 
 //Phylactery in the world
 PROC
