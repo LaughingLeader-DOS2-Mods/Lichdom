@@ -44,6 +44,7 @@ data "BloodSurfaceType" "None"
 data "WaterResistance" "25"
 data "AirResistance" "10"
 data "PiercingResistance" "10"
+data "Memory" "2"
 
 new entry "LLLICH_LICHFORM_PENALTY_A"
 type "StatusData"
