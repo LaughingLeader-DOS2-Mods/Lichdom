@@ -867,6 +867,25 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
+//REGION PASSIVE_SCALED_BONUS
+IF
+CharacterStatusApplied(_Lich, "LLLICH_LICHFORM", _)
+THEN
+ApplyStatus(_Lich, "LLLICH_LICHFORM_SCALED_BONUS", -1.0, 1, _Lich);
+
+//Re-apply the scaled bonuses on level up, since they don't auto-increase
+IF
+CharacterLeveledUp(_Lich)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Lich, 100, "LLLICH_Timers_ReApplyScaledBonus", "LLLICH_ReApplyScaledBonus");
+
+IF
+StoryEvent(_Lich, "LLLICH_ReApplyScaledBonus")
+THEN
+ApplyStatus(_Lich, "LLLICH_LICHFORM_SCALED_BONUS", -1.0, 1, _Lich);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

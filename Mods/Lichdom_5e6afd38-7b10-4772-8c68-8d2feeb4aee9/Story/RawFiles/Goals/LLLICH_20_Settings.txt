@@ -8,6 +8,7 @@ DB_GLO_CharacterAnimation("PlayAnim_skill_prepare_flight_01_loop","skill_prepare
 DB_GLO_CharacterAnimation("PlayAnim_skill_jump_flight_start","skill_jump_flight_start", 0);
 
 //LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "LichPassives", "LLLICH_LICHFORM", (STRING)_Flag)
+//LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "LichPassives", "LLLICH_LICHFORM_ScaledBonuses", (STRING)_Flag)
 KBSECTION
 
 QRY
