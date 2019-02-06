@@ -1,0 +1,2 @@
+LLLICH_DisplayText_SmallBoxInspected_Owner	<font color-'#46B195'>*Your Phylactery has [1]/100 Power.*</font>		
+LLLICH_DisplayText_SmallBoxInspected_Stranger	*This box has an unusual feel to it...*		

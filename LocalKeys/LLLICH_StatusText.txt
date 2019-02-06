@@ -1,0 +1,4 @@
+LLLICH_StatusText_SavingThrow_Fear	<font color='#C7A758' size='18'>Saving Throw Success for Fear</font>		
+LLLICH_StatusText_SavingThrow_Stunned	<font color='#C7A758' size='18'>Saving Throw Success for Stunned</font>		
+LLLICH_StatusText_ActuallyDying	<font color='#87365C' size='18'>Death comes for you at last...</font>		
+LLLICH_StatusText_PhylacteryTeleportFailedInArena	<font color='#87365C' size='18'>Teleportation to your Phylactery is blocked by an unknown power...</font>		

@@ -6,22 +6,33 @@ KBSECTION
 
 //REGION DRAIN_SOUL
 IF
+CharacterUsedSkill(_Lich, "Target_LLLICH_DrainSoul", _, _)
+THEN
+ApplyStatus(_Lich, "LLLICH_DRAINSOUL_ACCURACYBOOST", 6.0, 1, _Lich);
+
+IF
 CharacterUsedSkillOnTarget(_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul", _, _)
 THEN
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
-ProcObjectTimerCancel(_Lich, "LLLICH_Timers_CancelDyingEvent");
-ProcObjectTimer(_Lich, "LLLICH_Timers_CancelDyingEvent", 5000);
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_Skills_CancelDyingEvent");
+ProcObjectTimer(_Lich, "LLLICH_Timers_Skills_CancelDyingEvent", 5000);
 
 IF
 SkillCast(_Lich, "Target_LLLICH_DrainSoul", _, _)
 AND
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
-ProcObjectTimerCancel(_Lich, "LLLICH_Timers_CancelDyingEvent");
-ProcObjectTimer(_Lich, "LLLICH_Timers_CancelDyingEvent", 3000);
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_Skills_CancelDyingEvent");
+ProcObjectTimer(_Lich, "LLLICH_Timers_Skills_CancelDyingEvent", 2000);
+ProcObjectTimer(_Lich, "LLLICH_Timers_Skills_RemoveAccuracyBoost", 1000);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_CancelDyingEvent")
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Skills_RemoveAccuracyBoost")
+THEN
+RemoveStatus(_Lich, "LLLICH_DRAINSOUL_ACCURACYBOOST");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Skills_CancelDyingEvent")
 AND
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
@@ -34,7 +45,7 @@ AND
 DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul")
 THEN
 NOT DB_LLLICH_Skills_Temp_ListenForDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
-ProcObjectTimerCancel(_Target, "LLLICH_Timers_CancelDyingEvent");
+ProcObjectTimerCancel(_Target, "LLLICH_Timers_Skills_CancelDyingEvent");
 LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 //END_REGION
 
