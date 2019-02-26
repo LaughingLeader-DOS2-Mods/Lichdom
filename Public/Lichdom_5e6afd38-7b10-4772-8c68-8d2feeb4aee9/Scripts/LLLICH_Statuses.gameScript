@@ -276,3 +276,29 @@ ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)	
 
 //END_REGION
+
+EVENT LLLICH_ParalyzingTouch
+VARS
+	CHARACTER:_Target
+	STATUS:_Result
+	INT:_Turns
+	FLOAT:_Armor
+	LIST<STATUS>:_RemoveList
+ON
+	FetchCharacterApplyStatusData(_Target, LLLICH_PARALYZE)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, 1)
+	//ListAdd(_RemoveList, LLLICH_PARALYZE)
+IF "c1&!c2"
+	CharacterGetStat(_Armor, _Target, MagicArmorPoints)
+	IsGreaterThen(_Armor, 0)
+THEN
+	Set(_Result, STUNNED)
+ELIF "c1&!c2"
+	CharacterGetStat(_Armor, _Target, PhysicalArmorPoints)
+	IsGreaterThen(_Armor, 0)
+THEN
+	Set(_Result, KNOCKED_DOWN)
+ENDIF
+	RETURN(_RemoveList, _Result, _Turns)

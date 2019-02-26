@@ -117,7 +117,7 @@ data "CastAnimation" "skill_cast_target_touch_01_cast"
 data "CastSelfAnimation" "skill_cast_self_touch_01_cast"
 data "CastTextEvent" "cast"
 data "CastEffect" "RS3_FX_Skills_Voodoo_Cast_Decaying_Hand_02:Dummy_R_HandFX,Dummy_L_HandFX;RS3_FX_Skills_Voodoo_Cast_Decaying_Hand_01:Dummy_CastFX:cast"
-data "TargetEffect" "RS3_FX_Skills_Air_Lightning_Target_01:root:cast"
+data "TargetEffect" "RS3_FX_GP_Status_Shocked_01:root:cast;RS3_FX_Skills_Voodoo_Decaying_Impact_01:root:cast"
 data "CycleConditions" "Enemy;!Dead"
 
 new entry "Target_LLLICH_FleshSacrifice"

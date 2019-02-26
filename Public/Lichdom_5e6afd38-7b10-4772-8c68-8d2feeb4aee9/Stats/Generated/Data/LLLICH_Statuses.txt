@@ -303,13 +303,7 @@ data "InitiateCombat" "No"
 data "DisplayName" "LLLICH_PARALYZE_DisplayName"
 data "DisplayNameRef" "Paralyze"
 data "Icon" ""
-data "StatsId" "Stats_LLLICH_Paralyze"
 data "StackId" "Stack_LLLICH_Paralyze"
-
-new entry "Stats_LLLICH_Paralyze"
-type "Potion"
-data "Act part" "0"
-data "ExtraProperties" "IF(!MagicArmourUp):STUNNED,100,1;IF(!PhysicalArmourUp&MagicArmourUp):KNOCKED_DOWN,100,1;CLEANSE:LLLICH_PARALYZE"
 
 new entry "LLLICH_FLESH_SACRIFICE"
 type "StatusData"
