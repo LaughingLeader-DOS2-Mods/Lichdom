@@ -169,7 +169,6 @@ data "ForGameMaster" "No"
 data "InitiateCombat" "No"
 data "DisplayName" " "
 data "Icon" ""
-data "StackId" "Stack_LLLICH_PhylacteryEquipped"
 
 new entry "LLLICH_RECOVERING"
 type "StatusData"
