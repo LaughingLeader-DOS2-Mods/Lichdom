@@ -11,7 +11,7 @@ PROC
 LLLICH_LeaderLib_RegisterSettings()
 THEN
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
-LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "Debug.HideArmor", "LEADERLIB_HIDE_ARMOR", "LLLICH_Debug_HideArmor");
+LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "Debug.HideArmor", "LLLICH_HIDE_ARMOR", "LLLICH_Debug_HideArmor");
 
 /* Fort Joy */
 //Mona, Necromancy Trainer

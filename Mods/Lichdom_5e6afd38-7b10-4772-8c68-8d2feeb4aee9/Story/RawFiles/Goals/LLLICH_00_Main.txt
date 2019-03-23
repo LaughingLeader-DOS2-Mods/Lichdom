@@ -900,12 +900,12 @@ ApplyStatus(_Lich, "LLLICH_LICHFORM_SCALED_BONUS", -1.0, 1, _Lich);
 IF
 ObjectFlagSet("LLLICH_Debug_HideArmor", (CHARACTERGUID)_Lich, _)
 THEN
-LeaderLib_Statuses_ApplyPermanentStatus(_Lich, "LEADERLIB_HIDE_ARMOR", "LLLICH_Debug_HideArmor");
+ApplyStatus(_Lich, "LLLICH_HIDE_ARMOR", -1.0, 1, _Lich);
 
 IF
 ObjectFlagCleared("LLLICH_Debug_HideArmor", (CHARACTERGUID)_Lich, _)
 THEN
-RemoveStatus(_Lich, "LEADERLIB_HIDE_ARMOR");
+RemoveStatus(_Lich, "LLLICH_HIDE_ARMOR");
 //END_REGION
 EXITSECTION
 

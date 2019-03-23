@@ -247,3 +247,9 @@ add namegroup "LLLICH_LichStaff","","Item_WPN_Lizards_Staff_2H_A_VAR"
 add levelgroup 19,0,"Epic"
 add rootgroup "bd1e70cd-7d36-4d10-b4f7-5ee55afda913","DwarvesEpic"
 add namegroup "LLLICH_LichStaff","","Item_WPN_Dwarves_Staff_2H_B_VAR"
+
+new itemgroup "ARM_LLLICH_ArmorVisualsDisabled"
+
+add levelgroup 0,0,"All"
+add rootgroup "766150a5-b0cc-4aa3-a213-6b9172accac1",""
+add namegroup "EMPTY","",""
