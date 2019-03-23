@@ -11,6 +11,7 @@ PROC
 LLLICH_LeaderLib_RegisterSettings()
 THEN
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
+LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "Debug.HideArmor", "LEADERLIB_HIDE_ARMOR", "LLLICH_Debug_HideArmor");
 
 /* Fort Joy */
 //Mona, Necromancy Trainer
@@ -43,6 +44,46 @@ LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", CHARAC
 LeaderLib_Treasure_Register_TreasureToTrader("LL.Lichdom.NecromancySkillbooks", "LL.Lichdom.NecromancyTrainers");
 LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "BOOK_Skill_Necromancy_LLLICH_BloodBurst_6282599e-2449-4e0f-86ef-dcae4c448a38", 1);
 LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "Scroll_Skill_Shout_LLLICH_BloodBurst_d2adedbd-befe-47a4-aeba-b67c05d946cb", 1);
+
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery", "");
+/*
+LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d
+LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a
+LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c
+LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48
+LOOT_LLLICH_Phylactery_Ring_A_2_8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa
+LOOT_LLLICH_Phylactery_Ring_A_3_845cdd4d-0ad9-49ac-84d5-b4dba325e13c
+LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332
+LOOT_LLLICH_Phylactery_Smallbox_A_2_8d3d1223-48c5-481b-ac55-e407f71fb749
+LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557
+LOOT_LLLICH_Phylactery_Jar_A_c6104ce9-f45e-4b4d-8740-7103782e51b5
+LOOT_LLLICH_Phylactery_Jar_A_2_200f1fc6-6ffc-4a2c-a737-fd3728cac456
+LOOT_LLLICH_Phylactery_Jar_A_3_e721ec07-9c56-48e1-8381-2fafa11770e8
+*/
+//LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Amulet.3", "LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c");
+//LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Ring.3", "LOOT_LLLICH_Phylactery_Ring_A_3_845cdd4d-0ad9-49ac-84d5-b4dba325e13c");
+//LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Smallbox.3", "LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557");
+//LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Jar.3", "LOOT_LLLICH_Phylactery_Jar_A_3_e721ec07-9c56-48e1-8381-2fafa11770e8");
+
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Amulet.1", "LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d");
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Amulet.2", "LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Amulet.1", 8, "LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a", "LLLICH_Phylactery_Upgrade1");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Amulet.2", 16, "LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c", "LLLICH_Phylactery_Upgrade2");
+
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Ring.1", "LOOT_LLLICH_Phylactery_Ring_A_cd0b735f-6c57-43b5-8d12-131b725dda48");
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Ring.2", "LOOT_LLLICH_Phylactery_Ring_A_2_8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Ring.1", 8, "LOOT_LLLICH_Phylactery_Ring_A_2_8f9126d5-ecc5-47b2-b9d8-f5d61f84f6fa", "LLLICH_Phylactery_Upgrade1");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Ring.2", 16, "LOOT_LLLICH_Phylactery_Ring_A_3_845cdd4d-0ad9-49ac-84d5-b4dba325e13c", "LLLICH_Phylactery_Upgrade2");
+
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Smallbox.1", "LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332");
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Smallbox.2", "LOOT_LLLICH_Phylactery_Smallbox_A_2_8d3d1223-48c5-481b-ac55-e407f71fb749");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Smallbox.1", 8, "LOOT_LLLICH_Phylactery_Smallbox_A_2_8d3d1223-48c5-481b-ac55-e407f71fb749", "LLLICH_Phylactery_Upgrade1");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Smallbox.2", 16, "LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557", "LLLICH_Phylactery_Upgrade2");
+
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Jar.1", "LOOT_LLLICH_Phylactery_Jar_A_c6104ce9-f45e-4b4d-8740-7103782e51b5");
+LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery.Jar.2", "LOOT_LLLICH_Phylactery_Jar_A_2_200f1fc6-6ffc-4a2c-a737-fd3728cac456");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Jar.1", 8, "LOOT_LLLICH_Phylactery_Jar_A_2_200f1fc6-6ffc-4a2c-a737-fd3728cac456", "LLLICH_Phylactery_Upgrade1");
+LeaderLib_Growth_Items_Register_Transformation("LL.Lichdom.Phylactery.Jar.2", 16, "LOOT_LLLICH_Phylactery_Jar_A_3_e721ec07-9c56-48e1-8381-2fafa11770e8", "LLLICH_Phylactery_Upgrade2");
 
 //END_REGION
 EXITSECTION

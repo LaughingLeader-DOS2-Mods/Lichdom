@@ -5,7 +5,7 @@ new namegroup "LLLICH_Phylactery_Amulet_2"
 add name "Strange Pulsating Amulet",""
 
 new namegroup "LLLICH_Phylactery_Amulet_3"
-add name "Empowered Phlyactery",""
+add name "Ascended Phlyactery (Amulet)",""
 
 new namegroup "LLLICH_Phylactery_Ring"
 add name "Strange Ring",""
@@ -14,7 +14,7 @@ new namegroup "LLLICH_Phylactery_Ring_2"
 add name "Strange Pulsating Ring",""
 
 new namegroup "LLLICH_Phylactery_Ring_3"
-add name "Empowered Phlyactery",""
+add name "Ascended Phlyactery (Ring)",""
 
 new namegroup "LLLICH_Phylactery_Smallbox"
 add name "Strange Box",""
@@ -23,16 +23,28 @@ new namegroup "LLLICH_Phylactery_Smallbox_2"
 add name "Strange Pulsating Box",""
 
 new namegroup "LLLICH_Phylactery_Smallbox_3"
-add name "Empowered Phlyactery",""
+add name "Ascended Phlyactery (Box)",""
+
+new namegroup "LLLICH_Phylactery_Jar"
+add name "Strange Jar",""
+
+new namegroup "LLLICH_Phylactery_Jar_2"
+add name "Strange Pulsating Jar",""
+
+new namegroup "LLLICH_Phylactery_Jar_3"
+add name "Ascended Phlyactery (Jar)",""
 
 new namegroup "LLLICH_Phylactery_Amulet_Broken"
-add name "Strange Amulet (Broken)",""
+add name "Strange Broken Amulet",""
 
 new namegroup "LLLICH_Phylactery_Ring_Broken"
-add name "Strange Ring (Broken)",""
+add name "Strange Broken Ring",""
 
 new namegroup "LLLICH_Phylactery_Smallbox_Broken"
-add name "Strange Box (Broken)",""
+add name "Strange Broken Box",""
+
+new namegroup "LLLICH_Phylactery_Smallbox_Jar"
+add name "Strange Broken Jar",""
 
 new namegroup "WPN_UNIQUE_LLLICH_LichStaff"
 add name "Staff of the Soulkeeper",""

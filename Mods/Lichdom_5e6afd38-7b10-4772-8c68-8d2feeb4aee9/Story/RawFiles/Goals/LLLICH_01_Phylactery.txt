@@ -29,6 +29,12 @@ LOOT_LLLICH_Phylactery_Smallbox_A_3_2846990e-f2e4-48d8-8570-4854632cb557
 LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893
 LOOT_LLLICH_Phylactery_Smallbox_A_Broken_2_a069aefa-a981-4f79-8ab7-1489ebfbc288
 LOOT_LLLICH_Phylactery_Smallbox_A_Broken_3_d2068826-c847-440b-ba41-cb822e8fcd00
+LOOT_LLLICH_Phylactery_Jar_A_c6104ce9-f45e-4b4d-8740-7103782e51b5
+LOOT_LLLICH_Phylactery_Jar_A_2_200f1fc6-6ffc-4a2c-a737-fd3728cac456
+LOOT_LLLICH_Phylactery_Jar_A_3_e721ec07-9c56-48e1-8381-2fafa11770e8
+LOOT_LLLICH_Phylactery_Jar_A_Broken_89484c10-cc66-4563-962e-c601ae129fc2
+LOOT_LLLICH_Phylactery_Jar_A_Broken_2_fc08fddf-33c3-44d0-b933-bc857075fee3
+LOOT_LLLICH_Phylactery_Jar_A_Broken_3_a1329644-95f3-4f8b-8946-c86ef4e159f1
 */
 //DB_LLLICH_Phylactery_Templates(_Active, _Level, _Tag, _Template)
 DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d");
@@ -49,6 +55,12 @@ DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLIC
 DB_LLLICH_Phylactery_Templates(0, 1, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_ea462acf-cfc8-4707-85e9-f647215b4893");
 DB_LLLICH_Phylactery_Templates(0, 2, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_2_a069aefa-a981-4f79-8ab7-1489ebfbc288");
 DB_LLLICH_Phylactery_Templates(0, 3, "LLLICH_Phylactery_Smallbox_A", "LOOT_LLLICH_Phylactery_Smallbox_A_Broken_3_d2068826-c847-440b-ba41-cb822e8fcd00");
+DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_c6104ce9-f45e-4b4d-8740-7103782e51b5");
+DB_LLLICH_Phylactery_Templates(1, 2, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_2_200f1fc6-6ffc-4a2c-a737-fd3728cac456");
+DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_3_e721ec07-9c56-48e1-8381-2fafa11770e8");
+DB_LLLICH_Phylactery_Templates(0, 1, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_Broken_89484c10-cc66-4563-962e-c601ae129fc2");
+DB_LLLICH_Phylactery_Templates(0, 2, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_Broken_2_fc08fddf-33c3-44d0-b933-bc857075fee3");
+DB_LLLICH_Phylactery_Templates(0, 3, "LLLICH_Phylactery_Jar_A", "LOOT_LLLICH_Phylactery_Jar_A_Broken_3_a1329644-95f3-4f8b-8946-c86ef4e159f1");
 //REGION UPDATES
 //No phylactery entry in the DB, but is a lich with the status
 IF
@@ -296,11 +308,22 @@ AND
 ItemIsDestroyed(_Phylactery, 0)
 THEN
 DB_NOOP(1);
+//END_REGION
 
+//REGION SOUL_LEVEL
 QRY
 LLLICH_Phylactery_QRY_CheckSoulLevel((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery)
 THEN
 LLLICH_Phylactery_InitSoulLevel(_Lich);
+
+QRY
+LLLICH_Phylactery_QRY_SoulLevelIsGreaterThan((CHARACTERGUID)_Lich, (INTEGER)_Level)
+AND
+GetVarInteger(_Lich, "LLLICH_SoulLevel", _CurrentLevel)
+AND
+_CurrentLevel > _Level
+THEN
+DB_NOOP(1);
 
 PROC
 LLLICH_Phylactery_InitSoulLevel((CHARACTERGUID)_Lich)
@@ -317,6 +340,22 @@ AND
 _Level < 1
 THEN
 SetVarInteger(_Lich, "LLLICH_SoulLevel", 1);
+
+PROC
+LLLICH_Phylactery_SetSoulLevel((CHARACTERGUID)_Lich, (INTEGER)_Level)
+AND
+GetVarInteger(_Lich, "LLLICH_SoulLevel", _CurrentLevel)
+AND
+_CurrentLevel != _Level
+AND
+_Level > _CurrentLevel
+THEN
+LLLICH_Phylactery_OnSoulLevelIncreased(_Lich, _CurrentLevel, _Level);
+
+PROC
+LLLICH_Phylactery_SetSoulLevel((CHARACTERGUID)_Lich, (INTEGER)_Level)
+THEN
+SetVarInteger(_Lich, "LLLICH_SoulLevel", _Level);
 //END_REGION
 
 //REGION USING_SOUL_EXTRACTOR
@@ -462,6 +501,13 @@ THEN
 ObjectClearFlag(_Lich, "LLLICH_Phylactery_CreateSmallbox");
 LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:ObjectFlagSet] Flag [LLLICH_Phylactery_CreateSmallbox] was set.");
 LLLICH_Phylactery_CreatePhylactery(_Lich, "LLLICH_Phylactery_Smallbox", "LOOT_LLLICH_Phylactery_Smallbox_A_73c01ec2-7894-4d19-b12f-991650263332");
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_CreateJar", (CHARACTERGUID)_Lich, _)
+THEN
+ObjectClearFlag(_Lich, "LLLICH_Phylactery_CreateJar");
+LeaderLog_Log("DEBUG", "[Lichdom:Phylactery:ObjectFlagSet] Flag [LLLICH_Phylactery_CreateJar] was set.");
+LLLICH_Phylactery_CreatePhylactery(_Lich, "LLLICH_Phylactery_Jar", "LOOT_LLLICH_Phylactery_Jar_A_c6104ce9-f45e-4b4d-8740-7103782e51b5");
 
 /*
 IF
@@ -973,6 +1019,7 @@ SetVarObject(_Phylactery, "LLLICH_Phylactory_Owner", _Lich);
 ObjectSetFlag(_Lich, "LLLICH_PhylacteryActive", 0);
 SetStoryEvent(_Lich, "LLLICH_ApplyPhylacteryStatusInfluence");
 ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Restored");
+CharacterItemSetEvent(_Lich, _Phylactery, "LLLICH_OnPhylacteryRestored");
 //END_REGION
 
 //REGION PHYLACTERY_BROKEN
@@ -1325,7 +1372,118 @@ ObjectClearFlag(_Lich, "LLLICH_PhylacteryActive");
 ObjectClearFlag(_Lich, "LLLICH_Phylactery_Amulet");
 ObjectClearFlag(_Lich, "LLLICH_Phylactery_Ring");
 ObjectClearFlag(_Lich, "LLLICH_Phylactery_Smallbox");
+ObjectClearFlag(_Lich, "LLLICH_Phylactery_Jar");
 
+//REGION UPGRADE_START_EVENTS
+PROC
+LLLICH_Main_OnLichLeveledUp((CHARACTERGUID)_Lich, (INTEGER)_Level)
+AND
+_Level >= 8
+AND
+NOT LLLICH_Phylactery_QRY_SoulLevelIsGreaterThan(_Lich, 2)
+THEN
+LLLICH_Phylactery_SetSoulLevel(_Lich, 2);
+
+PROC
+LLLICH_Main_OnLichLeveledUp((CHARACTERGUID)_Lich, (INTEGER)_Level)
+AND
+_Level >= 16
+AND
+NOT LLLICH_Phylactery_QRY_SoulLevelIsGreaterThan(_Lich, 3)
+THEN
+LLLICH_Phylactery_SetSoulLevel(_Lich, 3);
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Upgrade1", (CHARACTERGUID)_Lich, _)
+AND
+CharacterGetLevel(_Lich, _Level)
+AND
+_Level >= 16
+THEN
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade");
+ProcObjectTimer(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade", 500);
+
+PROC
+LLLICH_Phylactery_OnSoulLevelIncreased((CHARACTERGUID)_Lich, (INTEGER)_CurrentLevel, (INTEGER)_NextLevel)
+AND
+_NextLevel > 1
+THEN
+ProcObjectTimerCancel(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade");
+ProcObjectTimer(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade", 500);
+
+IF
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
+THEN
+LLLICH_Phylactery_CheckForUpgrade(_Lich, _Phylactery, 1);
+//END_REGION
+
+PROC
+LeaderLib_Growth_Items_BlockEquipAfterTransform((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_ID, (STRING)_TransformTemplate, (INTEGER)_Level)
+AND
+IsTagged(_Item, "LLLICH_BlockEquip", 1)
+THEN
+DB_LeaderLib_Growth_Items_Temp_BlockEquip(_Character, _Item);
+
+//REGION UPGRADES
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade")
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+THEN
+LLLICH_Phylactery_CheckForUpgrade(_Lich, _Phylactery, _Active);
+
+PROC
+LLLICH_Phylactery_CheckForUpgrade((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, 1)
+AND
+NOT DB_LLLICH_Phylactery_Temp_Transforming(_Lich)
+AND
+ObjectGetFlag(_Lich, "LLLICH_Phylactery_Upgrade1", 0)
+AND
+CharacterGetLevel(_Lich, _Level)
+AND
+_Level >= 8
+AND
+GetTemplate(_Phylactery, _Template)
+THEN
+DB_LLLICH_Phylactery_Temp_Transforming(_Lich);
+LeaderLib_Growth_Items_TransformItem(_Lich, _Phylactery, _Level);
+
+PROC
+LLLICH_Phylactery_CheckForUpgrade((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, 1)
+AND
+NOT DB_LLLICH_Phylactery_Temp_Transforming(_Lich)
+AND
+ObjectGetFlag(_Lich, "LLLICH_Phylactery_Upgrade1", 1)
+AND
+ObjectGetFlag(_Lich, "LLLICH_Phylactery_Upgrade2", 0)
+AND
+CharacterGetLevel(_Lich, _Level)
+AND
+_Level >= 16
+THEN
+LeaderLib_Growth_Items_TransformItem(_Lich, _Phylactery, _Level);
+
+PROC
+LLLICH_Phylactery_CheckForUpgrade((CHARACTERGUID)_Lich, (ITEMGUID)_Phylactery, (INTEGER)_Active)
+AND
+DB_LLLICH_Phylactery_Temp_Transforming(_Lich)
+THEN
+NOT DB_LLLICH_Phylactery_Temp_Transforming(_Lich);
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Upgrade1", (ITEMGUID)_Phylactery, _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+THEN
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Upgraded_Level2");
+
+IF
+ObjectFlagSet("LLLICH_Phylactery_Upgrade2", (ITEMGUID)_Phylactery, _)
+AND
+DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, _Active)
+THEN
+ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Upgraded_Level3");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
