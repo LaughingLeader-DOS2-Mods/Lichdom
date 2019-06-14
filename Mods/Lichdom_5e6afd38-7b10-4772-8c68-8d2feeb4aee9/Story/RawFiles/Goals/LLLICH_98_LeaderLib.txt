@@ -45,7 +45,7 @@ LeaderLib_Treasure_Register_TreasureToTrader("LL.Lichdom.NecromancySkillbooks", 
 LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "BOOK_Skill_Necromancy_LLLICH_BloodBurst_6282599e-2449-4e0f-86ef-dcae4c448a38", 1);
 LeaderLib_Treasure_Register_ItemTemplate("LL.Lichdom.NecromancySkillbooks", "Scroll_Skill_Shout_LLLICH_BloodBurst_d2adedbd-befe-47a4-aeba-b67c05d946cb", 1);
 
-LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery", "");
+//LeaderLib_Growth_Items_Register_Template("LL.Lichdom.Phylactery", "");
 /*
 LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d
 LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a
