@@ -907,6 +907,13 @@ ObjectFlagCleared("LLLICH_Debug_HideArmor", (CHARACTERGUID)_Lich, _)
 THEN
 RemoveStatus(_Lich, "LLLICH_HIDE_ARMOR");
 //END_REGION
+
+IF
+RegionEnded(_Region)
+AND
+IsGameLevel(_Region, 1)
+THEN
+SysActivateGoal("LLLICH_11_GameReady");
 EXITSECTION
 
 ENDEXITSECTION
