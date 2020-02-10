@@ -1,0 +1,29 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLLICH_Statuses_InitSettings();
+KBSECTION
+PROC
+LLLICH_Statuses_InitSettings()
+THEN
+DB_LLLICH_Surfaces("Frozen", "SurfaceWaterFrozen", "Ground", "Standard");
+DB_LLLICH_Surfaces("Frozen", "SurfaceWaterFrozenBlessed", "Ground", "Blessed");
+DB_LLLICH_Surfaces("Frozen", "SurfaceWaterFrozenCursed", "Ground", "Cursed");
+DB_LLLICH_Surfaces("Frozen", "SurfaceWaterFrozenPurified", "Ground", "Purified");
+DB_LLLICH_Surfaces("Frozen", "SurfaceBloodFrozen", "Ground", "BloodStandard");
+DB_LLLICH_Surfaces("Frozen", "SurfaceBloodFrozenBlessed", "Ground", "Blessed");
+DB_LLLICH_Surfaces("Frozen", "SurfaceBloodFrozenCursed", "Ground", "Cursed");
+DB_LLLICH_Surfaces("Frozen", "SurfaceBloodFrozenPurified", "Ground", "Purified");
+
+QRY
+LLLICH_QRY_IsInSurfaceGroup((GUIDSTRING)_Obj, (STRING)_Group)
+AND
+DB_LLLICH_Surfaces("Frozen", _Surface, _, _)
+AND
+LeaderLib_Helper_QRY_IsInSurface(_Obj, _Surface)
+THEN
+DB_NOOP(1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
