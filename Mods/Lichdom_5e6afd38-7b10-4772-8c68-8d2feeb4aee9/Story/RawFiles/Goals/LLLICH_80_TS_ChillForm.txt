@@ -19,8 +19,6 @@ HasAppliedStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 0)
 AND
 HasActiveStatus(_Lich, "LLLICH_CHILLFORM", 1)
 AND
-HasActiveStatus(_Lich, "INSURFACE", 1)
-AND
 LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
 THEN
 ApplyStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 6.0, 1, _Lich);
