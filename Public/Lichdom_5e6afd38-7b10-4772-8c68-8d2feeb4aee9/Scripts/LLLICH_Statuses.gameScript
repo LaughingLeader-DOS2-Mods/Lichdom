@@ -1,7 +1,6 @@
 INIT
 	INT:%LLLICH_SavingThrow_Fear = 500
 	INT:%LLLICH_SavingThrow_Stunned = 700
-
 EVENTS
 
 //This effect is disabled/overriden in the status
@@ -44,8 +43,8 @@ EVENT LLLICH_LichForm_OnApplied
 VARS
 	CHARACTER:_Lich
 ON
-	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
-	OnCharacterStatusApplied(_Lich, LLLICH_PHYLACTERY_ACTIVE)
+	//OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
+	//OnCharacterStatusApplied(_Lich, LLLICH_PHYLACTERY_ACTIVE)
 	OnIterateCharacter(_Lich, "LLLICH_Iterator_ApplyPenalty")
 	OnCharacterEvent(_Lich, "LLLICH_ApplyLichPenalty")
 ACTIONS
@@ -65,7 +64,7 @@ EVENT LLLICH_LichForm_OnRemoved
 VARS
 	CHARACTER:_Lich
 ON
-	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM)
+	//OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM)
 	OnIterateCharacter(_Lich, "LLLICH_Iterator_RemovePenalty")
 	OnCharacterEvent(_Lich, "LLLICH_RemoveLichPenalty")
 ACTIONS
@@ -92,26 +91,36 @@ ON
 ACTIONS
 	IterateParty("LLLICH_Iterator_RemovePenalty", null, null, null, "LLLICH_Lich")
 
+/*
 EVENT LLLICH_Lichform_InfoStatus_Apply
 VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterStatusApplied(_Lich, LLLICH_LICHFORM)
 ACTIONS
+IF "c1&!c2"
+	HasGlobalFlag("LeaderLib_Initialized")
+	CharacterHasStatus(_Lich, LLLICH_LICHFORM_INFO)
+THEN
 	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_INFO, -1, 0, _Lich)
+ENDIF
+*/
 
+/*
 EVENT LLLICH_Lichform_InfoStatus_RemoveWorkaround
 VARS
 	CHARACTER:_Lich
 ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM_INFO)
 ACTIONS
-IF "c1&!c2"
+IF "c1&c2&!c3"
+	HasGlobalFlag("LeaderLib_Initialized")
 	HasStatusInfluence(_Lich, LLLICH_LICHFORM)
 	HasFlag(_Lich, "LLLICH_Settings_HideLichStatus")
 THEN
 	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_INFO, -1, 0, _Lich)
 ENDIF
+*/
 	
 EVENT LLLICH_Lichform_InfoStatus_ApplyViaFlag
 VARS
@@ -125,6 +134,7 @@ THEN
 	CharacterApplyStatus(_Lich, LLLICH_LICHFORM_INFO, -1, 0, _Lich)
 ENDIF
 
+/*
 EVENT LLLICH_Lichform_InfoStatus_Remove
 VARS
 	CHARACTER:_Lich
@@ -132,7 +142,12 @@ ON
 	OnCharacterStatusRemoved(_Lich, LLLICH_LICHFORM)
 	OnCharacterFlagSet("LLLICH_Settings_HideLichStatus", _Lich)
 ACTIONS
+IF "c1"
+	HasGlobalFlag("LeaderLib_Initialized")
+THEN
 	CharacterRemoveStatus(_Lich, LLLICH_LICHFORM_INFO, null, 0)
+ENDIF
+*/
 
 EVENT LLLICH_Lichform_SavingThrow_Fear
 VARS
@@ -186,13 +201,8 @@ VARS
 	CHARACTER:_Lich
 	FLOAT:_Radius
 ON
-	OnCharacterStatusApplied(_Lich, INSURFACE)
-	OnCharacterStatusApplied(_Lich, LLLICH_CHILLFORM)
+	OnCharacterEvent(_Lich, "LLLICH_Events_ChillForm_CheckForIceSurface_ApplyBonus")
 ACTIONS
-IF "c1&!c2"
-	CharacterHasStatus(_Lich, LLLICH_CHILLFORM)
-	CharacterHasStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST)
-THEN
 	Set(_Radius, 2.0)
 	IF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10"
 		IsInSurface(_Lich, SurfaceWaterFrozen, _Radius)
@@ -207,9 +217,13 @@ THEN
 		IsInSurface(_Lich, SurfaceBloodFrozenPurified, _Radius)
 	THEN
 		CharacterApplyStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, 1, 1, _Lich)
+	ELIF "c1"
+		CharacterHasStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST)
+	THEN
+		CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
 	ENDIF
-ENDIF
 
+/*
 EVENT LLLICH_ChillForm_SpeedBoost_RemoveStart
 VARS
 	CHARACTER:_Lich
@@ -224,13 +238,14 @@ THEN
 	SetVar(_Lich, "LeaderLib_Timer_Delay", INT:899)
 	CharacterEvent(_Lich, "LeaderLib_Commands_StartObjectTimer")
 ENDIF
+*/
 
 EVENT LLLICH_ChillForm_SpeedBoost_Remove
 VARS
 	CHARACTER:_Lich
 	FLOAT:_Radius
 ON
-	OnCharacterEvent(_Lich, "LLLICH_Events_ChillForm_CheckForIceSurface")
+	OnCharacterEvent(_Lich, "LLLICH_Events_ChillForm_CheckForIceSurface_RemoveBonus")
 ACTIONS
 	IF "!c1"
 		CharacterHasStatus(_Lich, INSURFACE)
@@ -253,6 +268,8 @@ ACTIONS
 			CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)
 		ENDIF
 	ENDIF
+
+/*
 EVENT LLLICH_ChillForm_EndTurn_FX
 VARS
 	CHARACTER:_Lich
@@ -264,7 +281,9 @@ IF "c1"
 THEN
 	PlayEffectAt(_Lich, "RS3_FX_Skills_Water_Ice_Shout_Ground_02")
 ENDIF
-	
+*/
+
+/*
 EVENT LLLICH_ChillForm_Removed
 VARS
 	CHARACTER:_Lich
@@ -274,6 +293,7 @@ ON
 ACTIONS
 	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_ENDTURN_AURA, null, 0)
 	CharacterRemoveStatus(_Lich, LLLICH_CHILLFORM_SPEEDBOOST, null, 0)	
+*/
 
 //END_REGION
 
