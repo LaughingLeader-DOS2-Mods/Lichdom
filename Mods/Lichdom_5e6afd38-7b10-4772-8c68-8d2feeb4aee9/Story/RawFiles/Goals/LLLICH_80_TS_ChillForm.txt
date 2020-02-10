@@ -1,0 +1,106 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterStatusApplied(_Lich, "LLLICH_CHILLFORM", _)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 0)
+AND
+LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
+THEN
+ApplyStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 6.0, 1, _Lich);
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", _)
+AND
+HasAppliedStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 0)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM", 1)
+AND
+HasActiveStatus(_Lich, "INSURFACE", 1)
+AND
+LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
+THEN
+ApplyStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 6.0, 1, _Lich);
+
+IF
+CharacterStatusApplied(_Lich, "INSURFACE", _)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM", 1)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", _HasSpeedBoost)
+THEN
+LLLICH_Statuses_OnInSurfaceApplied(_Lich, _HasSpeedBoost);
+
+PROC
+LLLICH_Statuses_OnInSurfaceApplied((CHARACTERGUID)_Lich, 0)
+AND
+LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
+THEN
+ApplyStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 6.0, 1, _Lich);
+
+IF
+CharacterStatusApplied(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", _)
+THEN
+LeaderLib_Timers_CancelObjectTimer(_Lich, "Timers_LLLICH_Events_ChillForm_CheckForIceSurface_RemoveBonus");
+
+/* [OSITOOLS_ONLY]
+PROC
+LLLICH_Statuses_OnInSurfaceApplied((CHARACTERGUID)_Lich, 1)
+AND
+LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
+AND
+NRD_StatusGetHandle(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", _Handle)
+AND
+NRD_StatusGetReal(_Lich, _Handle, "CurrentLifeTime", _Duration)
+AND
+_Duration < 6.0
+THEN
+NRD_StatusSetReal(_Lich, _Handle, "CurrentLifeTime", 6.0);
+NRD_StatusSetReal(_Lich, _Handle, "LifeTime", 6.0);
+*/
+
+/*
+IF
+CharacterStatusRemoved(_Lich, "INSURFACE", _)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM", 1)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 1)
+AND
+NOT LLLICH_QRY_IsInSurfaceGroup(_Lich, "Frozen")
+THEN
+RemoveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST");
+*/
+
+IF
+CharacterStatusRemoved(_Lich, "INSURFACE", _)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM", 1)
+AND
+HasActiveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST", 1)
+THEN
+//Listened for in LLLICH_Statuses.gameScript
+LeaderLib_Timers_StartObjectTimer(_Lich, 800, "Timers_LLLICH_Events_ChillForm_CheckForIceSurface_RemoveBonus", "LLLICH_Events_ChillForm_CheckForIceSurface_RemoveBonus");
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_CHILLFORM_ENDTURN_AURA", _)
+AND
+CharacterIsInCombat(_Lich, 1)
+AND
+GetPosition(_Lich, _x, _y, _z)
+THEN
+PlayEffectAtPosition("RS3_FX_Skills_Water_Ice_Shout_Ground_02", _x, _y, _z);
+
+IF
+CharacterStatusRemoved(_Lich, "LLLICH_CHILLFORM", _)
+THEN
+RemoveStatus(_Lich, "LLLICH_CHILLFORM_ENDTURN_AURA");
+RemoveStatus(_Lich, "LLLICH_CHILLFORM_SPEEDBOOST");
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Lich, "LLLICH_ChillFormActive", "Lichdom", 250);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLLICH_80_ToggledScripts"

@@ -1,0 +1,13 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLLICH_ToggledScripts_InitSettings();
+KBSECTION
+PROC
+LLLICH_ToggledScripts_InitSettings()
+THEN
+LeaderLib_ToggleScripts_Register_ObjectScript("LLLICH_80_TS_ChillForm", "LLLICH_ChillFormActive", 0);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
