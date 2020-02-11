@@ -30,4 +30,4 @@ DB_LLLICH_Phylactery_Active(_Lich, _ActualPhylactery, _Active);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LeaderLib_20__Debug"
+ParentTargetEdge "LeaderLib_90__Debug"

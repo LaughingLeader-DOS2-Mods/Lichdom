@@ -1,0 +1,13 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLLICH_GameScripts_InitSettings();
+KBSECTION
+PROC
+LLLICH_GameScripts_InitSettings()
+THEN
+LeaderLib_GameScripts_RegisterScript("Lichdom", "LLLICH_12_GS_01_Statuses");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"

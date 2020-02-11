@@ -56,7 +56,7 @@ NRD_StatusGetReal(_Lich, _Handle, "CurrentLifeTime", _Duration)
 AND
 _Duration < 6.0
 THEN
-NRD_StatusSetReal(_Lich, _Handle, "CurrentLifeTime", 6.0);
+//NRD_StatusSetReal(_Lich, _Handle, "CurrentLifeTime", 6.0);
 NRD_StatusSetReal(_Lich, _Handle, "LifeTime", 6.0);
 */
 
