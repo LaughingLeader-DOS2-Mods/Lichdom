@@ -1,0 +1,26 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+PROC
+LeaderLib_Initialized((STRING)_Region)
+AND
+IsGameLevel(_Region, 1)
+AND
+DB_IsPlayer(_Player)
+AND
+GetVarFixedString(_Player, "LeaderLib_CharacterCreationPreset", "LLLICH_Lich")
+THEN
+LLLich_Main_SetupLich(_Player);
+
+PROC
+LeaderLib_Initialized((STRING)_Region)
+AND
+IsGameLevel(_Region, 1)
+THEN
+GoalCompleted;
+
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLLICH_21_CC_Start"

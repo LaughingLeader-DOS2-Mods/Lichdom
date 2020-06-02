@@ -106,8 +106,9 @@ DB_LLLICH_LichStatuses("LLLICH_CHILLFORM_LIFESTEAL_FX");
 //Block when applying a different preset
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_ChillTouch", 0);
 DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_ChillForm", 0);
-DB_LLLICH_LichSkills("LichForm","Target_LLLICH_DrainSoul", 0);
-DB_LLLICH_LichSkills("Phylactery","Shout_LLLICH_Recall", 0);
+DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DrainSoul", 0);
+DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DominateUndead", 0);
+DB_LLLICH_LichSkills("Phylactery", "Shout_LLLICH_Recall", 0);
 
 //END_REGION
 
@@ -245,10 +246,12 @@ THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up lich.");
 LLLich_Main_SetupLich(_Lich);
 
+/*
 PROC
 LeaderLib_CC_PresetSaved((CHARACTERGUID)_Lich, "LLLICH_Lich")
 THEN
 LLLich_Main_SetupLich(_Lich);
+*/
 
 //LeaderLib PresetMenu
 PROC
@@ -269,36 +272,36 @@ LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
 AND
 NOT ObjectGetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff", 1)
 AND
-GetItemForItemTemplateInInventory(_Lich, "WPN_LLLICH_Lich_Staff_1H_PresetStarter_461453e9-34bd-4afc-993d-46a09be6eb22", _LichPresetStaff)
-AND
 GetPosition(_Lich, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("WPN_UNIQUE_LLLICH_Lich_Staff_1H_B_7981440d-567e-4738-8779-c36a276b632f", _x, _y, _z, _LichStaff)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Swapping preset starting staff for unique version.");
-ObjectSetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff");
-ItemRemove(_LichPresetStaff);
-CharacterEquipItem(_Lich, _LichStaff);
+ObjectSetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff", 0);
+ItemToInventory(_LichStaff, _Lich);
+LLLich_Main_SetupLich_EquipStaff(_Lich, _LichStaff);
 
 PROC
-LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
+LLLich_Main_SetupLich_EquipStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Staff)
 AND
-NOT UserGetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff", 1)
+GetRegion(_Lich, "TUT_Tutorial_A")
 AND
-CharacterGetEquippedItem(_Lich, "Weapon", (ITEMGUID)_LichPresetStaff)
-AND
-_LichPresetStaff != NULL_00000000-0000-0000-0000-000000000000
-AND
-GetTemplate(_LichPresetStaff, "WPN_LLLICH_Lich_Staff_1H_PresetStarter_461453e9-34bd-4afc-993d-46a09be6eb22")
-AND
-GetPosition(_Lich, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLLICH_Lich_Staff_1H_B_7981440d-567e-4738-8779-c36a276b632f", _x, _y, _z, _LichStaff)
+DB_TUT_LoseWeapons_LostWeapons(_Lich)
 THEN
-LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Swapping preset starting staff for unique version.");
-UserSetFlag(_Lich, "LLLICH_Preset_GainedUniqueStaff");
-ItemRemove(_LichPresetStaff);
-CharacterEquipItem(_Lich, _LichStaff);
+ItemToInventory(_Staff, ITEMGUID_S_TUT_MiddleDeck_ConfiscationChest_aabf4b72-c5f7-4637-9606-fc612be92ff7);
+DB_TUT_LostWeapon(_Lich, "Weapon", _Staff);
+
+PROC
+LLLich_Main_SetupLich_EquipStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Staff)
+AND
+NOT GetRegion(_Lich, "TUT_Tutorial_A")
+THEN
+// [BEGIN_NO_OSITOOLS]
+CharacterEquipItem(_Lich, _Staff);
+// [END_NO_OSITOOLS]
+/* [OSITOOLS_ONLY]
+NRD_CharacterEquipItem(_Lich, _Staff, "Weapon", 0, 0, 1, 1);
+*/
 
 PROC
 LLLich_Main_SetupLich((CHARACTERGUID)_Lich)
@@ -308,7 +311,7 @@ AND
 NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Adding an initial [Soul Extractor].");
-ObjectSetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor");
+ObjectSetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor", 0);
 ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
 
 PROC

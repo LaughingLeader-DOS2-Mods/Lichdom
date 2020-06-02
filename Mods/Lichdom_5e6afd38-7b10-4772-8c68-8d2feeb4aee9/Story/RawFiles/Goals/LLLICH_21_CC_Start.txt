@@ -1,0 +1,11 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+IF
+CharacterCreationStarted(_Level)
+THEN
+GoalCompleted;
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
