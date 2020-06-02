@@ -83,6 +83,13 @@ CharacterStatusApplied(_Lich, "LLLICH_CHILLFORM", _)
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Lich, "LLLICH_ChillFormActive", "Lichdom");
 
+/* [OSITOOLS_ONLY]
+IF
+CharacterStatusApplied(_Target, "LLLICH_TRY_DOMINATE", _Source)
+THEN
+NRD_ModCall("Lichdom", "TryDominateUndead", (STRING)_Target, (STRING)_Source);
+*/
+
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLLICH_11_GameScripts"

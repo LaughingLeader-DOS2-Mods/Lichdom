@@ -17,6 +17,7 @@ DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_Recall");
 DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_ChillForm"); // Too powerful otherwise?
 DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Shout_LLLICH_DreadShout");
 DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Target_LLLICH_FleshSacrifice");
+DB_LLMIME_Mimicking_Blacklist_Skills("Lichdom", "Target_LLLICH_DominateUndead");
 
 PROC
 LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
