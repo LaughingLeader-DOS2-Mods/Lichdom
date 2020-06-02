@@ -52,3 +52,6 @@ add name "Staff of the Soulkeeper",""
 new namegroup "LLLICH_LichStaff"
 add name "Lich's Staff",""
 add namecool "Lich's Wicked Staff",""
+
+new namegroup "WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A"
+add name "Grimoire of the Twin Skulls",""

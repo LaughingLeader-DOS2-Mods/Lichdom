@@ -253,3 +253,9 @@ new itemgroup "ARM_LLLICH_ArmorVisualsDisabled"
 add levelgroup 0,0,"All"
 add rootgroup "766150a5-b0cc-4aa3-a213-6b9172accac1",""
 add namegroup "EMPTY","",""
+
+new itemgroup "WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "87be43d7-e5a1-4235-9a38-5cdc4853009c",""
+add namegroup "WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A","",""
