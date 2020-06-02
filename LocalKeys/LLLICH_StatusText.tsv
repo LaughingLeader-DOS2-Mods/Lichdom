@@ -1,0 +1,7 @@
+Key	Content	Handle
+LLLICH_StatusText_ActuallyDying	<font color='#87365C' size='18'>Death comes for you at last...</font>	h0104dff9g2dceg4493g9f53g183f35cd22f0
+LLLICH_StatusText_PhylacteryTeleportFailedInArena	<font color='#87365C' size='18'>Teleportation to your Phylactery is blocked by an unknown power...</font>	h74f98b9dgeecfg4341g8d92gb91bb4192b98
+LLLICH_StatusText_SavingThrow_Fear	<font color='#C7A758' size='18'>Saving Throw Success for Fear</font>	h5897fa5eg0268g4663g8f1dgc76ab8f35bd0
+LLLICH_StatusText_SavingThrow_Stunned	<font color='#C7A758' size='18'>Saving Throw Success for Stunned</font>	ha9b570acg8b25g4b16g9961g25cde9c34dd8
+LLLICH_StatusText_SavingThrow	<font color='#C7A758' size='18'>Resisted [1]</font>	hdea60333g1649g444bgbf86g347676b8d581
+LLLICH_StatusText_Immune	<font color='#FF0058' size='18'>Immune to [1]</font>	h2474259fg6d67g4c98ga77fg0164f1476a41

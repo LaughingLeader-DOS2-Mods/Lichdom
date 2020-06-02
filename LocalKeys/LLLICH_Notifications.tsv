@@ -1,0 +1,19 @@
+Key	Content	Handle
+LLLICH_Notifications_Crafting_CreatedLichStaff	<font color='#80FFC3'>Using 1 soul from the Phylactery, you create a new staff.</font>	h00069720g5a74g4057gad59gd74df93fe96c
+LLLICH_Notifications_Crafting_PhylacteryRequired	<font color='#FF001F'>A phylactery with souls is required to create a new staff.</font>	h4ae13786g94c0g4d6eg8e9fgc71fce901699
+LLLICH_Notifications_Phylactery_Broken	<font color='#FF001F'>Your Phylactery was broken! It whispers for more souls...</font>	h4e94abe9g7a18g43ebg875cg3cd472846381
+LLLICH_Notifications_Phylactery_Created	<font color='#80FFC3'>Phylactery Power unlocked. Death has no claim on your soul.</font>	h612a77b1g370fg41fdgad9ag8d483dee266f
+LLLICH_Notifications_Phylactery_Damage	<font color='#F3D347'>Your Phylactery's power was reduced.</font>	h1605b394ge816g4cc5gbe2bg573317c1b9ca
+LLLICH_Notifications_Phylactery_Debug_Replaced	<font color='#80FFC3'>LIchdom was updated, and your Phylactery was reset in order to refresh its stats. Have a wonderful day.</font>	hd5a070bag3129g4940g9a3ag61f4acc9ce80
+LLLICH_Notifications_Phylactery_Destroyed	<font color='#FF001F'>Your Phylactery was destroyed!</font>	hac074af4g7176g4e06gbbeeg742f5ef994e7
+LLLICH_Notifications_Phylactery_FullPower	<font color='#80FFC3'>The Souls satiate you for now. Your Phylactery is at full power.</font>	h162a4538g0959g4bb3g87ecg233ab29aa358
+LLLICH_Notifications_Phylactery_Healed	<font color='#80FFC3'>You power your Phylactery with a new soul.</font>	hffbdc453ge2e3g448cga29bgd2ffc0d4dde2
+LLLICH_Notifications_Phylactery_Restored	<font color='#80FFC3'>Your Phylactery is fully powered and restored.</font>	hd20764ceg7f35g47f8g91abg1f137b3fed4a
+LLLICH_Notifications_Phylactery_SoulExtractorBlocked	<font color='#FF001F'>You can't extract your soul while in combat!</font>	h1f9792f5g7a76g41ccgbfc4gf3b647b5777b
+LLLICH_Notifications_Phylactery_SoulExtractorInUse	<font color='#FF001F'>Soul Extractor in Use</font>	hd521f039ga01fg42d4gab81gb52a3dce993c
+LLLICH_Notifications_Phylactery_TeleportedToWaypoint	<font color='#FF001F'>Teleported to the nearest waypoint to avoid lava.</font>	h7c387805g1fc3g484fg9891g9de635cbb200
+LLLICH_Notifications_Phylactery_TeleportFailed_Broken	<font color='#FF001F'>Teleport failed. The phylactery is broken.</font>	hd8b60932g11e8g4888gb82dgfd2c41ee3d71
+LLLICH_Notifications_Phylactery_TeleportFailed_InInventory	<font color='#FF001F'>Teleport failed. The phylactery is in your inventory.</font>	h7f41b433ga56cg4e46gb69ag598813c17db9
+LLLICH_Notifications_Phylactery_TeleportFailed_Stolen	<font color='#FF001F'>Teleport failed. Your phylactery is in possession of an unknown party.</font>	h4471079dg9bd3g4937gaf69g153d70165151
+LLLICH_Notifications_Phylactery_Upgraded_Level2	<font color='#80FFC3'>Your Phylactery has grown more powerful.</font>	h6d650500ga600g4868g815dga20c66ef32be
+LLLICH_Notifications_Phylactery_Upgraded_Level3	<font color='#80FFC3'>Your Phylactery has grown even more powerful.</font>	h39f6fc36ged70g4b3bga4c3g6f823926399b
