@@ -10,8 +10,6 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLLICH_LichStaff_PresetStarter"
-add equipmentgroup
 add equipment entry "CON_Potion_Poison_A"
 add equipmentgroup
 add equipment entry "SCROLL_Resurrect"
