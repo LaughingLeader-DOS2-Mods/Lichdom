@@ -1,7 +1,9 @@
 {
-    "RequiredExtensionVersion": 38,
+    "RequiredExtensionVersion": 46,
+    "ModTable": "Lichdom",
     "FeatureFlags": [
         "OsirisExtensions",
-        "Preprocessor"
+        "Preprocessor",
+        "Lua"
     ]
 }
