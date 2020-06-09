@@ -92,4 +92,4 @@ NRD_ModCall("Lichdom", "TryDominateUndead", (STRING)_Target, (STRING)_Source);
 
 EXITSECTION
 ENDEXITSECTION
-ParentTargetEdge "LLLICH_11_GameScripts"
+ParentTargetEdge "LeaderLib_20_GameScripts"

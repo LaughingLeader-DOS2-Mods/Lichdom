@@ -23,6 +23,101 @@ AND
 LeaderLib_Helper_QRY_IsInSurface(_Obj, _Surface)
 THEN
 DB_NOOP(1);
+
+//REGION DOMINATE_IMMUNITY
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLLICH_SetupCharacters")
+AND
+IsTagged(_Char, "UNDEAD", 1)
+AND
+IsBoss(_Char, 1)
+THEN
+SetTag(_Char, "LLLICH_DOMINATE_IMMUNE");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLLICH_SetupCharacters")
+AND
+DB_IsStoryNpc(_Char)
+THEN
+SetTag(_Char, "LLLICH_DOMINATE_IMMUNE");
+
+IF
+ObjectTurnStarted((CHARACTERGUID)_Target)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
+THEN
+PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
+//END_REGION
+
+//REGION DOMINATED_APPLIED
+IF
+CharacterStatusApplied(_Target, "LLLICH_DOMINATED", (CHARACTERGUID)_Source)
+AND
+GetFaction(_Source, _SourceFaction)
+AND
+GetFaction(_Target, _TargetFaction)
+THEN
+CharacterAddToPlayerCharacter(_Target, _Source);
+PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
+//ApplyStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP", -1.0, 0, _Source);
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
+SetFaction(_Target, _SourceFaction);
+//END_REGION
+
+//REGION DOMINATED_REMOVED
+PROC
+LeaderLib_StatusEvents_OnDisablingStatusApplied((CHARACTERGUID)_Source, (GUIDSTRING)_Cause, (STRING)_Status, (STRING)_Type)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
+THEN
+RemoveStatus(_Target, "LLLICH_DOMINATED");
+CharacterStatusText(_Target, "LLLICH_StatusText_DominationRemoved");
+
+/*
+IF
+CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)
+THEN
+RemoveStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP");
+*/
+
+IF
+CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
+THEN
+NOT DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
+CharacterRemoveFromPlayerCharacter(_Target, _Source);
+SetFaction(_Target, _TargetFaction);
+
+IF
+CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)
+AND
+ObjectGetFlag(_Target, "LLLICH_Dominate_WasDead", 1)
+THEN
+CharacterDie(_Target, 0, "DoT", NULL_00000000-0000-0000-0000-000000000000);
+ObjectClearFlag(_Target, "LLLICH_Dominate_WasDead", 0);
+//END_REGION
+
+//REGION DOMINATED_CLEANUP
+IF
+RegionEnded(_Region)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
+THEN
+NOT DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
+CharacterRemoveFromPlayerCharacter(_Target, _Source);
+SetFaction(_Target, _TargetFaction);
+
+IF
+GameStarted(_Region, _)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
+AND
+ObjectExists(_Target, 0)
+THEN
+NOT DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

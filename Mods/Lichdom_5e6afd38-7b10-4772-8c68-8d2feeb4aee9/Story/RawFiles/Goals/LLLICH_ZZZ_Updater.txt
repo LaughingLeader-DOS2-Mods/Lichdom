@@ -153,22 +153,6 @@ DB_LLLICH_Phylactery_Active(_Lich, _Phylactery, 1)
 THEN
 ProcObjectTimerCancel(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade");
 ProcObjectTimer(_Lich, "LLLICH_Timers_Phylactery_CheckForUpgrade", 500);
-
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-NOT SysIsActive("LLLICH_11_GameScripts")
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,9,0)
-THEN
-SysActivateGoal("LLLICH_11_GameScripts");
-
-PROC
-LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,9,0)
-THEN
-LeaderLib_GameScripts_RegisterScript("Lichdom", "LLLICH_12_GS_01_Statuses");
 //END_REGION
 
 EXITSECTION

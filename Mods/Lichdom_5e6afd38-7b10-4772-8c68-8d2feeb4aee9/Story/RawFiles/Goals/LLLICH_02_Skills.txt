@@ -49,6 +49,7 @@ ProcObjectTimerCancel(_Target, "LLLICH_Timers_Skills_CancelDyingEvent");
 LLLICH_Skills_OnTargetDeath(_Lich, _Target, "Target_LLLICH_DrainSoul");
 //END_REGION
 
+//REGION DRAIN_SOUL_BONUSES
 //Bonus, in addition to the other two results
 PROC
 LLLICH_Skills_OnTargetDeath((CHARACTERGUID)_Lich, (CHARACTERGUID)_Target, "Target_LLLICH_DrainSoul")
@@ -95,7 +96,7 @@ AND
 DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, _ID)
 THEN
 NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, _ID);
-
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -4,15 +4,33 @@ INITSECTION
 LLLICH_LeaderLib_RegisterSettings();
 //LeaderLib_Trader_Register_TraderInstance((STRING)_TraderID, (CHARACTERGUID)_Character, (STRING)_Level)
 KBSECTION
-
-//REGION NECROMANCY_TRAINERS
-
 PROC
 LLLICH_LeaderLib_RegisterSettings()
 THEN
-LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
+LLLICH_LeaderLib_RegisterScripts();
 LeaderLib_Statuses_Register_PermanentStatus("Lichdom", "Debug.HideArmor", "LLLICH_HIDE_ARMOR", "LLLICH_Debug_HideArmor");
 
+PROC
+LLLICH_LeaderLib_RegisterScripts()
+THEN
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "Lichdom");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaSkillListeners_Enabled", "Lichdom");
+LeaderLib_GameScripts_RegisterScript("Lichdom", "LLLICH_12_GS_01_Statuses");
+
+//REGION UPDATES
+PROC
+LeaderLib_Mods_OnVersionChanged(5e6afd38-7b10-4772-8c68-8d2feeb4aee9, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 268435456
+THEN
+LLLICH_LeaderLib_RegisterScripts();
+//END_REGION
+
+//REGION NECROMANCY_TRAINERS
+PROC
+LLLICH_LeaderLib_RegisterSettings()
+THEN
 /* Fort Joy */
 //Mona, Necromancy Trainer
 LeaderLib_Trader_Register_TraderInstance("LL.Lichdom.NecromancyTrainers", S_FTJ_GhettoNPC_Human_003_8e83098f-6dd8-445d-a37b-d22be064d334, "FJ_FortJoy_Main");
