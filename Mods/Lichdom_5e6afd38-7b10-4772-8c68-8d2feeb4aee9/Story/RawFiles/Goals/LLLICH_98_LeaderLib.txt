@@ -16,6 +16,7 @@ THEN
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "Lichdom");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "Lichdom");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaSkillListeners_Enabled", "Lichdom");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaEventListeners_Enabled", "Lichdom");
 LeaderLib_GameScripts_RegisterScript("Lichdom", "LLLICH_12_GS_01_Statuses");
 
 //REGION UPDATES

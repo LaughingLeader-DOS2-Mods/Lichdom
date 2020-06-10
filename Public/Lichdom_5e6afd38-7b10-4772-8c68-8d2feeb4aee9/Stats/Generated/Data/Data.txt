@@ -1,3 +1,4 @@
 key "LLLICH_DominateUndead_Turns","3"
 key "LLLICH_DominateUndead_IntResistance","14"
 key "LLLICH_DominateUndead_IntImmunity","38"
+key "LLLICH_SoulReaper_DamageHealPercentage","0.5"
