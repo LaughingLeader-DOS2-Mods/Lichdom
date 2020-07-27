@@ -1,27 +1,9 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
-local Classes = LeaderLib.Classes
 
----@type MessageData
-local MessageData = Classes["MessageData"]
-
----@param target string
----@param source string
----@param damage integer
----@param handle integer
 ---@param skill string
-function SoulReaper_OnNecromancySkillHit(target, source, damage, handle, skill)
-	if CharacterHasSkill(source, "Shout_LLLICH_SoulReaper") == 1 then
-		PersistentVars["SoulReaper"][source] = {
-			Damage = damage,
-			Skill = skill,
-			Target = target
-		}
-		local data = MessageData:CreateFromTable("SoulReaper", PersistentVars["SoulReaper"][source])
-		data.Params.UUID = source
-		Ext.PostMessageToClient(source, "LLLICH_StoreClientData", data:ToString())
-	end
-end
-
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
 local function OnSoulReaperSkill(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local last = PersistentVars["SoulReaper"][char]
@@ -53,3 +35,22 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 	end
 end
 LeaderLib.RegisterSkillListener("Shout_LLLICH_SoulReaper", OnSoulReaperSkill)
+
+---@param target string
+---@param source string
+---@param damage integer
+---@param handle integer
+---@param skill string
+function SoulReaper_OnNecromancySkillHit(target, source, damage, handle, skill)
+	if CharacterHasSkill(source, "Shout_LLLICH_SoulReaper") == 1 then
+		PersistentVars["SoulReaper"][source] = {
+			Damage = damage,
+			Skill = skill,
+			Target = target
+		}
+		---@type MessageData
+		local data = LeaderLib.Classes.MessageData:CreateFromTable("SoulReaper", PersistentVars["SoulReaper"][source])
+		data.Params.UUID = source
+		Ext.PostMessageToClient(source, "LLLICH_StoreClientData", data:ToString())
+	end
+end
