@@ -113,9 +113,9 @@ SysClear("DB_LLLICH_LichStatuses", 3);
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_ChillTouch", 0);
 DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_ChillForm", 0);
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DrainSoul", 0);
-DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DominateUndead", 0);
-DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_SoulReaper", 0);
 DB_LLLICH_LichSkills("Phylactery", "Shout_LLLICH_Recall", 0);
+DB_LLLICH_ExtenderLichSkills("LichForm", "Target_LLLICH_DominateUndead", 0);
+DB_LLLICH_ExtenderLichSkills("LichForm", "Shout_LLLICH_SoulReaper", 0);
 
 //END_REGION
 
@@ -176,11 +176,13 @@ ObjectClearFlag(_Lich, "LLLICH_Phylactery_Jar");
 IF
 ObjectWasTagged((CHARACTERGUID)_Lich, "LLLICH_Lich")
 AND
+CharacterIsPlayer(_Lich, _ShowNotification)
+AND
 DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
 AND
 CharacterHasSkill(_Lich, _Skill, 0)
 THEN
-CharacterAddSkill(_Lich, _Skill, 1);
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
 
 IF
 ObjectLostTag((CHARACTERGUID)_Lich, "LLLICH_Lich")
@@ -189,14 +191,36 @@ DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
 THEN
 CharacterRemoveSkill(_Lich, _Skill);
 
+/* [OSITOOLS_ONLY]
+IF
+ObjectWasTagged((CHARACTERGUID)_Lich, "LLLICH_Lich")
+AND
+CharacterIsPlayer(_Lich, _ShowNotification)
+AND
+DB_LLLICH_ExtenderLichSkills("LichForm", _Skill, _MinSouls)
+AND
+CharacterHasSkill(_Lich, _Skill, 0)
+THEN
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
+
+IF
+ObjectLostTag((CHARACTERGUID)_Lich, "LLLICH_Lich")
+AND
+DB_LLLICH_ExtenderLichSkills("LichForm", _Skill, _MinSouls)
+THEN
+CharacterRemoveSkill(_Lich, _Skill);
+*/
+
 IF
 ObjectFlagSet("LLLICH_PhylacteryActive", (CHARACTERGUID)_Lich, _)
+AND
+CharacterIsPlayer(_Lich, _ShowNotification)
 AND
 DB_LLLICH_LichSkills("Phylactery", _Skill, _MinSouls)
 AND
 CharacterHasSkill(_Lich, _Skill, 0)
 THEN
-CharacterAddSkill(_Lich, _Skill, 1);
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
 
 IF
 ObjectFlagCleared("LLLICH_PhylacteryActive", (CHARACTERGUID)_Lich, _)
@@ -208,20 +232,37 @@ CharacterRemoveSkill(_Lich, _Skill);
 PROC
 LLLICH_Main_AddLichSkills((CHARACTERGUID)_Lich)
 AND
+CharacterIsPlayer(_Lich, _ShowNotification)
+AND
 IsTagged(_Lich, "LLLICH_Lich", 1)
 AND
 DB_LLLICH_LichSkills("LichForm", _Skill, _MinSouls)
 THEN
-CharacterAddSkill(_Lich, _Skill, 1);
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
+
+/* [OSITOOLS_ONLY]
+PROC
+LLLICH_Main_AddLichSkills((CHARACTERGUID)_Lich)
+AND
+CharacterIsPlayer(_Lich, _ShowNotification)
+AND
+IsTagged(_Lich, "LLLICH_Lich", 1)
+AND
+DB_LLLICH_ExtenderLichSkills("LichForm", _Skill, _MinSouls)
+THEN
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
+*/
 
 PROC
 LLLICH_Main_AddLichSkills((CHARACTERGUID)_Lich)
 AND
 ObjectGetFlag(_Lich, "LLLICH_PhylacteryActive", 1)
 AND
+CharacterIsPlayer(_Lich, _ShowNotification)
+AND
 DB_LLLICH_LichSkills("Phylactery", _Skill, _MinSouls)
 THEN
-CharacterAddSkill(_Lich, _Skill, 1);
+CharacterAddSkill(_Lich, _Skill, _ShowNotification);
 
 PROC
 LLLICH_Main_RemoveLichSkills((CHARACTERGUID)_Lich)
