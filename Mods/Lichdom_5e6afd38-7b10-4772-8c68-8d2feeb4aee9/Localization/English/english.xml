@@ -38,6 +38,7 @@
 	<content contentuid="h33428fa2g4015g46b5ga3bdg9af2d2f5087e">Soul Extractor</content>
 	<content contentuid="h3599bc05gfe78g4e12gad7fgad59a6e282e1">Undying</content>
 	<content contentuid="h360b314bg0889g4c03g9b83g0f72fe98da7e">Sacrificed</content>
+	<content contentuid="h36ae9d1cg9657g4d6dg8a86g837f45a16d00">After using a damaging Necromancy skill, active this skill to heal half of the damage dealt.</content>
 	<content contentuid="h38a5df20g7f5ag4b67gaea4gd32bd4638264">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Phylactery Power&lt;/font&gt;&lt;br&gt;Teleport to your Phylactery.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;If your phylactery is in possession of an opposing player (not in your party), teleportation will be blocked.&lt;/font&gt;</content>
 	<content contentuid="h39f6fc36ged70g4b3bga4c3g6f823926399b">&lt;font color=&apos;#80FFC3&apos;&gt;Your Phylactery has grown even more powerful.&lt;/font&gt;</content>
 	<content contentuid="h3b501fa7gad05g43d1g864dg7d0bff6999c6">An eerie-looking amulet. Something seems off...</content>
@@ -123,6 +124,7 @@
 	<content contentuid="hac074af4g7176g4e06gbbeeg742f5ef994e7">&lt;font color=&apos;#FF001F&apos;&gt;Your Phylactery was destroyed!&lt;/font&gt;</content>
 	<content contentuid="hac5d6d00g4710g4449gafa8g7bf0a4008439">Character is full of dread.&lt;br&gt;If killed, may spread Fear or Madness to other characters with Dread.</content>
 	<content contentuid="haf04e6aagdb51g4a57gb2c7g5bc5b4541400">Character has an icey aura of death.&lt;br&gt;&lt;font color=&apos;#b8caff&apos;&gt;When turn ends, remove &lt;font color=&apos;#FE6E27&apos;&gt;Burning&lt;/font&gt; and &lt;font color=&apos;#FF9600&apos;&gt;Warm&lt;/font&gt; from allies, apply &lt;font color=&apos;#4197E2&apos;&gt;Chilled&lt;/font&gt; to enemies, and &lt;font color=&apos;#97FBFF&apos;&gt;leach health from Frozen enemies.&lt;/font&gt;&lt;/font&gt;</content>
+	<content contentuid="hafc82c07g530ag477fga809gd70021a084e8">&lt;font color=&apos;#73F6FF&apos;&gt;Soul Reaper&lt;/font&gt;</content>
 	<content contentuid="hb0c8ef6dga251g4833gbd0agb0ade729162c">Powered Phylactery (1 Soul)</content>
 	<content contentuid="hb319c9f2g5e5eg46cbga40cga825ea7f7811">Character is immortal through the power of a Phylactery.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos; size=&apos;19&apos;&gt;Phylactery Powers Unlocked&lt;/font&gt;</content>
 	<content contentuid="hb48af784g4057g40e5g8416gac73d17aa029">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Lich Form&lt;/font&gt;&lt;br&gt;Exude a chilling aura of death for 3 turns, gaining &lt;font color=&apos;#5e85f6&apos;&gt;[1]% Water Resistance&lt;/font&gt;, &lt;font color=&apos;#C7A758&apos;&gt;Immunity to Slipping and Burning&lt;/font&gt;, and &lt;font color=&apos;#a6bdff&apos;&gt;[2]% increased speed on ice&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos;&gt;At the end of your turn, allies within [3] who are &lt;font color=&apos;#FE6E27&apos;&gt;Burning&lt;/font&gt; or &lt;font color=&apos;#FF9600&apos;&gt;Warm&lt;/font&gt; are cooled down, enemies within [3] are &lt;font color=&apos;#4197E2&apos;&gt;Chilled&lt;/font&gt;, and &lt;font color=&apos;#c2d3ff&apos;&gt;Frozen&lt;/font&gt; enemies take [4], healing you for the damage dealt.&lt;/font&gt;</content>
@@ -146,16 +148,18 @@
 	<content contentuid="hd4114c0agcd5eg4071ga3a5g90aca47bbdd0">Lich Form</content>
 	<content contentuid="hd521f039ga01fg42d4gab81gb52a3dce993c">&lt;font color=&apos;#FF001F&apos;&gt;Soul Extractor in Use&lt;/font&gt;</content>
 	<content contentuid="hd5a070bag3129g4940g9a3ag61f4acc9ce80">&lt;font color=&apos;#80FFC3&apos;&gt;LIchdom was updated, and your Phylactery was reset in order to refresh its stats. Have a wonderful day.&lt;/font&gt;</content>
-	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Charges Depleted&amp;lt;br&amp;gt;</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Charges Depleted</content>
 	<content contentuid="hd74326c3g6a44g484ag8078g5deba25de410">Hide armor. This will equip an invisible item to your overhead that hides all equipped armor. You may need to re-equip your armor to make it invisible after hiding.</content>
 	<content contentuid="hd80b33f4g1205g4b46ga5fdg52e6b99bac39">Blood Burst Skillbook</content>
 	<content contentuid="hd8320032ga166g4c6aga025gb605a2fd1847">&lt;font color=&apos;#ff5252&apos; size=&apos;18&apos;&gt;Hemomancy&lt;/font&gt;&lt;br&gt;Call forth the blood of beings within [1], causing it to burst.&lt;br&gt;Living targets create a &lt;font color=&apos;#CD1F1F&apos;&gt;small pool of blood&lt;/font&gt;, while &lt;font color=&apos;#00AA00&apos;&gt;the undead spill poison&lt;/font&gt;.</content>
 	<content contentuid="hd89cf58egc410g4ff7ga117g22b6fdb1ca24">An strange-looking box pulsating with immense power.</content>
 	<content contentuid="hd8b60932g11e8g4888gb82dgfd2c41ee3d71">&lt;font color=&apos;#FF001F&apos;&gt;Teleport failed. The phylactery is broken.&lt;/font&gt;</content>
+	<content contentuid="hdad53f40ge86cg489cg83cbg71baa32faef1">Aborb half of the damage of your last used damaging Necromancy skill ([1]), healing for [2].</content>
 	<content contentuid="hdadd6959g632cg4130g90ccga405b4583bed">Frozen Celerity</content>
 	<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9">magic damage</content>
 	<content contentuid="hdc5e9cc6gbbdfg4ae3gafb5g4a5b6e7af4d9">[RACE] Change Race to Undead Lich Race</content>
 	<content contentuid="hdc6b22c0g1599g4bcbg8363gbe7193b30824">[REFUND] Refund Soul Extractor</content>
+	<content contentuid="hdc7b9b7dg648cg480ega8cdgc73dc405c6ff">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Lich Form&lt;/font&gt;&lt;br&gt;[1]</content>
 	<content contentuid="hdcaf405eg453eg4924g9b1bgf63f2eb6dd2f">An eerie-looking skull ring pulsating with immense power..</content>
 	<content contentuid="hde4370e3g503dg4a79g8767gd106fa0592f6">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Lich Form&lt;/font&gt;&lt;br&gt;Let loose a dreadful shout, lowering the primary attributes of enemies within a [1] radius for 3 turns.&lt;br&gt;&lt;font color=&apos;#FF001F&apos; size=&apos;20&apos;&gt;On death, nearby characters with Dread have a:&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#188EDE&apos; size=&apos;19&apos;&gt;50% chance to become Feared&lt;br&gt;25% chance to become Mad&lt;/font&gt;</content>
 	<content contentuid="hdea60333g1649g444bgbf86g347676b8d581">&lt;font color=&apos;#C7A758&apos; size=&apos;18&apos;&gt;Resisted [1]&lt;/font&gt;</content>
@@ -167,7 +171,7 @@
 	<content contentuid="heb01430fg177cg4cbeg963egccfdc732ee13">[Back]</content>
 	<content contentuid="hecde4b74gb2e6g4695gbc1dg8296256e2865">*Your soul fully leaves your body, transferring to the selected object. While you now feel a hollow emptiness, the power pulsating within the Phylactery feels forever chained to your being, supplying an intangible sense of warmth.*</content>
 	<content contentuid="hedb33358g1c16g4dacg852dga52ae809f897">An eerie-looking amulet pulsating with immense power.</content>
-	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69">Charges Depleted&amp;lt;br&amp;gt;</content>
+	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69">Charges Depleted</content>
 	<content contentuid="hf029502cg39e1g4ac3g8322g34397fca3fe6">&lt;font color=&apos;#73F6FF&apos;&gt;Drain Soul&lt;/font&gt;</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e">Shadow</content>
 	<content contentuid="hf617b586g1155g4449g9953geaa0d64b1cbe">&lt;font color=&apos;#CA00FF&apos; size=&apos;18&apos;&gt;Domination Removed&lt;/font&gt;</content>

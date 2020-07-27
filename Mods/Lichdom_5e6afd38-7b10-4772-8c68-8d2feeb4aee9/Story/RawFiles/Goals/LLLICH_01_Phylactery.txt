@@ -37,6 +37,7 @@ LOOT_LLLICH_Phylactery_Jar_A_Broken_2_fc08fddf-33c3-44d0-b933-bc857075fee3
 LOOT_LLLICH_Phylactery_Jar_A_Broken_3_a1329644-95f3-4f8b-8946-c86ef4e159f1
 */
 //DB_LLLICH_Phylactery_Templates(_Active, _Level, _Tag, _Template)
+SysClear("DB_LLLICH_Phylactery_DamageOnDeath", 4);
 DB_LLLICH_Phylactery_Templates(1, 1, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_5d0c0bef-9071-4328-b72c-b58086b0f68d");
 DB_LLLICH_Phylactery_Templates(1, 2, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_2_38facf35-de7b-4eb0-baef-48f92c61166a");
 DB_LLLICH_Phylactery_Templates(1, 3, "LLLICH_Phylactery_Amulet_A", "LOOT_LLLICH_Phylactery_Amulet_A_3_397a89d5-8fc9-4af2-a25a-dc9e998c223c");

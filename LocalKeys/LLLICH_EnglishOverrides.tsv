@@ -14,7 +14,7 @@ LLLICH_Override_StatusApplySet	[1][2][3]	h233bf83cg2204g4f14gb46agad27f95deb43
 LLLICH_Override_StatusApplyTurnsSet	Set [1] for [4] turn(s) [2][3]	hf90daa3cgba5cg471cgbebcgedb58a337a9f
 LLLICH_Override_StatusApplyChance	([1]% Chance)	h54e0b91cg48a7g4d5agaedcgbde756a109ea
 LLLICH_Override_FumbleText		ha0eca831g2e16g463fgb80fg09f33092c2ee
-LLLICH_Override_Charges1	Charges Depleted&lt;br&gt;	hd5f94f7eg6557g45cdg835ege011e66a3a3a
-LLLICH_Override_Charges2	Charges Depleted&lt;br&gt;	hf0293ca3g9022g4181gb4beg5f614e846c69
+LLLICH_Override_Charges1	Charges Depleted	hd5f94f7eg6557g45cdg835ege011e66a3a3a
+LLLICH_Override_Charges2	Charges Depleted	hf0293ca3g9022g4181gb4beg5f614e846c69
 LLLICH_Override_Charges3	Charges Depleted	h89dbdaf9g61bdg4246g82fag8e432a286751
 LLLICH_Override_NumberOfUses	Charges	h7da39b62gdaedg4565gbe58gc2e702a725ee

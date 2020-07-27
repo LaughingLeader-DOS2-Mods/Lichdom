@@ -8,6 +8,7 @@ KBSECTION
 PROC
 LLLICH_Main_InitSettings()
 THEN
+SysClear("DB_LLLICH_UndeadConversionTags", 3);
 DB_LLLICH_UndeadConversionTags("Dwarf", "UNDEAD_DWARF", "DWARF");
 DB_LLLICH_UndeadConversionTags("Human", "UNDEAD_HUMAN", "HUMAN");
 DB_LLLICH_UndeadConversionTags("Elf", "UNDEAD_ELF", "ELF");
@@ -43,6 +44,7 @@ Lizards_Hero_Female_Undead_Lich_76052c24-dd04-4e2d-b8df-3120664c9760
 Lizards_Hero_Male_Undead_Lich_6c80cd2c-9bf3-4a82-9a75-20e7f31abcf5
 */
 
+SysClear("DB_LLLICH_RaceConversion", 4);
 DB_LLLICH_RaceConversion("Dwarf", 1, "Dwarves_Hero_Female_Undead_Lich_414c29bd-6a1a-42ee-a885-f7d449d911f8", "Undead_Dwarf");
 DB_LLLICH_RaceConversion("Dwarf", 0, "Dwarves_Hero_Male_Undead_Lich_a9f4b776-dab2-4204-a28c-37fb592dac35", "Undead_Dwarf");
 DB_LLLICH_RaceConversion("Elf", 1, "Elves_Hero_Female_Undead_Lich_9dfe13c2-a2f6-4cbb-b341-70f58baded63", "Undead_Elf");
@@ -75,6 +77,7 @@ LLLICH_Player_Template_Sebille_b68eaa6c-9905-446c-b611-31e976e6248d
 LLLICH_Player_Template_Sebille_Lich_7607eec0-5fdf-400d-8655-6c72ba8b49c1
 */
 //DB_LLLICH_OriginRaceTemplates(_OriginTag, _OriginRace, _OriginTemplate, _LichRace, _LichTemplate)
+SysClear("DB_LLLICH_OriginRaceTemplates", 5);
 DB_LLLICH_OriginRaceTemplates("BEAST", "Dwarf", "LLLICH_Player_Template_Beast_59a34232-6cbb-4007-9462-f7851c4a28ed", "Undead_Dwarf", "LLLICH_Player_Template_Beast_59a34232-6cbb-4007-9462-f7851c4a28ed");
 DB_LLLICH_OriginRaceTemplates("FANE", "Undead_Human", "LLLICH_Player_Template_Fane_856aea97-e583-474d-bc58-09449eaf2c69", "Undead_Human", "LLLICH_Player_Template_Fane_Lich_41b0c80f-a149-4182-88b1-956df32a7e5a");
 DB_LLLICH_OriginRaceTemplates("IFAN", "Human", "LLLICH_Player_Template_Ifan_9fad43ba-6722-4d3c-aae1-dd9bb003a46c", "Undead_Human", "LLLICH_Player_Template_Ifan_Lich_2dc549ab-19a0-4eb4-ae63-0c10b0be7fa2");
@@ -82,11 +85,13 @@ DB_LLLICH_OriginRaceTemplates("LOHSE", "Human", "LLLICH_Player_Template_Lohse_a7
 DB_LLLICH_OriginRaceTemplates("RED PRINCE", "Lizard", "LLLICH_Player_Template_RedPrince_cb271dde-f978-41d2-a7cf-99b512102e23", "Undead_Lizard", "LLLICH_Player_Template_RedPrince_Lich_9e196966-4ef8-4adf-b7ea-76621105011d");
 DB_LLLICH_OriginRaceTemplates("SEBILLE", "Elf", "LLLICH_Player_Template_Sebille_b68eaa6c-9905-446c-b611-31e976e6248d", "Undead_Elf", "LLLICH_Player_Template_Sebille_Lich_7607eec0-5fdf-400d-8655-6c72ba8b49c1");
 
+SysClear("DB_LLLICH_OriginRaceTemplates", 4);
 DB_LLLICH_RacialSkills("Dwarf",     "REALLY_DWARF",     "Target_LLLICH_ParalyzingTouch",    "Target_PetrifyingTouch");
 DB_LLLICH_RacialSkills("Human",     "REALLY_HUMAN",     "Shout_LLLICH_DreadShout",          "Shout_InspireStart");
 DB_LLLICH_RacialSkills("Elf",       "REALLY_ELF",       "Target_LLLICH_FleshSacrifice",     "Shout_FleshSacrifice");
 DB_LLLICH_RacialSkills("Lizard",    "REALLY_LIZARD",    "Cone_LLLICH_Chillbreath",          "Cone_Flamebreath");
 
+SysClear("DB_LLLICH_LichStatuses", 1);
 DB_LLLICH_LichStatuses("LLLICH_LICHFORM");
 DB_LLLICH_LichStatuses("LLLICH_LICHFORM_INFO");
 DB_LLLICH_LichStatuses("LLLICH_PHYLACTERY_ACTIVE");
@@ -103,16 +108,23 @@ DB_LLLICH_LichStatuses("LLLICH_CHILLFORM_AURA_ENEMY");
 DB_LLLICH_LichStatuses("LLLICH_CHILLFORM_LIFESTEAL");
 DB_LLLICH_LichStatuses("LLLICH_CHILLFORM_LIFESTEAL_FX");
 
+SysClear("DB_LLLICH_LichStatuses", 3);
 //Block when applying a different preset
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_ChillTouch", 0);
 DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_ChillForm", 0);
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DrainSoul", 0);
 DB_LLLICH_LichSkills("LichForm", "Target_LLLICH_DominateUndead", 0);
+DB_LLLICH_LichSkills("LichForm", "Shout_LLLICH_SoulReaper", 0);
 DB_LLLICH_LichSkills("Phylactery", "Shout_LLLICH_Recall", 0);
 
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("Lichdom", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+THEN
+LLLICH_Main_InitSettings();
+
 PROC
 LLLICH_Main_Debug_Update_MigrateDB()
 AND
@@ -246,12 +258,10 @@ THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:TextEventSet(lichdom_setup)] Setting up lich.");
 LLLich_Main_SetupLich(_Lich);
 
-/*
 PROC
 LeaderLib_CC_PresetSaved((CHARACTERGUID)_Lich, "LLLICH_Lich")
 THEN
 LLLich_Main_SetupLich(_Lich);
-*/
 
 //LeaderLib PresetMenu
 PROC
@@ -285,8 +295,6 @@ PROC
 LLLich_Main_SetupLich_EquipStaff((CHARACTERGUID)_Lich, (ITEMGUID)_Staff)
 AND
 GetRegion(_Lich, "TUT_Tutorial_A")
-AND
-DB_TUT_LoseWeapons_LostWeapons(_Lich)
 THEN
 ItemToInventory(_Staff, ITEMGUID_S_TUT_MiddleDeck_ConfiscationChest_aabf4b72-c5f7-4637-9606-fc612be92ff7);
 DB_TUT_LostWeapon(_Lich, "Weapon", _Staff);

@@ -11,9 +11,6 @@ Ext.Require("Server/Skills/SoulReaper.lua")
 -- Ext.RegisterListener("SessionLoading", function()
 
 -- end)
--- Ext.RegisterListener("SessionLoaded", function()
-
--- end)
 
 Ext.RegisterConsoleCommand("hotbartest", function(cmd, ...)
 	Ext.BroadcastMessage("LLLICH_Debug_HotbarTest", "", nil)
