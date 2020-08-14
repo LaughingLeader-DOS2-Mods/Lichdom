@@ -1,4 +1,7 @@
 Ext.Require("Shared/Init.lua")
+Ext.Require("Client/DataListener.lua")
+Ext.Require("Client/SkillParams.lua")
+Ext.Require("Client/TooltipHandler.lua")
 
 Ext.RegisterNetListener("LLLICH_Debug_HotbarTest", function(channel, payload)
 	---@type UIObject
