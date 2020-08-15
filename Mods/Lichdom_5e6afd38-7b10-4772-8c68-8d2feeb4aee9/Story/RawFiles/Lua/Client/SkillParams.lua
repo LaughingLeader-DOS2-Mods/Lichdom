@@ -3,25 +3,35 @@ local Params = {}
 ---@type TranslatedString
 local ts = Mods.LeaderLib.Classes.TranslatedString
 
+local SoulReaperDescription = ts:Create("hdad53f40ge86cg489cg83cbg71baa32faef1", "Drain <font color='#FF1100'>[1] Vitality</font> from [2] (damaged by [3]).<br><font color='#CC2200'>This cannot kill the target.</font>")
+local SoulReaperDisabledDescription = ts:Create("h36ae9d1cg9657g4d6dg8a86g837f45a16d00", "After using a damaging Necromancy skill, active this skill to drain half of the damage dealt from the target's Vitality.")
+
 --- @param skill StatEntrySkillData
 --- @param character StatCharacter
 --- @param isFromItem boolean
 --- @param param string
 local function GetSoulReaperDescription(skill, character, isFromItem, param)
 	if ClientData["SoulReaper"] ~= nil then
+		--[1] = vitality restored
+		--[2] = the last target's Name
+		--[3] = the last Necromancy spell used
 		---@type MessageData
 		local data = ClientData["SoulReaper"][character.Character.MyGuid]
 		if data ~= nil then
-			local description,_ = Ext.GetTranslatedStringFromKey("Shout_LLLICH_SoulReaper_Description_Enabled")
 			local healPercentage = Ext.ExtraData["LLLICH_SoulReaper_DamageHealPercentage"] or 0.5
-			local heal = (data.Params.Damage * healPercentage)
-			description = description:gsub("%[1%]", Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(data.Params.Skill, "DisplayName")))
-			description = description:gsub("%[2%]", string.format("%i", math.ceil(heal)))
-			return description
+			local heal = (data.Damage * healPercentage)
+			local target = Ext.GetCharacter(data.Target)
+			local targetName = ""
+			if target ~= nil then
+				targetName = Ext.GetCharacter(data.Target).DisplayName
+			end
+			local skillName,_ = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(data.Skill, "DisplayName"))
+
+			print(heal, targetName, skillName, SoulReaperDescription.Value)
+			return SoulReaperDescription:ReplacePlaceholders(math.ceil(heal), targetName, skillName)
 		end
 	end
-	local description,_ = Ext.GetTranslatedStringFromKey("Shout_LLLICH_SoulReaper_Description_Disabled")
-	return description
+	return SoulReaperDisabledDescription.Value
 end
 
 Params["LLLICH_SoulReaper_SkillDescription"] = GetSoulReaperDescription
