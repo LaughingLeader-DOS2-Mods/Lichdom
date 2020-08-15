@@ -57,11 +57,11 @@ GetFaction(_Source, _SourceFaction)
 AND
 GetFaction(_Target, _TargetFaction)
 THEN
+SetFaction(_Target, _SourceFaction);
 CharacterAddToPlayerCharacter(_Target, _Source);
 PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
 //ApplyStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP", -1.0, 0, _Source);
 DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
-SetFaction(_Target, _SourceFaction);
 //END_REGION
 
 //REGION DOMINATED_REMOVED
@@ -73,12 +73,13 @@ THEN
 RemoveStatus(_Target, "LLLICH_DOMINATED");
 CharacterStatusText(_Target, "LLLICH_StatusText_DominationRemoved");
 
-/*
 IF
-CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)
+CharacterDied(_Source)
+AND
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
 THEN
-RemoveStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP");
-*/
+RemoveStatus(_Target, "LLLICH_DOMINATED");
+CharacterStatusText(_Target, "LLLICH_StatusText_DominationRemoved");
 
 IF
 CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)

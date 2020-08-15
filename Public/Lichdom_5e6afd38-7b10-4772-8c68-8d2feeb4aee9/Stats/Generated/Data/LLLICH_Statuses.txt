@@ -538,6 +538,7 @@ data "StatusType" "CONSUME"
 using "_LEADERLIB_HIDDEN_CONSUME_BASE"
 data "DisplayName" "LLLICH_TRY_DOMINATE_DisplayName"
 data "DisplayNameRef" "Dominate Undead"
+data "ImmuneFlag" "CharmImmunity"
 
 new entry "LLLICH_DOMINATED"
 type "StatusData"
@@ -551,7 +552,6 @@ data "DescriptionRef" "Character is being controlled through psychic domination.
 data "Icon" "statIcons_Remorse"
 data "FormatColor" "Source"
 data "StackId" "Stack_LLLICH_Dominated"
-data "ImmuneFlag" "CharmImmunity"
 
 new entry "LLLICH_DOMINATED_BEAM_FX"
 type "StatusData"

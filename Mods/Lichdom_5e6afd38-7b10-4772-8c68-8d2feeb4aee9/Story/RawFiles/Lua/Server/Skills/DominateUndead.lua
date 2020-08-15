@@ -1,15 +1,15 @@
 ---@type TranslatedString
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
+local ts = LeaderLib.Classes["TranslatedString"]
 
-local resistedText = TranslatedString:Create("hdea60333g1649g444bgbf86g347676b8d581", "<font color='#C7A758' size='18'>Resisted [1]</font>")
-local immuneText = TranslatedString:Create("h2474259fg6d67g4c98ga77fg0164f1476a41", "<font color='#FF0058' size='18'>Immune to [1]</font>")
+local resistedText = ts:Create("hdea60333g1649g444bgbf86g347676b8d581", "<font color='#C7A758' size='18'>Resisted [1]</font>")
+local immuneText = ts:Create("h2474259fg6d67g4c98ga77fg0164f1476a41", "<font color='#FF0058' size='18'>Immune to [1]</font>")
 
 function ApplyDomination(target, source, duration)
 	if CharacterIsDead(target) == 1 then
 		CharacterResurrect(target)
 		ObjectSetFlag(target, "LLLICH_Dominate_WasDead", 0)
 	end
-	ApplyStatus(target, "LLLICH_UNDEAD_DOMINATED", duration, 1, source)
+	ApplyStatus(target, "LLLICH_DOMINATED", duration, 1, source)
 end
 
 function TryDominateUndead(target, source)
