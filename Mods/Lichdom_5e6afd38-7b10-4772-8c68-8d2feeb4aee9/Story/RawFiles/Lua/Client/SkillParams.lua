@@ -34,13 +34,11 @@ local function SkillGetDescriptionParam(skill, character, isFromItem, param)
 	local param_func = Params[param]
 	if param_func ~= nil then
 		local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem)
-		if status then
-			if txt ~= nil then
-				return txt
-			end
+		if status and txt ~= nil then
+			return txt
 		else
-			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
-			return ""
+			Ext.PrintError("Error getting param (",param,") for skill",skill.Name)
+			Ext.PrintError(txt)
 		end
 	end
 end
