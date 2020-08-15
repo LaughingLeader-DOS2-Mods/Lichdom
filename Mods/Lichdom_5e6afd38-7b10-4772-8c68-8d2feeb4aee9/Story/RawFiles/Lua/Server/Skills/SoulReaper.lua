@@ -46,11 +46,10 @@ function SoulReaper_OnNecromancySkillHit(target, source, damage, handle, skill)
 		PersistentVars["SoulReaper"][source] = {
 			Damage = damage,
 			Skill = skill,
-			Target = target
+			Target = Ext.GetCharacter(target).NetID
 		}
-		---@type MessageData
-		local data = LeaderLib.Classes.MessageData:CreateFromTable("SoulReaper", PersistentVars["SoulReaper"][source])
-		data.Params.UUID = source
-		Ext.PostMessageToClient(source, "LLLICH_StoreClientData", data:ToString())
+		SendClientData(source)
+		SetTag(source, "LLLICH_CanUseSoulReaper")
+		GameHelpers.UI.SetSkillEnabled(source, "Shout_LLLICH_SoulReaper", true)
 	end
 end

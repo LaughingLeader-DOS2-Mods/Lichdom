@@ -3,7 +3,7 @@
 ---@type damage integer
 ---@type handle integer
 local function OnHit(target, source, damage, handle)
-	if damage > 0 and IsTagged(source, "LLLICH_Lich") == 1 then
+	if damage > 0 and IsTagged(source, "LLLICH_Lich") == 1 and ObjectIsCharacter(target) == 1 then
 		local skillprototype = NRD_StatusGetString(target, handle, "SkillId")
 		if skillprototype ~= "" and skillprototype ~= nil then
 			local skill = string.gsub(skillprototype, "_%-?%d+$", "")

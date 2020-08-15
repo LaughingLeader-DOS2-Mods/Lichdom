@@ -1,18 +1,12 @@
 ---@type MessageData
-local MessageData = LeaderLib.Classes["MessageData"]
+local msg = LeaderLib.Classes["MessageData"]
+
 ClientData = {}
 
-local function StoreClientData(channel, data)
-	---@type MessageData
-	local messageData = MessageData:CreateFromString(data)
-	if messageData ~= nil then
-		if ClientData[messageData.ID] == nil then
-			ClientData[messageData.ID] = {}
-		end
-		if messageData.Params ~= nil and messageData.Params.UUID ~= nil then
-			ClientData[messageData.ID][messageData.Params.UUID] = messageData
-		end
+Ext.RegisterNetListener("LLLICH_SyncPersistentVars", function(channel, datastr)
+	local data = Ext.JsonParse(datastr)
+	if data ~= nil then
+		ClientData = data
+		print("ClientData", Ext.JsonStringify(ClientData))
 	end
-end
-
-Ext.RegisterNetListener("LLLICH_StoreClientData", StoreClientData)
+end)
