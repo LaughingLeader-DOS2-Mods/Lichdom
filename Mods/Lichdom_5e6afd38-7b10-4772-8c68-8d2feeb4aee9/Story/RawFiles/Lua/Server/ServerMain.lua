@@ -1,4 +1,4 @@
-function SendClientData(uuid)
+function SyncClientData(uuid)
 	if uuid == nil then
 		Ext.BroadcastMessage("LLLICH_SyncPersistentVars", Ext.JsonStringify(PersistentVars), nil)
 	else
@@ -8,7 +8,7 @@ function SendClientData(uuid)
 end
 
 LeaderLib.RegisterListener("Initialized", function()
-	SendClientData()
+	SyncClientData()
 end)
 
 Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, username, profileId)

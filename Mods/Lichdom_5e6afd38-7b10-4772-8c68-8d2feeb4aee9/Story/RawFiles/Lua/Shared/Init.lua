@@ -9,5 +9,5 @@ end)
 
 Ext.RegisterListener("SessionLoaded", function()
 	LeaderLib.EnableFeature("RacialTalentsDisplayFix")
-	LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
+	LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
 end)

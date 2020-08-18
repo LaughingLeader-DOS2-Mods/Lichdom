@@ -1,5 +1,10 @@
-PersistentVars = {}
-PersistentVars["SoulReaper"] = {}
+if PersistentVars == nil then
+	PersistentVars = {}
+end
+
+if PersistentVars.SoulReaper == nil then
+	PersistentVars.SoulReaper = {}
+end
 
 Ext.Require("Shared/Init.lua")
 Ext.Require("Server/Skills/DominateUndead.lua")

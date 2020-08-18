@@ -11,7 +11,7 @@ local SoulReaperDisabledDescription = ts:Create("h36ae9d1cg9657g4d6dg8a86g837f45
 --- @param isFromItem boolean
 --- @param param string
 local function GetSoulReaperDescription(skill, character, isFromItem, param)
-	if ClientData["SoulReaper"] ~= nil then
+	if character.Character:HasTag("LLLICH_CanUseSoulReaper") and ClientData["SoulReaper"] ~= nil then
 		--[1] = vitality restored
 		--[2] = the last target's Name
 		--[3] = the last Necromancy spell used
@@ -19,11 +19,18 @@ local function GetSoulReaperDescription(skill, character, isFromItem, param)
 		local data = ClientData["SoulReaper"][character.Character.MyGuid]
 		if data ~= nil then
 			local healPercentage = Ext.ExtraData["LLLICH_SoulReaper_DamageHealPercentage"] or 0.5
-			local heal = (data.Damage * healPercentage)
-			local target = Ext.GetCharacter(data.Target)
+			local heal = math.ceil(data.Damage * healPercentage)+1
 			local targetName = ""
+			---@type EclCharacter
+			local target = Ext.GetCharacter(data.Target)
 			if target ~= nil then
-				targetName = Ext.GetCharacter(data.Target).DisplayName
+				targetName = target.DisplayName
+				if StringHelpers.IsNullOrEmpty(targetName) then
+					targetName = data.TargetName
+				end
+			else
+				targetName = data.TargetName
+				print("Can't find target?", data.Target)
 			end
 			local skillName,_ = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(data.Skill, "DisplayName"))
 
