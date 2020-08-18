@@ -38,7 +38,7 @@
 	<content contentuid="h33428fa2g4015g46b5ga3bdg9af2d2f5087e">Soul Extractor</content>
 	<content contentuid="h3599bc05gfe78g4e12gad7fgad59a6e282e1">Undying</content>
 	<content contentuid="h360b314bg0889g4c03g9b83g0f72fe98da7e">Sacrificed</content>
-	<content contentuid="h36ae9d1cg9657g4d6dg8a86g837f45a16d00">After using a damaging Necromancy skill, active this skill to drain half of the damage dealt from the target&apos;s Vitality.</content>
+	<content contentuid="h36ae9d1cg9657g4d6dg8a86g837f45a16d00">After using a damaging &lt;font color=&apos;#73F6FF&apos;&gt;Lichdom&lt;/font&gt; or &lt;font color=&apos;#D040D0&apos;&gt;Necromancy&lt;/font&gt; spell, active this skill to drain &lt;font color=&apos;#97FBFF&apos;&gt;[ExtraData:LLLICH_SoulReaper_DamageHealPercentage]%&lt;/font&gt; of the damage dealt from the target&apos;s &lt;font color=&apos;#97FBFF&apos;&gt;Vitality&lt;/font&gt;.</content>
 	<content contentuid="h38a5df20g7f5ag4b67gaea4gd32bd4638264">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Phylactery Power&lt;/font&gt;&lt;br&gt;Teleport to your Phylactery.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;If your phylactery is in possession of an opposing player (not in your party), teleportation will be blocked.&lt;/font&gt;</content>
 	<content contentuid="h39f6fc36ged70g4b3bga4c3g6f823926399b">&lt;font color=&apos;#80FFC3&apos;&gt;Your Phylactery has grown even more powerful.&lt;/font&gt;</content>
 	<content contentuid="h3b501fa7gad05g43d1g864dg7d0bff6999c6">An eerie-looking amulet. Something seems off...</content>
@@ -154,7 +154,7 @@
 	<content contentuid="hd8320032ga166g4c6aga025gb605a2fd1847">&lt;font color=&apos;#ff5252&apos; size=&apos;18&apos;&gt;Hemomancy&lt;/font&gt;&lt;br&gt;Call forth the blood of beings within [1], causing it to burst.&lt;br&gt;Living targets create a &lt;font color=&apos;#CD1F1F&apos;&gt;small pool of blood&lt;/font&gt;, while &lt;font color=&apos;#00AA00&apos;&gt;the undead spill poison&lt;/font&gt;.</content>
 	<content contentuid="hd89cf58egc410g4ff7ga117g22b6fdb1ca24">An strange-looking box pulsating with immense power.</content>
 	<content contentuid="hd8b60932g11e8g4888gb82dgfd2c41ee3d71">&lt;font color=&apos;#FF001F&apos;&gt;Teleport failed. The phylactery is broken.&lt;/font&gt;</content>
-	<content contentuid="hdad53f40ge86cg489cg83cbg71baa32faef1">Drain &lt;font color=&apos;#FF1100&apos;&gt;[1] Vitality&lt;/font&gt; from [2] (damaged by [3]).&lt;br&gt;&lt;font color=&apos;#CC2200&apos;&gt;This cannot kill the target.&lt;/font&gt;</content>
+	<content contentuid="hdad53f40ge86cg489cg83cbg71baa32faef1">Drain &lt;font color=&apos;#97FBFF&apos;&gt;[1] Vitality&lt;/font&gt; from &lt;font color=&apos;#FF0030&apos;&gt;[2]&lt;/font&gt; (damaged by &lt;font color=&apos;#B823CB&apos;&gt;[3]&lt;/font&gt;).&lt;br&gt;&lt;font color=&apos;#33CCFF&apos;&gt;If your vitality is full, transfer the heal to the nearest harmed ally within 16m, prioritizing party members.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF2200&apos;&gt;This spell is non-lethal, and cannot kill the target.&lt;/font&gt;</content>
 	<content contentuid="hdadd6959g632cg4130g90ccga405b4583bed">Frozen Celerity</content>
 	<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9">magic damage</content>
 	<content contentuid="hdc5e9cc6gbbdfg4ae3gafb5g4a5b6e7af4d9">[RACE] Change Race to Undead Lich Race</content>
