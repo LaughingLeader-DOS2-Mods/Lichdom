@@ -5,6 +5,51 @@ local ts = Mods.LeaderLib.Classes.TranslatedString
 
 local SoulReaperCombatText = ts:Create("h034f0136g2489g4549g996eg282f817c215d", "[1] drained <font color='#97FBFF'>[2] Vitality</font> from [3] with [Key:Shout_LLLICH_SoulReaper_DisplayName].")
 
+---@param center EsvCharacter
+---@param radius number
+---@param prioritizeParty boolean
+---@param prioritizeLowHealth boolean
+local function FindClosestCharacter(center, radius, prioritizeParty, prioritizeLowHealth)
+	local lastDist = radius+0.1
+	local lastVit = -1
+	local lastScore = -1
+	local targets = {}
+	for i,v in pairs(center:GetNearbyCharacters(radius)) do
+		if v ~= center.MyGuid and CharacterIsAlly(v, center.MyGuid) == 1 and CharacterIsDead(v) == 0 then
+			local targetChar = Ext.GetCharacter(v)
+			if targetChar ~= nil then
+				local score = 0
+				local dist = GetDistanceTo(center.MyGuid, v)
+				if dist < lastDist then
+					score = score + 1
+				end
+				if prioritizeLowHealth == true then
+					if targetChar.Stats.CurrentVitality < targetChar.Stats.MaxVitality then
+						score = score + 1
+						if lastVit == -1 then
+							lastVit = targetChar.Stats.CurrentVitality
+						elseif targetChar.Stats.CurrentVitality < lastVit then
+							score = score + 2
+							lastVit = targetChar.Stats.CurrentVitality
+						end
+					end
+				end
+				if prioritizeParty == true and CharacterIsInPartyWith(v, center.MyGuid) == 1 then
+					score = score + 1
+				end
+				table.insert(targets, {Target=v, Score=score})
+			end
+		end
+	end
+	if #targets > 0 then
+		table.sort(targets, function(a,b)
+			return a.Score > b.Score
+		end)
+		return targets[1].Target
+	end
+	return nil
+end
+
 ---@param skill string
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
@@ -25,25 +70,7 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 			local casterObj = Ext.GetCharacter(char)
 			local beamTarget = char
 			if casterObj.Stats.CurrentVitality >= casterObj.Stats.MaxVitality then
-				local target = nil
-				local lastDist = 999
-				local lastVit = 9999999999999
-				for i,v in pairs(casterObj:GetNearbyCharacters(16.1)) do
-					if v ~= char and CharacterIsAlly(v, char) == 1 and CharacterIsDead(v) == 0 then
-						local targetChar = Ext.GetCharacter(v)
-						if targetChar.Stats.CurrentVitality < targetChar.Stats.MaxVitality and targetChar.Stats.CurrentVitality < lastVit then
-							local dist = GetDistanceTo(char, v)
-							if dist < lastDist then
-								lastVit = targetChar.Stats.CurrentVitality
-								target = v
-							--Prioritize party members
-							elseif CharacterIsInPartyWith(v, char) == 1 and CharacterIsInPartyWith(target, char) == 0 then
-								lastVit = targetChar.Stats.CurrentVitality
-								target = v
-							end
-						end
-					end
-				end
+				local target = FindClosestCharacter(casterObj, 16.0, true, true)
 				if target == nil then target = char end
 				handle = NRD_HitPrepare(target, char)
 				beamTarget = target
@@ -120,6 +147,10 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 							NRD_HitAddDamage(enemyHit, "None", targetChar.Stats.CurrentVitality - nextHealth)
 							--print("Soul Reaper damage:", targetChar.Stats.CurrentVitality - nextHealth)
 							NRD_HitExecute(enemyHit)
+
+							local text,_ = Ext.GetTranslatedStringFromKey("LLLICH_StatusText_SoulReaperVictim")
+							text = string.gsub(text, "%[1%]", math.ceil(targetChar.Stats.CurrentVitality - nextHealth))
+							CharacterStatusText(last.Target, text)
 						end
 					end
 				end
@@ -145,7 +176,6 @@ function SoulReaper_OnNecromancySkillHit(target, source, damage, handle, skill)
 			Target = target,
 			TargetName = targetChar.DisplayName
 		}
-		print(targetChar.DisplayName, targetChar.OriginalDisplayName, targetChar.OriginalTransformDisplayName, targetChar.StoryDisplayName)
 		SyncClientData(source)
 		SetTag(source, "LLLICH_CanUseSoulReaper")
 		GameHelpers.UI.SetSkillEnabled(source, "Shout_LLLICH_SoulReaper", true)
