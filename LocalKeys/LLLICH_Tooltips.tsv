@@ -3,3 +3,7 @@ LLLICH_Tooltip_Phylactery_DisplayName	<font color='#73F6FF'>Phylactery ([1])</fo
 LLLICH_Tooltip_Phylactery_Description	<font color='#73F6FF'>The source of a Lich's immortality. Protect this at all cost.</font>	h84039498gaf60g4cfeg8675g5819d9a3d4c4
 LLLICH_Tooltip_Phylactery_Empty	<font color='#FF0000'>Out of Souls</font>	hf0641549g589ag4fe0g92b8g5d955ca084d9
 LLLICH_Tooltip_Phylactery_Charges	Souls	h36537a0bg24afg4727g9773gd4a9e1b036ed
+LLLICH_Tooltip_ShadowDamageHelper	Shadow damage bypasses armor and cannot be resisted.	hba763a56g971dg4dd3g85a4g7eb0addf0380
+LLLICH_Tooltip_OnKill	On Kill:	hb1b2f76eg982cg4503g8ab7g4cbd9e1b5a4f
+LLLICH_Tooltip_DrainSoulBonus1	+1 Phylactery Souls	h9e1caf88g0c2bg41d3g8253g932274a61116
+LLLICH_Tooltip_DrainSoulBonus2	+1 Source Points	h8d1a2e82g002fg4a71gb263g313ba9cb7747
