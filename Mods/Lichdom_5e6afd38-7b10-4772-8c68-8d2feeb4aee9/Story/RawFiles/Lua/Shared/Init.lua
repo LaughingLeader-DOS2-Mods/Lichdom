@@ -3,7 +3,9 @@ GameHelpers = LeaderLib.GameHelpers
 Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 
-local WEAPONEX_EXPANSION = "c60718c3-ba22-4702-9c5d-5ad92b41ba5f"
+MODID = {
+	WEAPONEX_EXPANSION = "c60718c3-ba22-4702-9c5d-5ad92b41ba5f"
+}
 
 local SkillRequirement = {
     MeleeWeapon = "MeleeWeapon",
@@ -65,7 +67,7 @@ end
 
 Ext.RegisterListener("StatsLoaded", function()
 	Ext.StatSetAttribute("LIFESTEAL", "StatusEffect", "")
-	if Ext.IsModLoaded(WEAPONEX_EXPANSION) then
+	if Ext.IsModLoaded(MODID.WEAPONEX_EXPANSION) then
 		local tags = Ext.StatGetAttribute("WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A", "Tags") or ""
 		if tags ~= "" then
 			tags = tags .. ";"

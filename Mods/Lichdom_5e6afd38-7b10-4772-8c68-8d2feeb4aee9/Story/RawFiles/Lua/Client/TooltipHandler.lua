@@ -99,22 +99,31 @@ local WeaponTypeTags = {
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
     if item ~= nil then
-        for i,tag in pairs(WeaponTypeTags) do
-            if item:HasTag(tag) then
-                local text,_ = Ext.GetTranslatedStringFromKey(tag)
-                local armorSlotType = tooltip:GetElement("ArmorSlotType")
-                if armorSlotType == nil then
-                    armorSlotType = {
-                        Type = "ArmorSlotType",
-                    }
-                    tooltip:AppendElement(armorSlotType)
-                end
-                armorSlotType.Label = text
-                break
+        if item:HasTag("LLLICH_GRIMOIRE") and Ext.IsModLoaded(MODID.WEAPONEX_EXPANSION) then
+            local text,_ = Ext.GetTranslatedStringFromKey("LLWEAPONEX_BattleBook")
+            local armorSlotType = tooltip:GetElement("ArmorSlotType")
+            if armorSlotType == nil then
+                armorSlotType = {
+                    Type = "ArmorSlotType",
+                }
+                tooltip:AppendElement(armorSlotType)
             end
-        end
-        if item.StatsId == "WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A" then
-
+            armorSlotType.Label = text
+        else
+            for i,tag in pairs(WeaponTypeTags) do
+                if item:HasTag(tag) then
+                    local text,_ = Ext.GetTranslatedStringFromKey(tag)
+                    local armorSlotType = tooltip:GetElement("ArmorSlotType")
+                    if armorSlotType == nil then
+                        armorSlotType = {
+                            Type = "ArmorSlotType",
+                        }
+                        tooltip:AppendElement(armorSlotType)
+                    end
+                    armorSlotType.Label = text
+                    break
+                end
+            end
         end
         if item:HasTag("LLLICH_Phylactery") then
             local lichIsLooking = false
