@@ -68,22 +68,24 @@
 	<content contentuid="h5897fa5eg0268g4663g8f1dgc76ab8f35bd0">&lt;font color=&apos;#C7A758&apos; size=&apos;18&apos;&gt;Saving Throw Success for Fear&lt;/font&gt;</content>
 	<content contentuid="h5a93cd43g9a7bg42a0g9ab4g1d09b953fe74">Character&apos;s blood has been sacrificed.</content>
 	<content contentuid="h5c8d7998g2687g4f42ga4dbge437021dddae">An strange-looking box. Something seems off...</content>
-	<content contentuid="h5ce6e372gb4b2g481dg871bg033170fb8a90">A trusty and eternal companion for any would-be Lich.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos;&gt;Grows with its wielder.&lt;/font&gt;</content>
+	<content contentuid="h5ce6e372gb4b2g481dg871bg033170fb8a90">A trusty companion for any would-be Lich.</content>
 	<content contentuid="h5d5f904bge26eg4993g96afg5ad5807170d8">*The Phylactery is now complete. As long it remains, death will not be permanent, though each death will damage the Phylactery.*</content>
 	<content contentuid="h5e907d89gda06g4565g8283g6abefd78cee8">Unhide armor. You may need to re-equip your armor for the visuals to come back.</content>
-	<content contentuid="h5ecb6e4cg6511g45a0g81fbga80332d73ec9">&lt;font color=&apos;#73F6FF&apos;&gt;Phylactery ([1])&lt;/font&gt;</content>
+	<content contentuid="h5ecb6e4cg6511g45a0g81fbga80332d73ec9">&lt;font color=&apos;#73F6FF&apos;&gt;Phylactery&lt;/font&gt;</content>
 	<content contentuid="h5ee5606eg255cg4e26g9652g69b4fd3e228f">Paralyzed</content>
 	<content contentuid="h6078090dg0856g42c5g9a34g89810f0c1196">Cooling (Death&apos;s Embrace)</content>
 	<content contentuid="h612a77b1g370fg41fdgad9ag8d483dee266f">&lt;font color=&apos;#80FFC3&apos;&gt;Phylactery Power unlocked. Death has no claim on your soul.&lt;/font&gt;</content>
 	<content contentuid="h617f4649gb667g4fd6g8ee9g018b7a46633c">*Use a skull ring for the Phylactery.*</content>
 	<content contentuid="h6363cc4bgaf8cg416eg9cb3gfe98cd6c062f">Changing race...</content>
+	<content contentuid="h663bed56gaa46g4e78gada3gdb68ede479dd">Accumulate magical energy while spells are cast in combat.&lt;br&gt;&lt;font color=&apos;#00FFCC&apos;&gt;At full power, your next spell deals a guaranteed critical hit and lowers all cooldowns greater than 1 by 1 turn.&lt;/font&gt;</content>
 	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756"></content>
 	<content contentuid="h68917b84ga66ag4dffgb1f2g55666f362cad">Blood Sacrifice</content>
+	<content contentuid="h6ab621ffgf9bdg463bga331ga98b7649b58c">Grimoire</content>
 	<content contentuid="h6accd377g3a3cg43bbgbb84gc802c8af6bc9">Lich Form</content>
 	<content contentuid="h6c7902b2gca05g430dga6dcg22d837712b78">Regenerating</content>
 	<content contentuid="h6c917da8gd3d4g478cg8442g2abd705525f8">Sacrificed</content>
 	<content contentuid="h6d650500ga600g4868g815dga20c66ef32be">&lt;font color=&apos;#80FFC3&apos;&gt;Your Phylactery has grown more powerful.&lt;/font&gt;</content>
-	<content contentuid="h6e66ab91g504dg4640g92dfg52056f443714">A grimoire adorned with two skulls.&lt;br&gt;&lt;font color=&apos;#CC00DD&apos;&gt;Thought to have once belonged to a powerful Lich, this book is said to have the power to manipulate souls.&lt;font/&gt;</content>
+	<content contentuid="h6e66ab91g504dg4640g92dfg52056f443714">A grimoire adorned with two skulls. It pulsates with a strange power.</content>
 	<content contentuid="h724b4423g5c4ag4021g9e0cgd979dc4e8bbf">Death&apos;s Embrace</content>
 	<content contentuid="h73f4a30bgf575g46f7gb325ga9097e513518">[RESET] Run the Lich Reset Command - This will reset/remove all related Lich flags, statuses, and skills.</content>
 	<content contentuid="h74f98b9dgeecfg4341g8d92gb91bb4192b98">&lt;font color=&apos;#87365C&apos; size=&apos;18&apos;&gt;Teleportation to your Phylactery is blocked by an unknown power...&lt;/font&gt;</content>
@@ -103,6 +105,7 @@
 	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36">Applies additional effects on hit</content>
 	<content contentuid="h8c17b7b9g5450g4062gb695gf3dd538a6f4d">Lich Form</content>
 	<content contentuid="h8cb74202g4e9eg4fcfg87d6gbb8e26ceb52c">Use the template&apos;s &quot;custom looks&quot;. This will make you look like what your origin undead equivalent &lt;i&gt;should &lt;/i&gt;look like, but hair and skin color options won&apos;t have any effect.</content>
+	<content contentuid="h8d1a2e82g002fg4a71gb263g313ba9cb7747">+1 Source Points</content>
 	<content contentuid="h8e724ccag7f32g4ce5ga784g3e9129cbb8bb">&lt;font color=&apos;#73F6FF&apos;&gt;Paralyzing Touch&lt;/font&gt;</content>
 	<content contentuid="h8ebdc134g334cg41adgbe9eg116edf8b89db">Hide Lich Status</content>
 	<content contentuid="h8fa21411gf1a1g47f7g85deg027648b72152">Enable Lich Penalties (Negative Fire Resistance, etc) [Default]</content>
@@ -116,6 +119,7 @@
 	<content contentuid="h9ac59b6dg8794g4cd7g9c71gff0ee43f99dc">Enable Phylactory Beam - When near your Phylactory, a beam will appear between you and it.</content>
 	<content contentuid="h9cf4f2f2g7db6g4e7eg9603g4a38e9794096">Fire Vulnerability (Lich)</content>
 	<content contentuid="h9dde5756g77d6g429fga76fg5791037608a4">Blood Burst</content>
+	<content contentuid="h9e1caf88g0c2bg41d3g8253g932274a61116">+1 Phylactery Souls</content>
 	<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee"></content>
 	<content contentuid="ha1d75676gb206g4ef9ga545gf616514baede">Dread</content>
 	<content contentuid="ha1d8e9d8gdcf8g417bg80d2g447654676d4c">Death Mark</content>
@@ -128,12 +132,14 @@
 	<content contentuid="haf04e6aagdb51g4a57gb2c7g5bc5b4541400">Character has an icey aura of death.&lt;br&gt;&lt;font color=&apos;#b8caff&apos;&gt;When turn ends, remove &lt;font color=&apos;#FE6E27&apos;&gt;Burning&lt;/font&gt; and &lt;font color=&apos;#FF9600&apos;&gt;Warm&lt;/font&gt; from allies, apply &lt;font color=&apos;#4197E2&apos;&gt;Chilled&lt;/font&gt; to enemies, and &lt;font color=&apos;#97FBFF&apos;&gt;leach health from Frozen enemies.&lt;/font&gt;&lt;/font&gt;</content>
 	<content contentuid="hafc82c07g530ag477fga809gd70021a084e8">&lt;font color=&apos;#73F6FF&apos;&gt;Soul Reaper&lt;/font&gt;</content>
 	<content contentuid="hb0c8ef6dga251g4833gbd0agb0ade729162c">Powered Phylactery (1 Soul)</content>
+	<content contentuid="hb1b2f76eg982cg4503g8ab7g4cbd9e1b5a4f">On Kill:</content>
 	<content contentuid="hb319c9f2g5e5eg46cbga40cga825ea7f7811">Character is immortal through the power of a Phylactery.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos; size=&apos;19&apos;&gt;Phylactery Powers Unlocked&lt;/font&gt;</content>
 	<content contentuid="hb48af784g4057g40e5g8416gac73d17aa029">Exude a chilling aura of death for 3 turns, gaining &lt;font color=&apos;#5e85f6&apos;&gt;[1]% Water Resistance&lt;/font&gt;, &lt;font color=&apos;#C7A758&apos;&gt;Immunity to Slipping and Burning&lt;/font&gt;, and &lt;font color=&apos;#a6bdff&apos;&gt;[2]% increased speed on ice&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos;&gt;At the end of your turn, allies within [3] who are &lt;font color=&apos;#FE6E27&apos;&gt;Burning&lt;/font&gt; or &lt;font color=&apos;#FF9600&apos;&gt;Warm&lt;/font&gt; are cooled down, enemies within [3] are &lt;font color=&apos;#4197E2&apos;&gt;Chilled&lt;/font&gt;, and &lt;font color=&apos;#c2d3ff&apos;&gt;Frozen&lt;/font&gt; enemies take [4], healing you for the damage dealt.&lt;/font&gt;</content>
 	<content contentuid="hb4fdea5agec70g46f9gbd32g19ac0f4e1eed">[SETUP] Run the Lich Setup Command - This will apply all the necessary commands to become a Lich (like if you selected the preset).</content>
 	<content contentuid="hb65ba3b1gc12bg4a00g9774g0722139a3b36">&lt;font color=&apos;#73F6FF&apos;&gt;Dominate Undead&lt;/font&gt;</content>
 	<content contentuid="hb90108f2g558eg4d43g91d0g3cc5f847bc17">*Use a small, inconspicous box for the Phylactery.*</content>
 	<content contentuid="hb982b0dega242g4c22gb72eg48ff219a07a9">An eerie-looking skull ring. Something seems off...</content>
+	<content contentuid="hba763a56g971dg4dd3g85a4g7eb0addf0380">Shadow damage bypasses armor and cannot be resisted.</content>
 	<content contentuid="hbbfb92e3g044bg4532ga385g120687c20f04">&lt;font color=&apos;#73F6FF&apos; size=&apos;18&apos;&gt;Lichdom&lt;/font&gt;&lt;br&gt;A magical contraption used to extract and preserve a soul.&lt;br&gt;&lt;font color=&apos;#B823CB&apos;&gt;Use to create a Phylactery.&lt;/font&gt;</content>
 	<content contentuid="hc0156e37g1f03g4774g88c4g7b312c9ddfd8">[Exit]</content>
 	<content contentuid="hc05d724bgda1cg40c3ga68cg8ae84a0b0c75">&lt;font color=&apos;#D040D0&apos;&gt;Wicked Missile&lt;/font&gt;</content>
@@ -172,6 +178,7 @@
 	<content contentuid="heb01430fg177cg4cbeg963egccfdc732ee13">[Back]</content>
 	<content contentuid="hecde4b74gb2e6g4695gbc1dg8296256e2865">*Your soul fully leaves your body, transferring to the selected object. While you now feel a hollow emptiness, the power pulsating within the Phylactery feels forever chained to your being, supplying an intangible sense of warmth.*</content>
 	<content contentuid="hedb33358g1c16g4dacg852dga52ae809f897">An eerie-looking amulet pulsating with immense power.</content>
+	<content contentuid="hef8a729bg734eg48a1gbb75gabe65a3233a9">One-handed Staff</content>
 	<content contentuid="hf029502cg39e1g4ac3g8322g34397fca3fe6">&lt;font color=&apos;#73F6FF&apos;&gt;Drain Soul&lt;/font&gt;</content>
 	<content contentuid="hf0641549g589ag4fe0g92b8g5d955ca084d9">&lt;font color=&apos;#FF0000&apos;&gt;Out of Souls&lt;/font&gt;</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e">Shadow</content>
@@ -179,6 +186,8 @@
 	<content contentuid="hf65108e0g9bc1g456dg8433g84ceb27eb8b8">Strange Ring (Broken)</content>
 	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hfac784b5gebe7g442cgbc2dg5713218636b9">Running command...</content>
+	<content contentuid="hfbd262d6g39ceg4913ga056gf17297015e6a">&lt;font color=&apos;#BB00FF&apos;&gt;Spell Enhancement&lt;/font&gt;</content>
 	<content contentuid="hfbd89c73g7faag4affg86bdgf2f6087fbf85">*Use an eerie-looking amulet for the Phylactery.*</content>
 	<content contentuid="hffbdc453ge2e3g448cga29bgd2ffc0d4dde2">&lt;font color=&apos;#80FFC3&apos;&gt;You power your Phylactery with a new soul.&lt;/font&gt;</content>
+	<content contentuid="hffd291aeg8a8ag4044g8d06g9fe2e9b63689">Lichdom</content>
 </contentList>
