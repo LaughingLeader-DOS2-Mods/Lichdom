@@ -67,7 +67,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 end
 
-local Phylactery_DisplayName = ts:Create("h5ecb6e4cg6511g45a0g81fbga80332d73ec9", "<font color='#73F6FF'>Phylactery ([1])</font>")
+local Phylactery_DisplayName = ts:Create("h5ecb6e4cg6511g45a0g81fbga80332d73ec9", "<font color='#73F6FF'>Phylactery</font>")
 local Phylactery_Description = ts:Create("h84039498gaf60g4cfeg8675g5819d9a3d4c4", "<font color='#73F6FF'>The source of a Lich's immortality. Protect this at all cost.</font>") 
 local Phylactery_Empty = ts:Create("hf0641549g589ag4fe0g92b8g5d955ca084d9", "<font color='#FF0000'>Out of Souls</font>")
 local Phylactery_Charges = ts:Create("h36537a0bg24afg4727g9773gd4a9e1b036ed", "Souls")
@@ -102,9 +102,9 @@ local function OnItemTooltip(item, tooltip)
             if element ~= nil then
                 element.Label = Phylactery_Charges.Value
             end
-            element = tooltip:GetElement("ItemName")
+            element = tooltip:GetElement("ItemRarity")
             if element ~= nil then
-                element.Label = Phylactery_DisplayName:ReplacePlaceholders(StringHelpers.Trim(element.Label))
+                element.Label = Phylactery_DisplayName
             end
             element = tooltip:GetElement("ItemDescription")
             if element ~= nil then
