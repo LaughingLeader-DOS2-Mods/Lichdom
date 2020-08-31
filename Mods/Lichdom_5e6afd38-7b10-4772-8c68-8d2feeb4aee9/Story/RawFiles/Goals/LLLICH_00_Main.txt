@@ -965,20 +965,7 @@ RegionEnded(_Region)
 AND
 LeaderLib_Helper_QRY_IsEditorOrGameLevel(_Region)
 THEN
-NOT DB_LLLICH_SetupCharacters(_Region);
 SysActivateGoal("LLLICH_11_GameReady");
-
-//REGION CHARACTER_TAG_SETUP
-IF
-GameStarted(_Region, _IsEditorMode)
-AND
-LeaderLib_Helper_QRY_IsEditorOrGameLevel(_Region, _IsEditorMode)
-AND
-NOT DB_LLLICH_SetupCharacters(_Region)
-THEN
-DB_LLLICH_SetupCharacters(_Region);
-CharacterLaunchOsirisOnlyIterator("LLLICH_SetupCharacters");
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -26,7 +26,7 @@ DB_NOOP(1);
 
 //REGION DOMINATE_IMMUNITY
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLLICH_SetupCharacters")
+ObjectEnteredCombat((CHARACTERGUID)_Char, _)
 AND
 IsTagged(_Char, "UNDEAD", 1)
 AND
@@ -35,7 +35,9 @@ THEN
 SetTag(_Char, "LLLICH_DOMINATE_IMMUNE");
 
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLLICH_SetupCharacters")
+ObjectEnteredCombat((CHARACTERGUID)_Char, _)
+AND
+IsTagged(_Char, "UNDEAD", 1)
 AND
 DB_IsStoryNpc(_Char)
 THEN
@@ -47,21 +49,6 @@ AND
 DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction)
 THEN
 PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
-//END_REGION
-
-//REGION DOMINATED_APPLIED
-IF
-CharacterStatusApplied(_Target, "LLLICH_DOMINATED", (CHARACTERGUID)_Source)
-AND
-GetFaction(_Source, _SourceFaction)
-AND
-GetFaction(_Target, _TargetFaction)
-THEN
-SetFaction(_Target, _SourceFaction);
-CharacterAddToPlayerCharacter(_Target, _Source);
-PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
-//ApplyStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP", -1.0, 0, _Source);
-DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
 //END_REGION
 
 //REGION DOMINATED_REMOVED
@@ -93,10 +80,27 @@ SetFaction(_Target, _TargetFaction);
 IF
 CharacterStatusRemoved(_Target, "LLLICH_DOMINATED", _)
 AND
+CharacterIsDead(_Target, 0)
+AND
 ObjectGetFlag(_Target, "LLLICH_Dominate_WasDead", 1)
 THEN
 CharacterDie(_Target, 0, "DoT", NULL_00000000-0000-0000-0000-000000000000);
 ObjectClearFlag(_Target, "LLLICH_Dominate_WasDead", 0);
+//END_REGION
+
+//REGION DOMINATED_APPLIED
+IF
+CharacterStatusApplied(_Target, "LLLICH_DOMINATED", (CHARACTERGUID)_Source)
+AND
+GetFaction(_Source, _SourceFaction)
+AND
+GetFaction(_Target, _TargetFaction)
+THEN
+SetFaction(_Target, _SourceFaction);
+CharacterAddToPlayerCharacter(_Target, _Source);
+PlayBeamEffect(_Source, _Target, "LLLICH_FX_Beams_Domination_Apply_01", "Dummy_NeckFX", "Dummy_NeckFX");
+//ApplyStatus(_Target, "LLLICH_DOMINATED_BEAM_FX_LOOP", -1.0, 0, _Source);
+DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
 //END_REGION
 
 //REGION DOMINATED_CLEANUP
