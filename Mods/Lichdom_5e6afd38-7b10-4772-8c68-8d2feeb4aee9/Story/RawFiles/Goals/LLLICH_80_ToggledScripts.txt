@@ -7,6 +7,24 @@ PROC
 LLLICH_ToggledScripts_InitSettings()
 THEN
 LeaderLib_ToggleScripts_Register_ObjectScript("LLLICH_80_TS_ChillForm", "LLLICH_ChillFormActive", 0);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLLICH_80_TS_TwinSkulls", "LLLICH_TwinSkullsActive", 0);
+
+//REGION UPDATES
+PROC
+LeaderLib_Mods_OnVersionChanged(5e6afd38-7b10-4772-8c68-8d2feeb4aee9, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+THEN
+LLLICH_ToggledScripts_InitSettings();
+//END_REGION
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A_87be43d7-e5a1-4235-9a38-5cdc4853009c", _Char)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLLICH_TwinSkullsActive", "Lichdom", 500);
+
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLLICH_TwinSkullGrimoire_A_87be43d7-e5a1-4235-9a38-5cdc4853009c", _Char)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLLICH_TwinSkullsActive", "Lichdom");
 EXITSECTION
 
 ENDEXITSECTION

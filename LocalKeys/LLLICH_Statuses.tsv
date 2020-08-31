@@ -24,3 +24,5 @@ LLLICH_RECOVERING_ACTIVE_DisplayName	Regenerating	h6c7902b2gca05g430dga6dcg22d83
 LLLICH_TRY_DOMINATE_DisplayName	Dominate Undead	h1517e286g2c8eg4642ga1a6g6049cf8a1700
 LLLICH_DOMINATED_DisplayName	Dominated	h3d54d894g16a1g46f6g931agaa7f0a91574b
 LLLICH_DOMINATED_Description	Character is being controlled through psychic domination.<br><font color='#CD1FFF'>Automatically cleansed if the source of domination is disabled or dies.</font>	h92c719abge5c0g4101g8f04g10b7da3b6bb8
+LLLICH_TWINSKULLS_ENERGY_DisplayName	Spell Enhancement	he1ab135eg9768g49f6g99e5g4d99df2f9fe2
+LLLICH_TWINSKULLS_ENERGY_Description	Character is gathering spell energy.	hf64a206fg61c8g4ac5ga8cbgef46d51b9c8e

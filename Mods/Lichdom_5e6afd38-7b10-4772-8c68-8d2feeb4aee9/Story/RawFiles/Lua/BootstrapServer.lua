@@ -5,12 +5,12 @@ end
 if PersistentVars.SoulReaper == nil then
 	PersistentVars.SoulReaper = {}
 end
+if PersistentVars.TwinSkullsEnergy == nil then
+	PersistentVars.TwinSkullsEnergy = {}
+end
 
 Ext.Require("Shared/Init.lua")
-Ext.Require("Server/Skills/DominateUndead.lua")
-Ext.Require("Server/Skills/SoulReaper.lua")
-Ext.Require("Server/HitListener.lua")
-Ext.Require("Server/ServerMain.lua")
+Ext.Require("Server/_Init.lua")
 
 -- Ext.RegisterListener("ModuleLoading", function()
 

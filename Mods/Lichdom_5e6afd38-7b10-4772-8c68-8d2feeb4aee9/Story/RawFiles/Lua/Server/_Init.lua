@@ -1,10 +1,17 @@
+Ext.Require("Server/Skills/DominateUndead.lua")
+Ext.Require("Server/Skills/SoulReaper.lua")
+Ext.Require("Server/HitListener.lua")
+Ext.Require("Server/ItemMechanics.lua")
+
 function SyncClientData(uuid)
 	if uuid == nil then
 		Ext.BroadcastMessage("LLLICH_SyncPersistentVars", Ext.JsonStringify(PersistentVars), nil)
 	else
 		Ext.PostMessageToClient(uuid, "LLLICH_SyncPersistentVars", Ext.JsonStringify(PersistentVars))
 	end
-	print("PersistentVars", Ext.JsonStringify(PersistentVars))
+	if Ext.IsDeveloperMode() then
+		Ext.Print("[Lichdom] PersistentVars", Ext.JsonStringify(PersistentVars))
+	end
 end
 
 LeaderLib.RegisterListener("Initialized", function()

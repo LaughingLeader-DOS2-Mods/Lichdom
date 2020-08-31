@@ -26,7 +26,25 @@ local function OnSkillTooltip(character, skill, tooltip)
         if element ~= nil then
             element.Label = schoolName.Value
         end
-	end
+    end
+    if character:HasTag("LLLICH_TwinSkulls_EnergyMax") then
+        local skillData = GameHelpers.Ext.CreateSkillTable(skill)
+        if skillData["Damage Multiplier"] > 0 and IsMagicSkill(skillData) then
+            local element = tooltip:GetElement("SkillDescription")
+            local header = Ext.GetTranslatedStringFromKey("LLLICH_TWINSKULLS")
+            local skillText = Ext.GetTranslatedString("ha05786dbg4f8eg4c23g835dge99f13aae201", "<font color='#00FFCC'>This spell with deal a guaranteed critical hit and reduce long cooldowns by 1.</font>")
+            local text = string.format("<br>%s<br>%s", header, skillText)
+            element.Label = element.Label .. text
+            -- tooltip:AppendElement({
+            --     Type = "StatusImmunity",
+            --     Label = Ext.GetTranslatedString("hd7ae6af5g82eeg49ffg9c73g772609b004e0", "Guaranteed Critical Hit"),
+            -- })
+            -- tooltip:AppendElement({
+            --     Type = "StatusImmunity",
+            --     Label = Ext.GetTranslatedString("h05b6e7d1gaf93g43ccg9cb2g0115e2a1f323", "Reduce Long Cooldowns By 1"),
+            -- })
+        end
+    end
 	if skill == "Shout_LLLICH_SoulReaper" then
 		local requirements = tooltip:GetElements("SkillRequiredEquipment")
 		if requirements ~= nil then
@@ -137,8 +155,48 @@ local function OnItemTooltip(item, tooltip)
 	end
 end
 
+local TwinSkullEnergyText = ts:Create("h19d156ffgaab9g4825gab62g8877197d5867", "[1]/[2] Spell Energy")
+-- local TwinSkullBonusHeader = ts:Create("hbcbbad37g9cf0g463cg805fg405c55fa1e49", "Next Magical Spell Will:")
+-- local TwinSkullBonusCooldowns = ts:Create("h05b6e7d1gaf93g43ccg9cb2g0115e2a1f323", "Reduce Large Cooldowns By 1")
+
+---@param character EsvCharacter
+---@param status EsvStatus
+---@param tooltip TooltipData
+local function TwinSkullsEnergyTooltip(character, status, tooltip)
+    local energy = ClientData.TwinSkullsEnergy[character.MyGuid]
+    if energy ~= nil then
+        local max = Ext.ExtraData.LLLICH_TwinSkulls_MaxEnergy or 10
+        if energy < max then
+            tooltip:AppendElement({
+                Type = "StatusBonus",
+                Label = TwinSkullEnergyText:ReplacePlaceholders(energy, max)
+            })
+        else
+            local headerText = Ext.GetTranslatedString("hbcbbad37g9cf0g463cg805fg405c55fa1e49", "<font color='#33FFCC'>The next damaging magical spell will:</font>")
+
+            local description = tooltip:GetElement("StatusDescription")
+            if description ~= nil then
+                description.Label = description.Label .. "<br>" .. headerText
+            end
+
+            local cooldownText = Ext.GetTranslatedString("h05b6e7d1gaf93g43ccg9cb2g0115e2a1f323", "Reduce Long Cooldowns By 1")
+            local critText = Ext.GetTranslatedString("h0a6c96bcg5d64g4226gb2eegc14f09676f65", "Critical Hit")
+            tooltip:AppendElement({
+                Type = "StatusBonus",
+                Label = critText
+            })
+            tooltip:AppendElement({
+                Type = "StatusBonus",
+                Label = cooldownText
+            })
+        end
+
+    end
+end
+
 Ext.RegisterListener("SessionLoaded", function()
     Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
     Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
+    Game.Tooltip.RegisterListener("Status", "LLLICH_TWINSKULLS_ENERGY", TwinSkullsEnergyTooltip)
     Mods.LeaderLib.UI.RegisterItemTooltipTag("LLLICH_TWINSKULLS")
 end)

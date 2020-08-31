@@ -7,3 +7,7 @@ LLLICH_Tooltip_ShadowDamageHelper	Shadow damage bypasses armor and cannot be res
 LLLICH_Tooltip_OnKill	On Kill:	hb1b2f76eg982cg4503g8ab7g4cbd9e1b5a4f
 LLLICH_Tooltip_DrainSoulBonus1	+1 Phylactery Souls	h9e1caf88g0c2bg41d3g8253g932274a61116
 LLLICH_Tooltip_DrainSoulBonus2	+1 Source Points	h8d1a2e82g002fg4a71gb263g313ba9cb7747
+LLLICH_Tooltip_TwinSkulls_Energy	[1]/[2] Spell Energy	h19d156ffgaab9g4825gab62g8877197d5867
+LLLICH_Tooltip_TwinSkulls_BonusHeader	<font color='#33FFCC'>The next damaging magical spell will:</font>	hbcbbad37g9cf0g463cg805fg405c55fa1e49
+LLLICH_Tooltip_TwinSkulls_CooldownReduction	Reduce Long Cooldowns By 1	h05b6e7d1gaf93g43ccg9cb2g0115e2a1f323
+LLLICH_Tooltip_TwinSkulls_ActivatedSkillText	<font color='#00FFCC'>This spell with deal a guaranteed critical hit and reduce long cooldowns by 1.</font>	ha05786dbg4f8eg4c23g835dge99f13aae201

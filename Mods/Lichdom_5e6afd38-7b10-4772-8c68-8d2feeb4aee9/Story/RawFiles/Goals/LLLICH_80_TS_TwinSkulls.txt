@@ -1,0 +1,56 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+/* [OSITOOLS_ONLY]
+IF
+SkillCast(_Char, _Skill, _SkillType, _Element)
+AND
+DB_CombatCharacters(_Char, _CombatID)
+AND
+DB_CombatCharacters(_OtherChar, _CombatID)
+AND
+IsTagged(_OtherChar, "LLLICH_TWINSKULLS", 1)
+AND
+GetUUID(_OtherChar, _UUID)
+THEN
+NRD_ModCall("Lichdom", "IncreaseTwinSkullsEnergy", _UUID, _Skill);
+
+IF
+ObjectLeftCombat((CHARACTERGUID)_Char, _CombatID)
+AND
+IsTagged(_Char, "LLLICH_TWINSKULLS", 1)
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("Lichdom", "ClearTwinSkullsEnergy", _UUID);
+*/
+
+// PROC
+// LLLICH_TwinSkulls_StoreEnergy((CHARACTERGUID)_Char, (STRING)_Amount)
+// AND
+// DB_LLLICH_Skills_Temp_TwinSkullsEnergy(_Char, _CombatID, _LastAmount)
+// THEN
+// NOT DB_LLLICH_Skills_Temp_TwinSkullsEnergy(_Char, _CombatID, _LastAmount);
+
+// PROC
+// LLLICH_TwinSkulls_StoreEnergy((CHARACTERGUID)_Char, (STRING)_Amount)
+// AND
+// CombatGetIDForCharacter(_Char, _CombatID)
+// THEN
+// DB_LLLICH_Skills_Temp_TwinSkullsEnergy(_Char, _CombatID, _Amount);
+
+// IF
+// CombatEnded(_CombatID)
+// AND
+// DB_LLLICH_Skills_Temp_TwinSkullsEnergy(_Char, _CombatID, _Amount)
+// THEN
+// NOT DB_LLLICH_Skills_Temp_TwinSkullsEnergy(_Char, _CombatID, _Amount);
+
+EXITSECTION
+//SysClear("DB_LLLICH_Skills_Temp_TwinSkullsEnergy", 3);
+/* [OSITOOLS_ONLY]
+NRD_ModCall("Lichdom", "ClearTwinSkullsEnergy");
+*/
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
