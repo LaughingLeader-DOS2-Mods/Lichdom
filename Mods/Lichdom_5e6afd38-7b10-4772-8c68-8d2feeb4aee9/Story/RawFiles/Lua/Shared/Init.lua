@@ -51,6 +51,14 @@ local function GetSkillHitType(skill)
 end
 
 function IsMagicSkill(skill)
+	if type(skill) == "string" then
+		if string.find(skill, "LLLICH_") then
+			return true
+		end
+		skill = GameHelpers.Ext.CreateSkillTable(skill)
+	elseif string.find(skill.Name, "LLLICH_") then
+		return true
+	end
 	local hitType = GetSkillHitType(skill)
 	return hitType == HitType.Magic or hitType == HitType.WeaponDamage
 end

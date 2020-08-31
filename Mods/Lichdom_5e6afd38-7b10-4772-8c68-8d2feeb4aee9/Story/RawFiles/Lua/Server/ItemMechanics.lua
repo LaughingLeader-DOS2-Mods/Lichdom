@@ -10,9 +10,12 @@ local MagicSchools = {
 }
 
 function IncreaseTwinSkullsEnergy(uuid, skillid)
+	if IsTagged(uuid, "LLLICH_TwinSkulls_EnergyMax") == 1 then
+		return
+	end
 	---@type StatEntrySkillData
 	local skill = Ext.GetStat(skillid)
-	if skill["Magic Cost"] > 0 or (skill.ActionPoints > 0 and MagicSchools[skill.Ability] == true) then
+	if skill["Magic Cost"] > 0 or (skill.ActionPoints > 0 and IsMagicSkill(skillid)) then
 		local currentEnergy = 0
 		if PersistentVars.TwinSkullsEnergy[uuid] ~= nil then
 			currentEnergy = PersistentVars.TwinSkullsEnergy[uuid] or 0
@@ -36,10 +39,13 @@ function IncreaseTwinSkullsEnergy(uuid, skillid)
 			end
 		end
 		local hasTag = IsTagged(uuid, "LLLICH_TwinSkulls_EnergyMax") == 0
-		if currentEnergy >= max and hasTag then
+		if currentEnergy >= max and not hasTag then
 			SetTag(uuid, "LLLICH_TwinSkulls_EnergyMax")
 		elseif hasTag then
 			ClearTag(uuid, "LLLICH_TwinSkulls_EnergyMax")
+		end
+		if Ext.IsDeveloperMode() then
+			SetTag(uuid, "LLLICH_TwinSkulls_EnergyMax")
 		end
 	end
 end
