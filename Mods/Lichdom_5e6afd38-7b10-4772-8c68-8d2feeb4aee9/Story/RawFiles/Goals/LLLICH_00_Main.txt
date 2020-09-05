@@ -361,6 +361,7 @@ NOT DB_LLLICH_Phylactery_Active(_Lich, _, _)
 THEN
 LeaderLog_Log("DEBUG", "[Lichdom:Main:SetupLich] Adding an initial [Soul Extractor].");
 ObjectSetFlag(_Lich, "LLLICH_Preset_GainedInitialSoulExtractor", 0);
+ObjectSetFlag(_Lich, "QuestAdd_LLLICH_Main_CreatePhylactery", 0);
 ItemTemplateAddTo("PUZ_LLLICH_PhylacteryCreator_A_71cb1886-a2fc-4f3a-acd6-886485fa9bee", _Lich, 1, 1);
 
 PROC

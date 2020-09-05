@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="3" minor="6" revision="6" build="0" />
+	<region id="QuestCategories">
+		<node id="root">
+			<children>
+				<node id="QuestCategory">
+					<attribute id="CategoryID" value="LLLICH_LichPowers" type="22" />
+					<attribute id="Description" value="The journey of becoming a Lich and expanding your powers." type="28" handle="h230a6c1ag2fa3g4f7fg83dbgada6005e2112" />
+					<attribute id="SortingPriority" value="0" type="4" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

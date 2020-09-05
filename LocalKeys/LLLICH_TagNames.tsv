@@ -3,4 +3,4 @@ LLLICH_Lich	Lich	h0f1e61f2g998cg4a5cg868dg1a5ddcda84e1
 LLLICH_GRIMOIRE	Grimoire	h6ab621ffgf9bdg463bga331ga98b7649b58c
 LLLICH_LICHSTAFF	One-handed Staff	hef8a729bg734eg48a1gbb75gabe65a3233a9
 LLLICH_TWINSKULLS	<font color='#BB00FF'>Spell Enhancement</font>	hfbd262d6g39ceg4913ga056gf17297015e6a
-LLLICH_TWINSKULLS_Description	Accumulate magical energy while spells are cast in combat.<br><font color='#00FFCC'>At full power, your next spell deals a guaranteed critical hit and lowers all cooldowns greater than 1 by 1 turn.</font>	h663bed56gaa46g4e78gada3gdb68ede479dd
+LLLICH_TWINSKULLS_Description	Accumulate magical energy when spells are cast in combat.<br><font color='#00FFCC'>At full power, your next spell deals a guaranteed critical hit and lowers all cooldowns greater than 1 by 1 turn.</font>	h663bed56gaa46g4e78gada3gdb68ede479dd

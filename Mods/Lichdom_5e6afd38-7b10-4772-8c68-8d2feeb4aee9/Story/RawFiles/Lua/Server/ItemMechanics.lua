@@ -44,9 +44,6 @@ function IncreaseTwinSkullsEnergy(uuid, skillid)
 		elseif hasTag then
 			ClearTag(uuid, "LLLICH_TwinSkulls_EnergyMax")
 		end
-		if Ext.IsDeveloperMode() then
-			SetTag(uuid, "LLLICH_TwinSkulls_EnergyMax")
-		end
 	end
 end
 
@@ -64,3 +61,18 @@ function ClearTwinSkullsEnergy(uuid, recursive)
 		end
 	end
 end
+
+Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, isEditorMode)
+	if IsGameLevel(region) == 1 then
+		for i,v in pairs(Osi.DB_IsPlayer:Get(nil)) do
+			local player = v[1]
+			if IsTagged(player, "LLLICH_TwinSkulls_EnergyMax") == 1 or HasActiveStatus(player, "LLLICH_TWINSKULLS_ENERGY") == 1 then
+				local uuid = GetUUID(player)
+				local energy = PersistentVars.TwinSkullsEnergy[uuid]
+				if energy == nil or energy == 0 then
+					ClearTwinSkullsEnergy(uuid)
+				end
+			end
+		end
+	end
+end)
