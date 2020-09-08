@@ -28,12 +28,12 @@
 	<content contentuid="h1a8b68dfgcc10g4259g8f99gb12187e2c919">Small Box</content>
 	<content contentuid="h1f9792f5g7a76g41ccgbfc4gf3b647b5777b">&lt;font color=&apos;#FF001F&apos;&gt;You can&apos;t extract your soul while in combat!&lt;/font&gt;</content>
 	<content contentuid="h2036da3bgad7dg42cag8dddgf2e3fb287941">Frozen Celerity</content>
-	<content contentuid="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593">Become Immortal</content>
+	<content contentuid="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593">Gain immortality.</content>
 	<content contentuid="h230a6c1ag2fa3g4f7fg83dbgada6005e2112">Lichdom</content>
 	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">[1][2][3]</content>
 	<content contentuid="h2474259fg6d67g4c98ga77fg0164f1476a41">&lt;font color=&apos;#FF0058&apos; size=&apos;18&apos;&gt;Immune to [1]&lt;/font&gt;</content>
 	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135">shadow Damage</content>
-	<content contentuid="h2693ffdag7fbcg41d1g941ag916c1e4d39d4">With the phylactery created, I am now an immortal Lich.&lt;br&gt;Such a strange feeling... Like a puppet at the end of a string, this vessel is merely a manifestation of my will. Death no longer holds any sway over my fate.</content>
+	<content contentuid="h2693ffdag7fbcg41d1g941ag916c1e4d39d4">With the phylactery created, I am now an immortal Lich.&lt;br&gt;Such a strange feeling... Like a puppet at the end of a string, this vessel is merely a manifestation of my will.&lt;br&gt;Death no longer holds any sway over my fate.</content>
 	<content contentuid="h269d8e77gfab2g4035g8afcg709fabce0f45">Change race using default settings.</content>
 	<content contentuid="h28131905gceb4g4f3ag97cfgab016276a7b7">Inspect</content>
 	<content contentuid="h297d7dc9g1173g4b74gaa79g77c0d508ab73">Breathe chilling wind in a cone, dealing [1] damage to all non-allied characters and freezing the ground.&lt;br&gt;&lt;font color=&apos;#CFECFF&apos; size=&apos;19&apos;&gt;If the target is Chilled/Wet, apply Frozen for 1 turn.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#97FBFF&apos; size=&apos;19&apos;&gt;Otherwise, apply Chilled for 2 turns.&lt;/font&gt;</content>

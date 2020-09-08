@@ -16,7 +16,7 @@
                     </children>
 				</node>
 				<node id="Objective">
-					<attribute id="Description" value="Become Immortal" type="28" handle="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593" />
+					<attribute id="Description" value="Gain immortality." type="28" handle="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593" />
 					<attribute id="ObjectiveID" value="LLLICH_Main_CreatePhylactery_Completed" type="22" />
 					<attribute id="Priority" value="0" type="4" />
 					<children>
