@@ -6,7 +6,7 @@
 		<node id="root">
 			<children>
 				<node id="Quest">
-					<attribute id="CategoryID" value="LLLICH_Main_LichCreation" type="22" />
+					<attribute id="CategoryID" value="LLLICH_Lichdom" type="22" />
 					<attribute id="MainQuest" value="False" type="19" />
 					<attribute id="QuestBroadcastLevel" value="0" type="1" />
 					<attribute id="QuestID" value="LLLICH_Main_LichCreation" type="22" />
@@ -15,9 +15,9 @@
 					<attribute id="SortingPriority" value="0" type="4" />
 					<children>
 						<node id="QuestState">
-							<attribute id="Achievement" value="LLLICH_Main_PhylacteryCreated" type="22" />
+							<attribute id="Achievement" value="" type="22" />
 							<attribute id="Act" value="0" type="4" />
-							<attribute id="Description" value="With your phylactery created, you are now immortal. Take delicate care to keep the phylactery empowered." type="28" handle="h2693ffdag7fbcg41d1g941ag916c1e4d39d4" />
+							<attribute id="Description" value="Your studies on how to attain Lichdom have revealed that you must create a phylactery - An object to store your life force.&lt;br&gt;Through the process of placing your soul within a phylactery, you gain the ability to re-materialize at will and cheat death, so long as your phylactery persists and remains powered.&lt;br&gt;A device named the &quot;Soul Extractor&quot; can separate your soul safely. Thankfully you've managed to retain yours, despite being made prisoner." type="28" handle="h79977c0agd9e9g4634gab6fg3bc905feae15" />
 							<attribute id="DevComment" value="" type="22" />
 							<attribute id="Gain" value="0" type="4" />
 							<attribute id="Mystery" value="" type="22" />
@@ -45,6 +45,22 @@
 							<attribute id="ReputationGain" value="0" type="4" />
 							<attribute id="StatTriggerGUID" value="" type="22" />
 							<attribute id="Status" value="LLLICH_Main_PhylacteryCreated" type="22" />
+						</node>
+						<node id="QuestState">
+							<attribute id="Achievement" value="" type="22" />
+							<attribute id="Act" value="0" type="4" />
+							<attribute id="Description" value="With your new ability to drain souls, it is now possible to upgrade your phylactery. Gather souls for more power." type="28" handle="hb4c42cfdgabffg4c20g9e42g8ecd29a212da" />
+							<attribute id="DevComment" value="" type="22" />
+							<attribute id="Gain" value="0" type="4" />
+							<attribute id="Mystery" value="" type="22" />
+							<attribute id="MysteryAction" value="0" type="1" />
+							<attribute id="MysteryDescription" value="" type="28" handle="h248966eag678eg4ad8g8f2agd2910d0087c5" />
+							<attribute id="Objective" value="LLLICH_Main_UpgradePhylactery1_Objective" type="22" />
+							<attribute id="QuestRewardCount" value="0" type="4" />
+							<attribute id="QuestRewardLevel" value="0" type="4" />
+							<attribute id="ReputationGain" value="0" type="4" />
+							<attribute id="StatTriggerGUID" value="" type="22" />
+							<attribute id="Status" value="LLLICH_Main_PhylacteryUpgrading1" type="22" />
 						</node>
 					</children>
 				</node>

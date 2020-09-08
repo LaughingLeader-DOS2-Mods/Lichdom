@@ -6,7 +6,7 @@
 		<node id="root">
 			<children>
 				<node id="QuestCategory">
-					<attribute id="CategoryID" value="LLLICH_LichPowers" type="22" />
+					<attribute id="CategoryID" value="LLLICH_Lichdom" type="22" />
 					<attribute id="Description" value="Lichdom" type="28" handle="h230a6c1ag2fa3g4f7fg83dbgada6005e2112" />
 					<attribute id="SortingPriority" value="0" type="4" />
 				</node>
