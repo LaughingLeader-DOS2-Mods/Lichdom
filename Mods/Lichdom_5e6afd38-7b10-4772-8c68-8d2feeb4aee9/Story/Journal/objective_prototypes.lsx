@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="3" minor="6" revision="0" build="3" />
+	<region id="Objectives">
+		<node id="root">
+			<children>
+				<node id="Objective">
+					<attribute id="Description" value="Use the &lt;font color='#8C753E'&gt;Soul Extractor&lt;/font&gt; to create a phylactery." type="28" handle="hd286937bgf77cg4d8fga78bg132d05c09228" />
+					<attribute id="ObjectiveID" value="LLLICH_Main_CreatePhylactery_SoulExtractor" type="22" />
+					<attribute id="Priority" value="0" type="4" />
+					<children>
+                        <node id="Markers">
+                            <attribute id="Markers" value="" type="22" />
+                        </node>
+                    </children>
+				</node>
+				<node id="Objective">
+					<attribute id="Description" value="Gain Souls for the Phylactery" type="28" handle="hff6df7f5g9d8ag4872g8687g50a4018a76e1" />
+					<attribute id="ObjectiveID" value="LLLICH_Main_UpgradePhylactery1_Objective" type="22" />
+					<attribute id="Priority" value="0" type="4" />
+					<children>
+                        <node id="Markers">
+                            <attribute id="Markers" value="" type="22" />
+                        </node>
+                    </children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
