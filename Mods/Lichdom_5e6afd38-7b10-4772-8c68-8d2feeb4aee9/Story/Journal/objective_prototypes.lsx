@@ -16,7 +16,17 @@
                     </children>
 				</node>
 				<node id="Objective">
-					<attribute id="Description" value="Gain Souls for the Phylactery" type="28" handle="hff6df7f5g9d8ag4872g8687g50a4018a76e1" />
+					<attribute id="Description" value="Become Immortal" type="28" handle="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593" />
+					<attribute id="ObjectiveID" value="LLLICH_Main_CreatePhylactery_Completed" type="22" />
+					<attribute id="Priority" value="0" type="4" />
+					<children>
+                        <node id="Markers">
+                            <attribute id="Markers" value="" type="22" />
+                        </node>
+                    </children>
+				</node>
+				<node id="Objective">
+					<attribute id="Description" value="Drain Souls for the Phylactery" type="28" handle="hff6df7f5g9d8ag4872g8687g50a4018a76e1" />
 					<attribute id="ObjectiveID" value="LLLICH_Main_UpgradePhylactery1_Objective" type="22" />
 					<attribute id="Priority" value="0" type="4" />
 					<children>

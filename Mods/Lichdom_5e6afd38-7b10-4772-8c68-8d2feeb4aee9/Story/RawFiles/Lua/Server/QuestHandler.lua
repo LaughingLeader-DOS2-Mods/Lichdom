@@ -10,16 +10,15 @@ local Quests = {
 
 local States = {
 	CreatePhylactery = qs:Create("LLLICH_Main_CreatePhylactery"),
-	PhylacteryCreated = qs:Create("LLLICH_Main_PhylacteryCreated")
+	PhylacteryCreated = qs:Create("LLLICH_Main_PhylacteryCreated"),
+	UpgradePhylactery1 = qs:Create("LLLICH_Main_PhylacteryUpgrading1"),
 }
 
 Quests.Main:AddState(States)
 
 function RegisterQuests()
-	for quest,states in pairs(Quests) do
-		for i,state in pairs(states) do
-			Osi.DB_QuestDef_State(quest, state)
-		end
+	for questName,data in pairs(Quests) do
+		data:RegisterDatabases()
 	end
 end
 
@@ -30,13 +29,17 @@ end
 LeaderLib.RegisterListener("Initialized", function(region)
 	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = db[1]
-		if IsTagged(uuid, "LLLICH_Lich") == 1 and not Quests.Main:HasQuest(uuid) then
-			Quests.Main:Activate(uuid)
+		if IsTagged(uuid, "LLLICH_Lich") == 1 then
+			if not Quests.Main:HasQuest(uuid) then
+				Quests.Main:Activate(uuid)
+			end
 			local phylactery = GetVarObject(uuid, "LLLICH_Phylactery")
-			if phylactery ~= nil then
+			if StringHelpers.IsNullOrEmpty(phylactery) then
 				States.CreatePhylactery:Activate(uuid)
 			else
+				States.CreatePhylactery:Activate(uuid)
 				States.PhylacteryCreated:Activate(uuid)
+				States.UpgradePhylactery1:Activate(uuid)
 			end
 		end
 	end

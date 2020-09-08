@@ -7,7 +7,7 @@
 	<content contentuid="h0742bdd2g3877g4347gabe4g48646d11d5e7">You have power over the &lt;font color=&apos;#00AA00&apos;&gt;Undead&lt;/font&gt;, allowing you to control an undead being for [ExtraData:LLLICH_DominateUndead_Turns] turn(s).&lt;br&gt;&lt;font color=&apos;#CCFF00&apos;&gt;Undead with intelligence higher than [ExtraData:LLLICH_DominateUndead_IntResistance] have a chance to resist the effect.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3300&apos;&gt;The last enemy in battle, or Undead with intelligence of [ExtraData:LLLICH_DominateUndead_IntImmunity] or higher are immune to mental control.&lt;/font&gt;</content>
 	<content contentuid="h080b267bg014cg4f37g9e37ga44a33d3bcd8">Death&apos;s Embrace</content>
 	<content contentuid="h08292830geebbg4f0fgbfdage7eef4d75afb">Place your chilling hand on the target, dealing [1].&lt;br&gt;&lt;font color=&apos;#CFECFF&apos; size=&apos;19&apos;&gt;If the target is Wet/Chilled, apply Frozen for 1 turn.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#97FBFF&apos; size=&apos;19&apos;&gt;If the target is not Wet/Chilled/Frozen, apply Chilled for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#D7001F&apos; size=&apos;19&apos;&gt;If the target is Frozen, deal [2].&lt;/font&gt;</content>
-	<content contentuid="h091fab92g05b7g4f75g914fg8a2ee4345bcc">Create a Phylactery</content>
+	<content contentuid="h091fab92g05b7g4f75g914fg8a2ee4345bcc">Immortality</content>
 	<content contentuid="h0c95431eg86feg4f1dgb36fg14d1ce8ae4bd">Character is an immortal, undead sorcerer.&lt;br&gt;&lt;font color=&apos;#C7A758&apos;&gt;Immunity to Bleeding &amp; Suffocating&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#C7A758&apos;&gt;Chance to Resist Fear &amp; Stunned&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#B823CB&apos;&gt;Lich Powers Unlocked&lt;/font&gt;</content>
 	<content contentuid="h0d0fb632g57cag4656g9a4fgeaef48c7fdf0">Character is slowly regenerating through the power of a Phylactery.</content>
 	<content contentuid="h0f1e61f2g998cg4a5cg868dg1a5ddcda84e1">Lich</content>
@@ -28,11 +28,12 @@
 	<content contentuid="h1a8b68dfgcc10g4259g8f99gb12187e2c919">Small Box</content>
 	<content contentuid="h1f9792f5g7a76g41ccgbfc4gf3b647b5777b">&lt;font color=&apos;#FF001F&apos;&gt;You can&apos;t extract your soul while in combat!&lt;/font&gt;</content>
 	<content contentuid="h2036da3bgad7dg42cag8dddgf2e3fb287941">Frozen Celerity</content>
+	<content contentuid="h22fd41acg145cg4ff0g9d86gb4ec8e1bd593">Become Immortal</content>
 	<content contentuid="h230a6c1ag2fa3g4f7fg83dbgada6005e2112">Lichdom</content>
 	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">[1][2][3]</content>
 	<content contentuid="h2474259fg6d67g4c98ga77fg0164f1476a41">&lt;font color=&apos;#FF0058&apos; size=&apos;18&apos;&gt;Immune to [1]&lt;/font&gt;</content>
 	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135">shadow Damage</content>
-	<content contentuid="h2693ffdag7fbcg41d1g941ag916c1e4d39d4">With your phylactery created, you are now immortal. Take delicate care to keep the phylactery empowered.</content>
+	<content contentuid="h2693ffdag7fbcg41d1g941ag916c1e4d39d4">With the phylactery created, I am now an immortal Lich.&lt;br&gt;Such a strange feeling... Like a puppet at the end of a string, this vessel is merely a manifestation of my will. Death no longer holds any sway over my fate.</content>
 	<content contentuid="h269d8e77gfab2g4035g8afcg709fabce0f45">Change race using default settings.</content>
 	<content contentuid="h28131905gceb4g4f3ag97cfgab016276a7b7">Inspect</content>
 	<content contentuid="h297d7dc9g1173g4b74gaa79g77c0d508ab73">Breathe chilling wind in a cone, dealing [1] damage to all non-allied characters and freezing the ground.&lt;br&gt;&lt;font color=&apos;#CFECFF&apos; size=&apos;19&apos;&gt;If the target is Chilled/Wet, apply Frozen for 1 turn.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#97FBFF&apos; size=&apos;19&apos;&gt;Otherwise, apply Chilled for 2 turns.&lt;/font&gt;</content>
@@ -98,7 +99,7 @@
 	<content contentuid="h75d3d108g1749g435ag95fdg2b7fe2221129">Phylactery</content>
 	<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f">[1] Magic</content>
 	<content contentuid="h775ac0aag1640g464bg9d4cg2dcb11788ea7">Lich&apos;s Staff</content>
-	<content contentuid="h79977c0agd9e9g4634gab6fg3bc905feae15">Your studies on how to attain Lichdom have revealed that you must create a phylactery - An object to store your life force.&lt;br&gt;Through the process of placing your soul within a phylactery, you gain the ability to re-materialize at will and cheat death, so long as your phylactery persists and remains powered.&lt;br&gt;A device named the &quot;Soul Extractor&quot; can separate your soul safely. Thankfully you&apos;ve managed to retain yours, despite being made prisoner.</content>
+	<content contentuid="h79977c0agd9e9g4634gab6fg3bc905feae15">My lifelong study of Lichdom has revealed that I must create a phylactery - A magical object that can store the soul itself.&lt;br&gt;Through a phylactery, I gain the ability to re-materialize at will and cheat death, so long as the phylactery remains powered.&lt;br&gt;A device named the &quot;Soul Extractor&quot; can separate my soul safely, and it just so happens I&apos;ve managed to keep mine, despite being made prisoner.&lt;br&gt;&lt;br&gt;Now I just need the resolve to give up my humanity...</content>
 	<content contentuid="h7a5d9707g3e3dg44f3g9b30g2fdfd64c2087">Launch a soul-infused missile from your staff that deals [1] and marks the target for death.&lt;br&gt;If the target dies while marked, their soul explodes for [2] within a [3] radius.</content>
 	<content contentuid="h7ac8e6a3g55beg4de0g83a8g8c0961190c53">&lt;font color=&apos;#73F6FF&apos;&gt;Return to Phylactery&lt;/font&gt;</content>
 	<content contentuid="h7c387805g1fc3g484fg9891g9de635cbb200">&lt;font color=&apos;#FF001F&apos;&gt;Teleported to the nearest waypoint to avoid lava.&lt;/font&gt;</content>
@@ -142,6 +143,7 @@
 	<content contentuid="hb1b2f76eg982cg4503g8ab7g4cbd9e1b5a4f">On Kill:</content>
 	<content contentuid="hb319c9f2g5e5eg46cbga40cga825ea7f7811">Character is immortal through the power of a Phylactery.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos; size=&apos;19&apos;&gt;Phylactery Powers Unlocked&lt;/font&gt;</content>
 	<content contentuid="hb48af784g4057g40e5g8416gac73d17aa029">Exude a chilling aura of death for 3 turns, gaining &lt;font color=&apos;#5e85f6&apos;&gt;[1]% Water Resistance&lt;/font&gt;, &lt;font color=&apos;#C7A758&apos;&gt;Immunity to Slipping and Burning&lt;/font&gt;, and &lt;font color=&apos;#a6bdff&apos;&gt;[2]% increased speed on ice&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#73F6FF&apos;&gt;At the end of your turn, allies within [3] who are &lt;font color=&apos;#FE6E27&apos;&gt;Burning&lt;/font&gt; or &lt;font color=&apos;#FF9600&apos;&gt;Warm&lt;/font&gt; are cooled down, enemies within [3] are &lt;font color=&apos;#4197E2&apos;&gt;Chilled&lt;/font&gt;, and &lt;font color=&apos;#c2d3ff&apos;&gt;Frozen&lt;/font&gt; enemies take [4], healing you for the damage dealt.&lt;/font&gt;</content>
+	<content contentuid="hb4c42cfdgabffg4c20g9e42g8ecd29a212da">As a Lich, I&apos;ve gained a new potential for powerful magic. One such ability is the manipulation of souls. &lt;br&gt;Beings near death are particularly suspectible. In fact, I bet I could power the phylactery with additional souls...</content>
 	<content contentuid="hb4fdea5agec70g46f9gbd32g19ac0f4e1eed">[SETUP] Run the Lich Setup Command - This will apply all the necessary commands to become a Lich (like if you selected the preset).</content>
 	<content contentuid="hb65ba3b1gc12bg4a00g9774g0722139a3b36">&lt;font color=&apos;#73F6FF&apos;&gt;Dominate Undead&lt;/font&gt;</content>
 	<content contentuid="hb90108f2g558eg4d43g91d0g3cc5f847bc17">*Use a small, inconspicous box for the Phylactery.*</content>
@@ -199,6 +201,7 @@
 	<content contentuid="hfac784b5gebe7g442cgbc2dg5713218636b9">Running command...</content>
 	<content contentuid="hfbd262d6g39ceg4913ga056gf17297015e6a">&lt;font color=&apos;#BB00FF&apos;&gt;Spell Enhancement&lt;/font&gt;</content>
 	<content contentuid="hfbd89c73g7faag4affg86bdgf2f6087fbf85">*Use an eerie-looking amulet for the Phylactery.*</content>
+	<content contentuid="hff6df7f5g9d8ag4872g8687g50a4018a76e1">Drain Souls for the Phylactery</content>
 	<content contentuid="hffbdc453ge2e3g448cga29bgd2ffc0d4dde2">&lt;font color=&apos;#80FFC3&apos;&gt;You power your Phylactery with a new soul.&lt;/font&gt;</content>
 	<content contentuid="hffd291aeg8a8ag4044g8d06g9fe2e9b63689">Lichdom</content>
 </contentList>

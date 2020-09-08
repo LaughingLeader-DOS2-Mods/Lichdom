@@ -10,14 +10,14 @@
 					<attribute id="MainQuest" value="False" type="19" />
 					<attribute id="QuestBroadcastLevel" value="0" type="1" />
 					<attribute id="QuestID" value="LLLICH_Main_LichCreation" type="22" />
-					<attribute id="QuestTitle" value="Create a Phylactery" type="28" handle="h091fab92g05b7g4f75g914fg8a2ee4345bcc" />
+					<attribute id="QuestTitle" value="Immortality" type="28" handle="h091fab92g05b7g4f75g914fg8a2ee4345bcc" />
 					<attribute id="Shareable" value="False" type="19" />
 					<attribute id="SortingPriority" value="0" type="4" />
 					<children>
 						<node id="QuestState">
 							<attribute id="Achievement" value="" type="22" />
 							<attribute id="Act" value="0" type="4" />
-							<attribute id="Description" value="Your studies on how to attain Lichdom have revealed that you must create a phylactery - An object to store your life force.&lt;br&gt;Through the process of placing your soul within a phylactery, you gain the ability to re-materialize at will and cheat death, so long as your phylactery persists and remains powered.&lt;br&gt;A device named the &quot;Soul Extractor&quot; can separate your soul safely. Thankfully you've managed to retain yours, despite being made prisoner." type="28" handle="h79977c0agd9e9g4634gab6fg3bc905feae15" />
+							<attribute id="Description" value="My lifelong study of Lichdom has revealed that I must create a phylactery - A magical object that can store the soul itself.&lt;br&gt;Through a phylactery, I gain the ability to re-materialize at will and cheat death, so long as the phylactery remains powered.&lt;br&gt;A device named the &quot;Soul Extractor&quot; can separate my soul safely, and it just so happens I've managed to keep mine, despite being made prisoner.&lt;br&gt;&lt;br&gt;Now I just need the resolve to give up my humanity..." type="28" handle="h79977c0agd9e9g4634gab6fg3bc905feae15" />
 							<attribute id="DevComment" value="" type="22" />
 							<attribute id="Gain" value="0" type="4" />
 							<attribute id="Mystery" value="" type="22" />
@@ -33,13 +33,13 @@
 						<node id="QuestState">
 							<attribute id="Achievement" value="" type="22" />
 							<attribute id="Act" value="0" type="4" />
-							<attribute id="Description" value="With your phylactery created, you are now immortal. Take delicate care to keep the phylactery empowered." type="28" handle="h2693ffdag7fbcg41d1g941ag916c1e4d39d4" />
+							<attribute id="Description" value="With the phylactery created, I am now an immortal Lich.&lt;br&gt;Such a strange feeling... Like a puppet at the end of a string, this vessel is merely a manifestation of my will. Death no longer holds any sway over my fate." type="28" handle="h2693ffdag7fbcg41d1g941ag916c1e4d39d4" />
 							<attribute id="DevComment" value="" type="22" />
 							<attribute id="Gain" value="0" type="4" />
 							<attribute id="Mystery" value="" type="22" />
 							<attribute id="MysteryAction" value="0" type="1" />
 							<attribute id="MysteryDescription" value="" type="28" handle="h248966eag678eg4ad8g8f2agd2910d0087c5" />
-							<attribute id="Objective" value="" type="22" />
+							<attribute id="Objective" value="LLLICH_Main_CreatePhylactery_Completed" type="22" />
 							<attribute id="QuestRewardCount" value="0" type="4" />
 							<attribute id="QuestRewardLevel" value="0" type="4" />
 							<attribute id="ReputationGain" value="0" type="4" />
@@ -49,7 +49,7 @@
 						<node id="QuestState">
 							<attribute id="Achievement" value="" type="22" />
 							<attribute id="Act" value="0" type="4" />
-							<attribute id="Description" value="With your new ability to drain souls, it is now possible to upgrade your phylactery. Gather souls for more power." type="28" handle="hb4c42cfdgabffg4c20g9e42g8ecd29a212da" />
+							<attribute id="Description" value="As a Lich, I've gained a new potential for powerful magic. One such ability is the manipulation of souls. &lt;br&gt;Beings near death are particularly suspectible. In fact, I bet I could power the phylactery with additional souls..." type="28" handle="hb4c42cfdgabffg4c20g9e42g8ecd29a212da" />
 							<attribute id="DevComment" value="" type="22" />
 							<attribute id="Gain" value="0" type="4" />
 							<attribute id="Mystery" value="" type="22" />
