@@ -1,20 +1,20 @@
 ---@type QuestData
-local q = LeaderLib.Classes.QuestData
+local q = Classes.QuestData
 ---@type QuestStateData
-local qs = LeaderLib.Classes.QuestStateData
+local qs = Classes.QuestStateData
 
 ---@type table<string,QuestData>
 local Quests = {
 	Main = q:Create("LLLICH_Main_LichCreation")
 }
 
-local States = {
+local MainStates = {
 	CreatePhylactery = qs:Create("LLLICH_Main_CreatePhylactery"),
 	PhylacteryCreated = qs:Create("LLLICH_Main_PhylacteryCreated"),
 	UpgradePhylactery1 = qs:Create("LLLICH_Main_PhylacteryUpgrading1"),
 }
 
-Quests.Main:AddState(States)
+Quests.Main:AddState(MainStates)
 
 function RegisterQuests()
 	for questName,data in pairs(Quests) do
@@ -23,10 +23,10 @@ function RegisterQuests()
 end
 
 function StartPhylacteryQuest(uuid)
-	ObjectSetFlag(uuid, "", 0)
+	Quests.Main:Activate(uuid)
 end
 
-LeaderLib.RegisterListener("Initialized", function(region)
+RegisterListener("Initialized", function(region)
 	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = db[1]
 		if IsTagged(uuid, "LLLICH_Lich") == 1 then
@@ -35,11 +35,11 @@ LeaderLib.RegisterListener("Initialized", function(region)
 			end
 			local phylactery = GetVarObject(uuid, "LLLICH_Phylactery")
 			if StringHelpers.IsNullOrEmpty(phylactery) then
-				States.CreatePhylactery:Activate(uuid)
+				MainStates.CreatePhylactery:Activate(uuid)
 			else
-				States.CreatePhylactery:Activate(uuid)
-				States.PhylacteryCreated:Activate(uuid)
-				States.UpgradePhylactery1:Activate(uuid)
+				MainStates.CreatePhylactery:Activate(uuid)
+				MainStates.PhylacteryCreated:Activate(uuid)
+				MainStates.UpgradePhylactery1:Activate(uuid)
 			end
 		end
 	end
