@@ -100,7 +100,6 @@ end
 ---@param state SKILL_STATE
 ---@param data HitData
 local function OnSkillHit(skill, caster, state, data)
-	print(skill, IsMagicSkill(skill))
 	if IsTagged(caster, "LLLICH_TwinSkulls_EnergyMax") == 1 and IsMagicSkill(skill) then
 		local b,err = xpcall(TwinSkullsBonus, debug.traceback, skill, caster, state, data)
 		if not b then

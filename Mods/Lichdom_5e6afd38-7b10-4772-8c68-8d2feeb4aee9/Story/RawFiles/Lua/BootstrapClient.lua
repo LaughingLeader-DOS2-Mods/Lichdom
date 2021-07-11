@@ -1,4 +1,4 @@
-Ext.Require("Shared/Init.lua")
+Ext.Require("Shared/_Init.lua")
 Ext.Require("Client/DataListener.lua")
 Ext.Require("Client/SkillParams.lua")
 Ext.Require("Client/TooltipHandler.lua")

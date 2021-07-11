@@ -61,7 +61,7 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 			GameHelpers.UI.SetSkillEnabled(char, "Shout_LLLICH_SoulReaper", false)
 		end
 
-		local last = PersistentVars["SoulReaper"][GetUUID(char)]
+		local last = LichdomPersistentVars.SoulReaper[GetUUID(char)]
 		if last ~= nil and last.Damage ~= nil then
 			local healPercentage = Ext.ExtraData["LLLICH_SoulReaper_DamageHealPercentage"] or 0.5
 			local heal = math.ceil(last.Damage * healPercentage)
@@ -155,7 +155,7 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 					end
 				end
 			end
-			PersistentVars["SoulReaper"][char] = nil
+			LichdomPersistentVars.SoulReaper[char] = nil
 			SyncClientData(char)
 		end
 	end
@@ -170,7 +170,7 @@ LeaderLib.RegisterSkillListener("Shout_LLLICH_SoulReaper", OnSoulReaperSkill)
 function SoulReaper_OnNecromancySkillHit(target, source, damage, handle, skill)
 	if CharacterHasSkill(source, "Shout_LLLICH_SoulReaper") == 1 then
 		local targetChar = Ext.GetCharacter(target)
-		PersistentVars["SoulReaper"][source] = {
+		LichdomPersistentVars.SoulReaper[source] = {
 			Damage = damage,
 			Skill = skill,
 			Target = target,
