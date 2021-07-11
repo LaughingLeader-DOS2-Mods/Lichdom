@@ -1,16 +1,11 @@
 Ext.Require("Shared/_Init.lua")
 
----@private
----@type LichdomPersistentVars
-PersistentVars = Common.CopyTable(DefaultLichdomPersistentVars, true)
+local function VarsLoaded()
+
+end
 
 ---@type LichdomPersistentVars
-LichdomPersistentVars = PersistentVars
-
-RegisterListener("PersistentVarsLoaded", function()
-	Common.InitializeTableFromSource(PersistentVars, DefaultLichdomPersistentVars)
-	LichdomPersistentVars = PersistentVars
-end)
+LichdomPersistentVars = GameHelpers.PersistentVars.Initialize(_G, DefaultLichdomPersistentVars, VarsLoaded)
 
 Ext.Require("Server/_Init.lua")
 

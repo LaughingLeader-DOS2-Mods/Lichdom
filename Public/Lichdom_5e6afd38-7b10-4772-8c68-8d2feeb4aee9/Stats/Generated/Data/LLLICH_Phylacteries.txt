@@ -36,6 +36,7 @@ data "Armor Defense Value" "0"
 data "Magic Armor Value" "100"
 data "MagicArmorBoost" "20"
 data "Necromancy" "1"
+data "Tags" "LLLICH_Phylactery_Equipped"
 
 new entry "LLLICH_Phylactery_Amulet"
 type "Armor"

@@ -1,2 +1,3 @@
 DB_LLMIME_Mimicking_Blacklist_Skills 2
 DB_LLLICH_Phylactery_Active 2
+DB_LLLICH_Deprecated 1

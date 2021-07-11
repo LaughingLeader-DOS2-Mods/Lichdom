@@ -4,7 +4,10 @@ Mods.LeaderLib.ImportUnsafe(Mods.Lichdom)
 DefaultLichdomPersistentVars = {
 	SoulReaper = {},
 	TwinSkullsEnergy = {},
-	PhylacteryType = {}
+    ---@type table<UUID,LichSaveData>
+    LichData = {},
+    ---@type table<UUID,UUID>
+    ActivePhylacteries = {}
 }
 
 MODID = {
