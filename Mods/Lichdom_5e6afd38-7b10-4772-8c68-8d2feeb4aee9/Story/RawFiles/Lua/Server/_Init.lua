@@ -1,5 +1,7 @@
+Ext.Require("Server/Lich/_Init.lua")
 Ext.Require("Server/Skills/DominateUndead.lua")
 Ext.Require("Server/Skills/SoulReaper.lua")
 Ext.Require("Server/HitListener.lua")
 Ext.Require("Server/ItemMechanics.lua")
 Ext.Require("Server/QuestHandler.lua")
+Ext.Require("Server/Updates.lua")

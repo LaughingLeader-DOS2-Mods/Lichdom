@@ -58,9 +58,9 @@ if isClient then
 	}
 
 	local ArmorBoostAttributes = {
-		MagicArmorBoost = "+%s Magic Armour",
-		Necromancy = "+%s Necromancy",
-		WaterSpecialist = "+%s Hydrosophist",
+		MagicArmorBoost = "+%s [Handle:hc6dcb940gb6b6g41aagaeceg31008af9c082:Magic Armour]",
+		Necromancy = "+%s [Handle:hb7ea4cc5g2a18g416bg9b95g51d928a60398:Necromancer]",
+		WaterSpecialist = "+%s [Handle:h21354580g6870g411dgbef4g52f34942686a:Hydrosophist]",
 	}
 
 	---@param character EclCharacter
@@ -93,7 +93,7 @@ if isClient then
 								if attributeValue and attributeValue > 0 then
 									tooltip:AppendElement({
 										Type="StatsTalentsBoost",
-										Label = string.format(valueStr, attributeValue)
+										Label = GameHelpers.Tooltip.ReplacePlaceholders(string.format(valueStr, attributeValue), character)
 									})
 								end
 							end
@@ -108,9 +108,9 @@ if isClient then
 											local diff = attributeValue - lastValue
 											if attributeValue and diff > 0 then
 												if not StringHelpers.IsNullOrWhitespace(element.NextLevelEffect) then
-													element.NextLevelEffect = string.format("%s<br>"..valueStr, element.NextLevelEffect, diff)
+													element.NextLevelEffect = GameHelpers.Tooltip.ReplacePlaceholders(string.format("%s<br>"..valueStr, element.NextLevelEffect, diff), character)
 												else
-													element.NextLevelEffect = string.format(valueStr, diff)
+													element.NextLevelEffect = GameHelpers.Tooltip.ReplacePlaceholders(string.format(valueStr, diff), character)
 												end
 											end
 										end
