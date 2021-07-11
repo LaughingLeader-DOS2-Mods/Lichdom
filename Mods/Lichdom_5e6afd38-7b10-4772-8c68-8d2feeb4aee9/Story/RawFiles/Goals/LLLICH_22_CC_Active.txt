@@ -23,4 +23,4 @@ GoalCompleted;
 
 EXITSECTION
 ENDEXITSECTION
-ParentTargetEdge "LLLICH_21_CC_Start"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

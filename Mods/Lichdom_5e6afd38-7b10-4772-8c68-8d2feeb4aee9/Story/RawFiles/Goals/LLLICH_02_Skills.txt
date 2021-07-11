@@ -100,4 +100,4 @@ NOT DB_LLLICH_Skills_Temp_ListenForDeath_SkillResolved(_Lich, _Target, _ID);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_Lichdom"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

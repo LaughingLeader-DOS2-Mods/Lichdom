@@ -1488,4 +1488,4 @@ ShowNotification(_Lich, "LLLICH_Notifications_Phylactery_Upgraded_Level3");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_Lichdom"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

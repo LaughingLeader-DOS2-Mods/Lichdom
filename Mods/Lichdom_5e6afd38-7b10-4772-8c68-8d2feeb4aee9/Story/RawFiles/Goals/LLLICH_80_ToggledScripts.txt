@@ -28,4 +28,4 @@ LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLLICH_TwinSkullsActive", 
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_Lichdom"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

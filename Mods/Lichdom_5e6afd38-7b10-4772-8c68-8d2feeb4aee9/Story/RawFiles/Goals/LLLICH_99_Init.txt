@@ -14,4 +14,4 @@ GoalCompleted;
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_Lichdom"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

@@ -126,4 +126,4 @@ NOT DB_LLLICH_Statuses_Dominated_Minions(_Source, _Target, _TargetFaction);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_Lichdom"
+ParentTargetEdge "LLLICH_Lichdom_Deprecated"

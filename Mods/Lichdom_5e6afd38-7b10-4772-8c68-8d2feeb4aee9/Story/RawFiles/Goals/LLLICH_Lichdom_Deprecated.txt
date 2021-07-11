@@ -1,0 +1,73 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLLICH_Deprecated_Start();
+KBSECTION
+// [BEGIN_NO_OSITOOLS]
+PROC
+LLLICH_Deprecated_Start()
+THEN
+SysActivateGoal("LLLICH_00_Main");
+SysActivateGoal("LLLICH_01_Phylactery");
+SysActivateGoal("LLLICH_02_Skills");
+SysActivateGoal("LLLICH_03_Statuses");
+SysActivateGoal("LLLICH_10_Crafting");
+//SysActivateGoal("LLLICH_12_GS_01_Statuses");
+//SysActivateGoal("LLLICH_20_DebugLevel");
+SysActivateGoal("LLLICH_20_Settings");
+SysActivateGoal("LLLICH_21_CC_Start");
+//SysActivateGoal("LLLICH_22_CC_Active");
+SysActivateGoal("LLLICH_40_ModCompatibility");
+SysActivateGoal("LLLICH_80_ToggledScripts");
+SysActivateGoal("LLLICH_80_TS_ChillForm");
+SysActivateGoal("LLLICH_80_TS_TwinSkulls");
+SysActivateGoal("LLLICH_98_LeaderLib");
+SysActivateGoal("LLLICH_99_Init");
+SysActivateGoal("LLLICH_Lichdom_Deprecated");
+SysActivateGoal("LLLICH_ZZZ_Updater");
+DB_LLLICH_Deprecated(1);
+
+IF
+SavegameLoaded(_,_,_,_)
+AND
+NOT DB_LLLICH_Deprecated(1)
+THEN
+LLLICH_Deprecated_Start();
+// [END_NO_OSITOOLS]
+
+/* [OSITOOLS_ONLY]
+PROC
+LLLICH_Deprecated_Start()
+THEN
+NOT DB_LLLICH_Deprecated(1);
+SysCompleteGoal("LLLICH_00_Main");
+SysCompleteGoal("LLLICH_01_Phylactery");
+SysCompleteGoal("LLLICH_02_Skills");
+SysCompleteGoal("LLLICH_03_Statuses");
+SysCompleteGoal("LLLICH_10_Crafting");
+SysCompleteGoal("LLLICH_12_GS_01_Statuses");
+//SysCompleteGoal("LLLICH_20_DebugLevel");
+SysCompleteGoal("LLLICH_20_Settings");
+SysCompleteGoal("LLLICH_21_CC_Start");
+//SysCompleteGoal("LLLICH_22_CC_Active");
+SysCompleteGoal("LLLICH_40_ModCompatibility");
+SysCompleteGoal("LLLICH_80_ToggledScripts");
+SysCompleteGoal("LLLICH_80_TS_ChillForm");
+SysCompleteGoal("LLLICH_80_TS_TwinSkulls");
+SysCompleteGoal("LLLICH_98_LeaderLib");
+SysCompleteGoal("LLLICH_99_Init");
+SysCompleteGoal("LLLICH_Lichdom_Deprecated");
+SysCompleteGoal("LLLICH_ZZZ_Updater");
+LeaderLib_GameScripts_ClearScriptsForGroup("Lichdom");
+
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_LLLICH_Deprecated(1)
+THEN
+LLLICH_Deprecated_Start();
+*/
+
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_Lichdom"
