@@ -1,7 +1,11 @@
-LeaderLib = Mods["LeaderLib"]
-GameHelpers = LeaderLib.GameHelpers
-Common = LeaderLib.Common
-StringHelpers = LeaderLib.StringHelpers
+Mods.LeaderLib.ImportUnsafe(Mods.Lichdom)
+
+---@class LichdomPersistentVars
+DefaultLichdomPersistentVars = {
+	SoulReaper = {},
+	TwinSkullsEnergy = {},
+	PhylacteryType = {}
+}
 
 MODID = {
 	WEAPONEX_EXPANSION = "c60718c3-ba22-4702-9c5d-5ad92b41ba5f"
@@ -78,10 +82,12 @@ end)
 
 Ext.RegisterListener("SessionLoaded", function()
 	--LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-    LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
-	LeaderLib.EnableFeature("TooltipGrammarHelper")
-	LeaderLib.EnableFeature("FixChaosDamageDisplay")
-	LeaderLib.EnableFeature("StatusParamSkillDamage")
-	LeaderLib.EnableFeature("ReduceTooltipSize")
-	LeaderLib.EnableFeature("FormatTagElementTooltips")
+    EnableFeature("ReplaceTooltipPlaceholders")
+	EnableFeature("TooltipGrammarHelper")
+	EnableFeature("FixChaosDamageDisplay")
+	EnableFeature("StatusParamSkillDamage")
+	EnableFeature("ReduceTooltipSize")
+	EnableFeature("FormatTagElementTooltips")
 end)
+
+Ext.Require("Shared/CustomStats.lua")
