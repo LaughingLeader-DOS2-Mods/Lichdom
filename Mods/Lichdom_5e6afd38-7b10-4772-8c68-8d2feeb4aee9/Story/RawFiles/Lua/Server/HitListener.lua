@@ -28,7 +28,7 @@ local function OnHit(target, source, damage, handle)
 	end
 end
 
-LeaderLib.RegisterListener("OnHit", OnHit)
+RegisterListener("OnHit", OnHit)
 
 
 local function RefreshSkillCooldowns(uuid)
@@ -83,7 +83,7 @@ local function TwinSkullsBonus(skill, caster, state, data)
 		end
 	end
 	if hasSkillCooldowns then
-		LeaderLib.StartOneshotTimer("LLLICH_FixSkillCooldown_"..skill..caster, 50, function()
+		Timer.StartOneshot("LLLICH_FixSkillCooldown_"..skill..caster, 50, function()
 			for v,cd in pairs(skillCooldowns) do
 				NRD_SkillSetCooldown(caster, v, cd)
 			end
@@ -107,7 +107,7 @@ local function OnSkillHit(skill, caster, state, data)
 		end
 	end
 end
-LeaderLib.RegisterListener("OnSkillHit", OnSkillHit)
+RegisterListener("OnSkillHit", OnSkillHit)
 
 ---@type target string
 ---@type source string
@@ -118,4 +118,4 @@ LeaderLib.RegisterListener("OnSkillHit", OnSkillHit)
 
 -- 	end
 -- end
--- LeaderLib.RegisterListener("OnPrepareHit", OnPrepareHit)
+-- RegisterListener("OnPrepareHit", OnPrepareHit)

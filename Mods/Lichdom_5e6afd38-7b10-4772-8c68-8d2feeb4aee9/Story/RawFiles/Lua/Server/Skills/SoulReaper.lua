@@ -1,7 +1,5 @@
-SKILL_STATE = LeaderLib.SKILL_STATE
-
 ---@type TranslatedString
-local ts = Mods.LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
 local SoulReaperCombatText = ts:Create("h034f0136g2489g4549g996eg282f817c215d", "[1] drained <font color='#97FBFF'>[2] Vitality</font> from [3] with [Key:Shout_LLLICH_SoulReaper_DisplayName].")
 
@@ -160,7 +158,7 @@ local function OnSoulReaperSkill(skill, char, state, skillData)
 		end
 	end
 end
-LeaderLib.RegisterSkillListener("Shout_LLLICH_SoulReaper", OnSoulReaperSkill)
+RegisterSkillListener("Shout_LLLICH_SoulReaper", OnSoulReaperSkill)
 
 ---@param target string
 ---@param source string

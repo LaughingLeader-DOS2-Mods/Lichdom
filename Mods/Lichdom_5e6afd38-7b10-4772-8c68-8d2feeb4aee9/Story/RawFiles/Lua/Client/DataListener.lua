@@ -1,6 +1,3 @@
----@type MessageData
-local msg = LeaderLib.Classes["MessageData"]
-
 ---@type LichdomPersistentVars
 ClientData = Common.CopyTable(DefaultLichdomPersistentVars, true)
 

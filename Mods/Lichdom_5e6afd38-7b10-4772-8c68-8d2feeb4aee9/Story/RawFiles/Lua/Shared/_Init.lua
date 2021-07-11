@@ -81,7 +81,7 @@ Ext.RegisterListener("StatsLoaded", function()
 end)
 
 Ext.RegisterListener("SessionLoaded", function()
-	--LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
+	--EnableFeature("ApplyBonusWeaponStatuses")
     EnableFeature("ReplaceTooltipPlaceholders")
 	EnableFeature("TooltipGrammarHelper")
 	EnableFeature("FixChaosDamageDisplay")

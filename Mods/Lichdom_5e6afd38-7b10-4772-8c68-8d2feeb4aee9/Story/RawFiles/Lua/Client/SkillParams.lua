@@ -1,7 +1,7 @@
 local Params = {}
 
 ---@type TranslatedString
-local ts = Mods.LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
 local SoulReaperDescription = ts:Create("hdad53f40ge86cg489cg83cbg71baa32faef1", "Drain <font color='#FF1100'>[1] Vitality</font> from [2] (damaged by [3]).<br><font color='#CC2200'>This cannot kill the target.</font>")
 local SoulReaperDisabledDescription = ts:Create("h36ae9d1cg9657g4d6dg8a86g837f45a16d00", "After using a damaging Necromancy skill, active this skill to drain half of the damage dealt from the target's Vitality.")
@@ -61,3 +61,13 @@ local function SkillGetDescriptionParam(skill, character, isFromItem, param)
 end
 
 Ext.RegisterListener("SkillGetDescriptionParam", SkillGetDescriptionParam)
+
+---@param skill SkillEventData
+---@param character StatCharacter
+---@return string[]
+RegisterListener("GetTooltipSkillDamage", function(skill, character)
+	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
+	if paramText ~= nil then
+		return paramText
+	end
+end)

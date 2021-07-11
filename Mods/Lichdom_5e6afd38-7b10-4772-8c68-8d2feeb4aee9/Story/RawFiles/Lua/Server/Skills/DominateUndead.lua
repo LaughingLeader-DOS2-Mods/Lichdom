@@ -1,5 +1,5 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes["TranslatedString"]
+local ts = Classes.TranslatedString
 
 local resistedText = ts:Create("hdea60333g1649g444bgbf86g347676b8d581", "<font color='#C7A758' size='18'>Resisted [1]</font>")
 local immuneText = ts:Create("h2474259fg6d67g4c98ga77fg0164f1476a41", "<font color='#FF0058' size='18'>Immune to [1]</font>")

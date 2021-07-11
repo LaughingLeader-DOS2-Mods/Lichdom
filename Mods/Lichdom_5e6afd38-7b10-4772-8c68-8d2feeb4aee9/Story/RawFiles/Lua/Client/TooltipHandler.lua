@@ -1,5 +1,5 @@
 ---@type TranslatedString
-local ts = Mods.LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
 local LichAbility = ts:Create("hcbc6d3d0g7968g47a3gb6fcgf23c1a33d1c5", "<font color='#73F6FF'>Lichdom</font>")
 local PhylacteryAbility = ts:Create("h3750ae3bg4ef4g4fc1g9362gea05305d88c6", "<font color='#73F6FF'>Lichdom</font>")
@@ -127,11 +127,9 @@ local function OnItemTooltip(item, tooltip)
         end
         if item:HasTag("LLLICH_Phylactery") then
             local lichIsLooking = false
-            if Mods.LeaderLib.UI.ClientCharacter ~= nil then
-                local character = Ext.GetCharacter(Mods.LeaderLib.UI.ClientCharacter)
-                if character ~= nil then
-                    lichIsLooking = character:HasTag("LLLICH_Lich")
-                end
+            local character = Client:GetCharacter()
+            if character ~= nil then
+                lichIsLooking = character:HasTag("LLLICH_Lich")
             else
                 local characterStr = item:GetOwnerCharacter()
                 if characterStr ~= nil then
@@ -219,5 +217,5 @@ Ext.RegisterListener("SessionLoaded", function()
     Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
     Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
     Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
-    Mods.LeaderLib.UI.RegisterItemTooltipTag("LLLICH_TWINSKULLS")
+    LeaderLib.UI.RegisterItemTooltipTag("LLLICH_TWINSKULLS")
 end)
