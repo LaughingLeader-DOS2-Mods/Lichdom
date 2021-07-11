@@ -1,0 +1,27 @@
+{
+	"Defaults": {
+		"Stats": {
+			"Create": true,
+			"Category": "Lichdom",
+			"TooltipType": "Ability",
+			"PointID": "LLLICH_Lichdom",
+			"Visible": false
+		}
+	},
+	"Categories" : {
+		"Lichdom": {
+			"DisplayName": "LLLICH_Lichdom_DisplayName",
+			"Description": "LLLICH_Lichdom_Description",
+			"ShowAlways" : false
+		}
+	},
+	"Stats": {
+		"LLLICH_PhlyacteryLevel": {
+			"DisplayName": "LLLICH_PhlyacteryLevel_DisplayName",
+			"Description": "LLLICH_PhlyacteryLevel_Description",
+			"MaxAmount": 3,
+			"Icon": "Talent_Soulcatcher",
+			"AutoAddAvailablePointsOnRemove": false
+		}
+	}
+}

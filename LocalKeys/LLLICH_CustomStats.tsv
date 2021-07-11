@@ -1,0 +1,10 @@
+Key	Content	Handle
+LLLICH_Lichdom_DisplayName	Lichdom	h7e70c767g6d53g428eg8d0bg28bf44f45153
+LLLICH_Lichdom_Description	Your powers as a Lich.<br><font color='#80FFC3'>Lichdom</font>	hcb75e69cg5d34g4ecbg88c9gead492651ece
+LLLICH_PhlyacteryLevel_DisplayName	Phylactery	he9cf3debgcea4g4a57g9f56g860727067338
+LLLICH_PhlyacteryLevel_Description	The power level of your Phylactery. A higher level grants more bonuses.	ha0cc09d5g56c7g45ceg8515g70c7744b45a5
+LLLICH_PhlyacteryLevel_None	Your soul is not yet bound to an object.	h43502f11gc26ag4e64gb394g19dbe2c2c72a
+LLLICH_PhlyacteryLevel_Effect1	Gain a standard Phylactery with 3 charges.	hd27551d6g4a58g4d20gbe27g9c2d8bc4fead
+LLLICH_PhlyacteryLevel_Effect2	The phylactery gains 4 max charges.	h8a9ebd90gccc0g4893g9117gdb9a3bbcf777
+LLLICH_PhlyacteryLevel_Effect3	The phylactery gains 5 max charges.	h8553372fgf401g45e1gb9b2g2cb004490f82
+LLLICH_PhlyacteryLevel_Effect4	The phylactery gains 6 max charges.	h9d75dc81gea65g4ed8gb8cfgf1b5feef047c

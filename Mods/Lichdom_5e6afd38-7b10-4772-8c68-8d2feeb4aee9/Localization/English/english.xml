@@ -54,6 +54,7 @@
 	<content contentuid="h3e79be6agee02g45ccgb85agadfa56a8b1bf">Store your soul in a Phylactery, granting immortality as long as it is not destroyed.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Only one Phylactery per Lich can exist at a time.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFAB00&apos;&gt;Upon nearly dying, you will be teleported to your Phylactery to regenerate. If the Phylactery is in your inventory, you will regenerate at the location of your &apos;death&apos;.&lt;/font&gt;</content>
 	<content contentuid="h3ee3cf86ga8a9g4f78ga005g22ecd9a264cc">==============</content>
 	<content contentuid="h40e3a44dg3905g4608gb160g9705e6e3bf07">Character has sacrificed the blood of a living being.</content>
+	<content contentuid="h43502f11gc26ag4e64gb394g19dbe2c2c72a">Your soul is not yet bound to an object.</content>
 	<content contentuid="h4471079dg9bd3g4937gaf69g153d70165151">&lt;font color=&apos;#FF001F&apos;&gt;Teleport failed. Your phylactery is in possession of an unknown party.&lt;/font&gt;</content>
 	<content contentuid="h45adfc3bg8ab3g48f8gb91cg55df774d19e6">&lt;font color=&apos;#73F6FF&apos;&gt;Create Phylactery&lt;/font&gt;</content>
 	<content contentuid="h4796bd46g6344g48a5gb086g873cdd35f569">*Cancel the process, returning your soul to your body.*</content>
@@ -103,13 +104,16 @@
 	<content contentuid="h7a5d9707g3e3dg44f3g9b30g2fdfd64c2087">Launch a soul-infused missile from your staff that deals [1] and marks the target for death.&lt;br&gt;If the target dies while marked, their soul explodes for [2] within a [3] radius.</content>
 	<content contentuid="h7ac8e6a3g55beg4de0g83a8g8c0961190c53">&lt;font color=&apos;#73F6FF&apos;&gt;Return to Phylactery&lt;/font&gt;</content>
 	<content contentuid="h7c387805g1fc3g484fg9891g9de635cbb200">&lt;font color=&apos;#FF001F&apos;&gt;Teleported to the nearest waypoint to avoid lava.&lt;/font&gt;</content>
+	<content contentuid="h7e70c767g6d53g428eg8d0bg28bf44f45153">Lichdom</content>
 	<content contentuid="h7f41b433ga56cg4e46gb69ag598813c17db9">&lt;font color=&apos;#FF001F&apos;&gt;Teleport failed. The phylactery is in your inventory.&lt;/font&gt;</content>
 	<content contentuid="h8070f1aega624g4a9bg9214g7097a964d4b3">Disable Lich Penalties (Negative Fire Resistance, etc)</content>
 	<content contentuid="h809ad58fgebccg4e37g99e9ge7c4c45436eb">&lt;font color=&apos;#73F6FF&apos;&gt;Death&apos;s Embrace&lt;/font&gt;</content>
 	<content contentuid="h82aefec9gc993g4684gb57cg931ef526dc25">Hide Phylactory Beam &lt;i&gt;(Note: Disabling the Phylactory status also hides this beam)&lt;/i&gt;</content>
 	<content contentuid="h84039498gaf60g4cfeg8675g5819d9a3d4c4">&lt;font color=&apos;#73F6FF&apos;&gt;The source of a Lich&apos;s immortality. Protect this at all cost.&lt;/font&gt;</content>
 	<content contentuid="h84f858aeg7040g4aeag88a8g8bdbdef65c2c">Show Lich Status</content>
+	<content contentuid="h8553372fgf401g45e1gb9b2g2cb004490f82">The phylactery gains 5 max charges.</content>
 	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36">Applies additional effects on hit</content>
+	<content contentuid="h8a9ebd90gccc0g4893g9117gdb9a3bbcf777">The phylactery gains 4 max charges.</content>
 	<content contentuid="h8c17b7b9g5450g4062gb695gf3dd538a6f4d">Lich Form</content>
 	<content contentuid="h8cb74202g4e9eg4fcfg87d6gbb8e26ceb52c">Use the template&apos;s &quot;custom looks&quot;. This will make you look like what your origin undead equivalent &lt;i&gt;should &lt;/i&gt;look like, but hair and skin color options won&apos;t have any effect.</content>
 	<content contentuid="h8d1a2e82g002fg4a71gb263g313ba9cb7747">+1 Source Points</content>
@@ -125,9 +129,11 @@
 	<content contentuid="h99a0e446g1ca5g4827ga1d1g0516bf687843">Reset race using default settings.</content>
 	<content contentuid="h9ac59b6dg8794g4cd7g9c71gff0ee43f99dc">Enable Phylactory Beam - When near your Phylactory, a beam will appear between you and it.</content>
 	<content contentuid="h9cf4f2f2g7db6g4e7eg9603g4a38e9794096">Fire Vulnerability (Lich)</content>
+	<content contentuid="h9d75dc81gea65g4ed8gb8cfgf1b5feef047c">The phylactery gains 6 max charges.</content>
 	<content contentuid="h9dde5756g77d6g429fga76fg5791037608a4">Blood Burst</content>
 	<content contentuid="h9e1caf88g0c2bg41d3g8253g932274a61116">+1 Phylactery Souls</content>
 	<content contentuid="ha05786dbg4f8eg4c23g835dge99f13aae201">&lt;font color=&apos;#00FFCC&apos;&gt;This spell with deal a guaranteed critical hit and reduce long cooldowns by 1.&lt;/font&gt;</content>
+	<content contentuid="ha0cc09d5g56c7g45ceg8515g70c7744b45a5">The power level of your Phylactery. A higher level grants more bonuses.</content>
 	<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee"></content>
 	<content contentuid="ha1d75676gb206g4ef9ga545gf616514baede">Dread</content>
 	<content contentuid="ha1d8e9d8gdcf8g417bg80d2g447654676d4c">Death Mark</content>
@@ -157,11 +163,13 @@
 	<content contentuid="hc32d7b61g207cg4c2agb40ag7637438bf4f8">&lt;font color=&apos;#73F6FF&apos;&gt;Blood Sacrifice&lt;/font&gt;</content>
 	<content contentuid="hc62a08aegf18fg4543gb12bgd10a44279474">Drain the soul of an enemy, dealing [1].&lt;br&gt;&lt;font color=&apos;#73F6FF&apos;&gt;If at max Source Points when this skill kills the target, create an explosion of source, dealing [2] to enemies in a [3] radius.&lt;/font&gt;&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#11D77A&apos; size=&apos;18&apos;&gt;Shadow Damage bypasses armor and cannot be resisted.&lt;/font&gt;</content>
 	<content contentuid="hca426d70ge03fg4dedgb86bgd69541964d61"> *You activate the Soul Extractor. The magic within pulsates and begins to rip the soul from your body.*</content>
+	<content contentuid="hcb75e69cg5d34g4ecbg88c9gead492651ece">Your powers as a Lich.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Lichdom&lt;/font&gt;</content>
 	<content contentuid="hcbe11fb4g22adg4b10g938bg467f8c41107c">Corrosive</content>
 	<content contentuid="hcdb23dbfg3f84g48d0g91a1gc8fa15262e64">An strange-looking jar. Something seems off...</content>
 	<content contentuid="hce699802g8b67g4aa7g95a8g035c5dc9407e">Debug Menu</content>
 	<content contentuid="hd01e5f46g36d4g48f5g8550gabdc4bef1f04">Magic</content>
 	<content contentuid="hd20764ceg7f35g47f8g91abg1f137b3fed4a">&lt;font color=&apos;#80FFC3&apos;&gt;Your Phylactery is fully powered and restored.&lt;/font&gt;</content>
+	<content contentuid="hd27551d6g4a58g4d20gbe27g9c2d8bc4fead">Gain a standard Phylactery with 3 charges.</content>
 	<content contentuid="hd286937bgf77cg4d8fga78bg132d05c09228">Use the &lt;font color=&apos;#8C753E&apos;&gt;Soul Extractor&lt;/font&gt; to create a phylactery.</content>
 	<content contentuid="hd403e3f9gb782g4950gb527gdcd67ef0704d">Show Phylactery Status</content>
 	<content contentuid="hd4114c0agcd5eg4071ga3a5g90aca47bbdd0">Lich Form</content>
@@ -187,6 +195,7 @@
 	<content contentuid="he308201cg093cg49efg892fg41677d2a9080">Drain Frozen</content>
 	<content contentuid="he41e4285g31ccg445fg93feg59a7185b09aa">Deal [1] damage to a target character, paralyzing them for 1 turn.&lt;br&gt;&lt;font color=&apos;#7D71D9&apos; size=&apos;19&apos;&gt;If the target does not have Magic Armor, apply Stunned.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#A8A8A8&apos; size=&apos;19&apos;&gt;Otherwise, if the target does not have Physical Armor, apply Knocked Down.&lt;/font&gt;</content>
 	<content contentuid="he7300c98g4087g498dg8a7fgceb26d15ed3d">Regenerating</content>
+	<content contentuid="he9cf3debgcea4g4a57g9f56g860727067338">Phylactery</content>
 	<content contentuid="heb01430fg177cg4cbeg963egccfdc732ee13">[Back]</content>
 	<content contentuid="hecde4b74gb2e6g4695gbc1dg8296256e2865">*Your soul fully leaves your body, transferring to the selected object. While you now feel a hollow emptiness, the power pulsating within the Phylactery feels forever chained to your being, supplying an intangible sense of warmth.*</content>
 	<content contentuid="hedb33358g1c16g4dacg852dga52ae809f897">An eerie-looking amulet pulsating with immense power.</content>
